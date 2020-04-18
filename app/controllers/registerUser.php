@@ -14,13 +14,13 @@ if (isset($_POST["register"])) {
   $register = $user->registerUser($username, $password, $firstName, $lastName, $email, $contactNo, $isAdmin);
   unset($_POST, $password);
   if ($register) {
-    //Registration Success
+    // Registration Success
     echo "<div class='alert alert-success form-user'>" .
     "Registration of '$username' was successful.<br />" .
     "They will receive an email once their account is approved." .
     "</div>";
   } else {
-    //Registration Failure
+    // Registration Failure
     echo "<div class='alert alert-danger form-user'>" .
     "Sorry - Registration of '$username' failed." .
     "</div>";

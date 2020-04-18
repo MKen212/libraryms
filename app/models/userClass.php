@@ -28,14 +28,14 @@ class User {
   public function registerUser($username, $password, $firstName, $lastName, $email, $contactNo) {
     $sqlChkUser = "SELECT UserID FROM users WHERE UserName = '$username'";
     $stmtChkUser = $this->conn->query($sqlChkUser, PDO::FETCH_ASSOC);
-    $countChkUser = $stmtChkUser->rowCount();
-    if ($countChkUser == 0) {
+    $cntChkUser = $stmtChkUser->rowCount();
+    if ($cntChkUser == 0) {
       $passwordHash = password_hash($password, PASSWORD_ARGON2ID);
       $sqlInsUser = "INSERT INTO users
         (UserName, UserPassword, FirstName, LastName, Email, ContactNo) VALUES
         ('$username', '$passwordHash', '$firstName', '$lastName', '$email', '$contactNo')";
-      $resultInsUser = $this->conn->exec($sqlInsUser);
-      return $resultInsUser;
+      $resInsUser = $this->conn->exec($sqlInsUser);
+      return $resInsUser;
     } else {
       return false;
     }
@@ -50,18 +50,18 @@ class User {
   public function login($username, $password) {
     $sqlChkLogin = "SELECT UserID, UserPassword, IsAdmin, UserStatus FROM users WHERE UserName = '$username'";
     $stmtChkLogin = $this->conn->query($sqlChkLogin, PDO::FETCH_ASSOC);
-    $countChkLogin = $stmtChkLogin->rowCount();
-    if ($countChkLogin != 1) {
+    $cntChkLogin = $stmtChkLogin->rowCount();
+    if ($cntChkLogin != 1) {
       // Username not found
       $_SESSION["message"] = "Incorrect User Name or Password entered!";
       return false;
     } else {
-      $resultChkLogin = $stmtChkLogin->fetch();
-      $passwordStatus = password_verify($password, $resultChkLogin["UserPassword"]);
-      $userID = $resultChkLogin["UserID"];
-      $userIsAdmin = $resultChkLogin["IsAdmin"];
-      $userStatus = $resultChkLogin["UserStatus"];
-      $resultChkLogin = null;
+      $resChkLogin = $stmtChkLogin->fetch();
+      $passwordStatus = password_verify($password, $resChkLogin["UserPassword"]);
+      $userID = $resChkLogin["UserID"];
+      $userIsAdmin = $resChkLogin["IsAdmin"];
+      $userStatus = $resChkLogin["UserStatus"];
+      $resChkLogin = null;
       if ($passwordStatus == true) {
         if ($userStatus == true) {
           $_SESSION["userLogin"] = true;
@@ -99,8 +99,8 @@ class User {
   public function getUsers() {
     $sqlGetUsers = "SELECT UserID, UserName, FirstName, LastName, Email, ContactNo, IsAdmin, UserStatus FROM users";
     $stmtGetUsers = $this->conn->query($sqlGetUsers, PDO::FETCH_ASSOC);
-    $resultGetUsers = $stmtGetUsers->fetchAll();
-    return $resultGetUsers;
+    $resGetUsers = $stmtGetUsers->fetchAll();
+    return $resGetUsers;
   }
 
   /**
@@ -111,8 +111,8 @@ class User {
    */
   public function updateStatus($userID, $userStatus) {
     $sqlUpdateStatus = "UPDATE users SET UserStatus = '$userStatus' WHERE UserID = '$userID'";
-    $resultUpdateStatus = $this->conn->exec($sqlUpdateStatus);
-    return $resultUpdateStatus;
+    $resUpdateStatus = $this->conn->exec($sqlUpdateStatus);
+    return $resUpdateStatus;
   }
 
 }

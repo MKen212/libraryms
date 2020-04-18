@@ -11,7 +11,8 @@ define("DBSERVER", $connDetails);
 
 /* Default Values */
 $defaultValues = [
-  "TBA" => "TBAValue",  // TBA
+  "maxUploadSize" => 2000000,  // Maximum PHP upload file size in bytes - see phpInfo
+  "booksImgPath" => "/var/www/html/libraryms/uploads/imgBooks/",  // Path to books Images
 ];
 
 define("DEFAULTS", $defaultValues);

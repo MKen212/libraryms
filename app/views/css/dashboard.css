@@ -1,6 +1,6 @@
-body {
-  font-size: .875rem;
-}
+/*
+ * Feather
+ */
 
 .feather {
   width: 16px;
@@ -104,3 +104,15 @@ body {
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
 }
+
+/*
+ * Input form
+ */
+
+ .labFixed {
+   width: 150px;
+ }
+
+ .inpFixed {
+   width: 350px;
+ }

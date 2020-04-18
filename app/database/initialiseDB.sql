@@ -19,12 +19,26 @@ CREATE TABLE IF NOT EXISTS users (
   UserStatus BOOLEAN NOT NULL DEFAULT 0
 );
 
--- Load initial test users - use registration.php
+-- Load initial test users - Better to use registration.php for Password Hashing
 INSERT INTO users
   (UserName, UserPassword, FirstName, LastName, Email, ContactNo, IsAdmin, UserStatus) VALUES
   ("UserTest", "####", "User", "Test", "usertest@gmail.com", "12345", "0", "1"),
   ("AdminTest", "####", "Admin", "Test", "admintest@gmail.com", "98765", "1", "1");
 
--- Update Admin Status
+-- Manually Update User and Admin Status for test users
 UPDATE users SET UserStatus = "1" WHERE UserID = 1 OR UserID = 2;
 UPDATE users SET IsAdmin = "1" WHERE UserID = 2;
+
+-- Create books table
+CREATE TABLE IF NOT EXISTS books (
+  BookID INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  Title VARCHAR(40) NOT NULL,
+  Author VARCHAR(40) NOT NULL,
+  Publisher VARCHAR(40) NOT NULL,
+  ISBN VARCHAR(40) DEFAULT NULL,
+  PriceGBP DECIMAL(6, 2) DEFAULT 0.00,
+  ImgFilename VARCHAR(60) DEFAULT NULL,
+  DateAdded DATE DEFAULT NULL,
+  UserID INT(11) NOT NULL,
+  FOREIGN KEY (UserID) REFERENCES users (UserID)
+);
