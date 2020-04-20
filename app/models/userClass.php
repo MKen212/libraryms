@@ -61,7 +61,7 @@ class User {
       $userID = $resChkLogin["UserID"];
       $userIsAdmin = $resChkLogin["IsAdmin"];
       $userStatus = $resChkLogin["UserStatus"];
-      $resChkLogin = null;
+      $resChkLogin = NULL;
       if ($passwordStatus == true) {
         if ($userStatus == true) {
           $_SESSION["userLogin"] = true;
@@ -87,7 +87,7 @@ class User {
    * @return bool  True if function success
    */
   public function logout() {
-    $_SESSION["message"] = "Thanks for using privnet.";
+    $_SESSION["message"] = "Thanks for using the LibraryMS.";
     $_SESSION["userLogin"] = false;
     return true;
   }

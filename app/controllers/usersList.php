@@ -12,7 +12,7 @@ class TableRows extends RecursiveIteratorIterator {
     $parentValue = parent::current();
     if ($parentKey == "UserID") {
       // For UserID save the current value to $_SESSION
-      $_SESSION["CurUserID"] = $parentValue;
+      $_SESSION["curUserID"] = $parentValue;
     }
     if ($parentKey == "IsAdmin") {
       // For IsAdmin output Yes/No
@@ -24,9 +24,9 @@ class TableRows extends RecursiveIteratorIterator {
     } else if ($parentKey == "UserStatus") {
       // For UserStatus output Approved/Unapproved + Change Link
       if ($parentValue == 1) {
-        $returnValue = "<a class='badge badge-success' href='../controllers/usersUpdateStatus.php?updateID=" . $_SESSION["CurUserID"] . "&newStatus=0'>Approved</a>";
+        $returnValue = "<a class='badge badge-success' href='../controllers/usersUpdateStatus.php?updateID=" . $_SESSION["curUserID"] . "&newStatus=0'>Approved</a>";
       } else {
-        $returnValue = "<a class='badge badge-danger' href='../controllers/usersUpdateStatus.php?updateID=" . $_SESSION["CurUserID"] . "&newStatus=1'>Unapproved</a>";
+        $returnValue = "<a class='badge badge-danger' href='../controllers/usersUpdateStatus.php?updateID=" . $_SESSION["curUserID"] . "&newStatus=1'>Unapproved</a>";
       }
     } else {
       // For all others output original value
@@ -39,7 +39,7 @@ class TableRows extends RecursiveIteratorIterator {
   }
   public function endChildren() {
     echo "</tr>";
-    unset ($_SESSION["CurUserID"]);
+    unset ($_SESSION["curUserID"]);
   }
 }
 

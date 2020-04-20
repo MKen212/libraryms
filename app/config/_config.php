@@ -12,7 +12,7 @@ define("DBSERVER", $connDetails);
 /* Default Values */
 $defaultValues = [
   "maxUploadSize" => 2000000,  // Maximum PHP upload file size in bytes - see phpInfo
-  "booksImgPath" => "/var/www/html/libraryms/uploads/imgBooks/",  // Path to books Images
+  "booksImgPath" => "../../uploads/imgBooks/",  // Path to books images
 ];
 
 define("DEFAULTS", $defaultValues);

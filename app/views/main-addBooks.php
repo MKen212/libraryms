@@ -39,7 +39,7 @@
     <div class="form-group row">
       <label class="col-form-label labFixed" for="priceGBP">Book Price (GBP):</label>
       <div class="inpFixed">
-        <input class="form-control" type="number" name="priceGBP" id="priceGBP" placeholder="Enter Book Price in GBP" min="0" step="0.01" autocomplete="off" />
+        <input class="form-control" type="number" name="priceGBP" id="priceGBP" placeholder="Enter Book Price in GBP" min="0" step="0.01" value="0.00" autocomplete="off" required />
       </div>
     </div>
     <!-- Image Filename -->
