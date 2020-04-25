@@ -1,5 +1,5 @@
 <!-- Add Books Page -->
-<!-- Let Browser handle JavaScipt error checks -->
+<!-- Let Browser handle basic form error checks -->
 <div class="pt-3 pb-2 mb-3 border-bottom">
   <h1 class="h2">Add Books</h1>
 </div>

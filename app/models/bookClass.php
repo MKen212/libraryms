@@ -50,15 +50,38 @@ class Book {
   }
 
   /**
+   * getBookIDs function - Retrieve all book IDs (with Title)
+   * @return array  $resGetBookIDs  Returns all BookIDs (with Title)
+   */
+  public function getBookIDs() {
+    $sqlGetBookIDs = "SELECT BookID, Title FROM books ORDER BY Title";
+    $stmtGetBookIDs = $this->conn->query($sqlGetBookIDs, PDO::FETCH_ASSOC);
+    $resGetBookIDs = $stmtGetBookIDs->fetchAll();
+    return $resGetBookIDs;
+  }
+
+  /**
+   * getBookByID function - Retrieve book record based on ID
+   * @param int     $bookID          Book ID
+   * @return array  $resGetBookByID  Returns book record for $bookID
+   */
+  public function getBookByID($bookID) {
+    $sqlGetBookByID = "SELECT BookID, Title, Author, Publisher, ISBN FROM books WHERE BookID = '$bookID'";
+    $stmtGetBookByID = $this->conn->query($sqlGetBookByID, PDO::FETCH_ASSOC);
+    $resGetBookByID = $stmtGetBookByID->fetchAll();
+    return $resGetBookByID;
+  }
+
+  /**
    * getBooksByTitle function - Retrieve book records based on Title
-   * @param string  $title             Book Title
-   * @return array  $resGetBooksTitle  Returns all book records
+   * @param string  $title               Book Title
+   * @return array  $resGetBooksByTitle  Returns all book records with $title
    */
   public function getBooksByTitle($title) {
-    $sqlGetBooksTitle = "SELECT BookID, ImgFilename, Title, Author, Publisher, ISBN, PriceGBP, ImgFilename, DateAdded, UserID FROM books WHERE Title LIKE '%$title%'";
-    $stmtGetBooksTitle = $this->conn->query($sqlGetBooksTitle, PDO::FETCH_ASSOC);
-    $resGetBooksTitle = $stmtGetBooksTitle->fetchAll();
-    return $resGetBooksTitle;
+    $sqlGetBooksByTitle = "SELECT BookID, ImgFilename, Title, Author, Publisher, ISBN, PriceGBP, DateAdded, UserID FROM books WHERE Title LIKE '%$title%'";
+    $stmtGetBooksByTitle = $this->conn->query($sqlGetBooksByTitle, PDO::FETCH_ASSOC);
+    $resGetBooksByTitle = $stmtGetBooksByTitle->fetchAll();
+    return $resGetBooksByTitle;
   }
 }
 ?>

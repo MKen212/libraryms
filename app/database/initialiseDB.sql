@@ -42,3 +42,15 @@ CREATE TABLE IF NOT EXISTS books (
   UserID INT(11) NOT NULL,
   FOREIGN KEY (UserID) REFERENCES users (UserID)
 );
+
+-- Create books_issued table
+CREATE TABLE IF NOT EXISTS books_issued (
+  IssuedID INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  BookID INT(11) NOT NULL,
+  UserID INT(11) NOT NULL,
+  IssuedDate DATE NOT NULL,
+  ReturnDueDate DATE NOT NULL,
+  ReturnedDate DATE DEFAULT NULL,
+  FOREIGN KEY (BookID) REFERENCES books (BookID),
+  FOREIGN KEY (UserID) REFERENCES users (UserID)
+);

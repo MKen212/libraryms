@@ -1,0 +1,29 @@
+<?php  // Select User ID
+include_once("../models/userClass.php");
+$user = new User();
+
+// Extend the RecursiveIteratorIterator with option tags
+class UserIDRows extends RecursiveIteratorIterator {
+  public function __construct($result) {
+    parent::__construct($result, self::LEAVES_ONLY);
+  }
+  public function current() {
+    $parentKey = parent::key();
+    $parentValue = parent::current();
+    if ($parentKey == "UserID") {
+      echo "<option value='$parentValue'";
+      if (isset($_POST["userIDSelected"])) {
+        // If userIDSelected then make this the selected value in the option list
+        if ($parentValue == $_POST["userIDSelected"]) echo " selected";
+      }
+      echo ">$parentValue > ";
+    } else if ($parentKey == "UserName") {
+      echo "$parentValue</option>";
+    }
+  }
+}
+
+foreach(new UserIDRows(new RecursiveArrayIterator($user->getUserIDs())) as $value) {
+  echo $value;
+}
+?>

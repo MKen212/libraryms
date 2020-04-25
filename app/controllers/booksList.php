@@ -3,7 +3,7 @@ include_once("../models/bookClass.php");
 $book = new Book();
 
 // Extend the RecursiveIteratorIterator with table tags
-class TableRows extends RecursiveIteratorIterator {
+class BookListRows extends RecursiveIteratorIterator {
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);
   }
@@ -37,17 +37,16 @@ class TableRows extends RecursiveIteratorIterator {
 }
 
 if (isset($_POST["bookSearch"])) {
-
-// UP TO HERE - NEED METHOD OF CHANGING ? & * to _ & %
-
   $schString = trim($_POST["schTitle"]);
-  foreach(new TableRows(new RecursiveArrayIterator($book->getBooksByTitle($schString))) as $value) {
+  $schString = str_replace("?", "_", $schString);  // Fix MariaDB one char wildcard
+  $schString = str_replace("*", "%", $schString);  // Fix MariaDB multi char wildcard
+  foreach(new BookListRows(new RecursiveArrayIterator($book->getBooksByTitle($schString))) as $value) {
     echo $value;
   }
   unset($_POST);
 } else {
   // Loop through ALL Books and output the values
-  foreach(new TableRows(new RecursiveArrayIterator($book->getBooksAll())) as $value) {
+  foreach(new BookListRows(new RecursiveArrayIterator($book->getBooksAll())) as $value) {
     echo $value;
   }
 }

@@ -3,7 +3,7 @@ include_once("../models/userClass.php");
 $user = new User();
 
 // Extend the RecursiveIteratorIterator with table tags
-class TableRows extends RecursiveIteratorIterator {
+class UserListRows extends RecursiveIteratorIterator {
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);
   }
@@ -44,7 +44,7 @@ class TableRows extends RecursiveIteratorIterator {
 }
 
 // Loop through the Users and output the values
-foreach(new TableRows(new RecursiveArrayIterator($user->getUsers())) as $value) {
+foreach(new UserListRows(new RecursiveArrayIterator($user->getUsersAll())) as $value) {
   echo $value;
 }
 ?>

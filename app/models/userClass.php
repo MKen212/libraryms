@@ -93,14 +93,37 @@ class User {
   }
 
   /**
-   * getUsers function - Retrieve all user records
-   * @return array  $resultGetUsers   Returns all user records
+   * getUsersAll function - Retrieve all user records
+   * @return array $resultGetUsersAll  Returns all user records
    */
-  public function getUsers() {
-    $sqlGetUsers = "SELECT UserID, UserName, FirstName, LastName, Email, ContactNo, IsAdmin, UserStatus FROM users";
-    $stmtGetUsers = $this->conn->query($sqlGetUsers, PDO::FETCH_ASSOC);
-    $resGetUsers = $stmtGetUsers->fetchAll();
-    return $resGetUsers;
+  public function getUsersAll() {
+    $sqlGetUsersAll = "SELECT UserID, UserName, FirstName, LastName, Email, ContactNo, IsAdmin, UserStatus FROM users";
+    $stmtGetUsersAll = $this->conn->query($sqlGetUsersAll, PDO::FETCH_ASSOC);
+    $resGetUsersAll = $stmtGetUsersAll->fetchAll();
+    return $resGetUsersAll;
+  }
+
+  /**
+   * getUserIDs function - Retrieve all user IDs (with Username)
+   * @return array $resultGetUserIDs  Returns all UserIDs (with Username)
+   */
+  public function getUserIDs() {
+    $sqlGetUserIDs = "SELECT UserID, UserName FROM users ORDER BY UserName";
+    $stmtGetUserIDs = $this->conn->query($sqlGetUserIDs, PDO::FETCH_ASSOC);
+    $resGetUserIDs = $stmtGetUserIDs->fetchAll();
+    return $resGetUserIDs;
+  }
+
+  /**
+   * getUserByID function - Retrieve user record based on ID
+   * @param int    $userID             User ID
+   * @return array $resultGetUserByID  Returns user record for $userID
+   */
+  public function getUserByID($userID) {
+    $sqlGetUserByID = "SELECT UserID, UserName, FirstName, LastName, Email, ContactNo FROM users WHERE UserID = '$userID'";
+    $stmtGetUserByID = $this->conn->query($sqlGetUserByID, PDO::FETCH_ASSOC);
+    $resGetUserByID = $stmtGetUserByID->fetch();
+    return $resGetUserByID;
   }
 
   /**
