@@ -1,8 +1,8 @@
-<?php  // Show Selected User ID
+<?php  // Show Selected UserID
 include_once("../models/userClass.php");
 $user = new User();
 
-if (isset($_POST["selectUser"])) {
+if (isset($_POST["selectUser"]) || isset($_POST["selectBook"]) || isset($_POST["issueBook"])) {
   $selUser = $user->getUserByID($_POST["userIDSelected"]);
   echo "<table class='table table-striped table-sm'>
     <thead>

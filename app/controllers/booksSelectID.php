@@ -24,17 +24,18 @@ class BookIDRows extends RecursiveIteratorIterator {
 }
 
 // Show Book ID Choice section if User already selected
-if (isset($_POST["selectUser"])) {
+if (isset($_POST["selectUser"]) || isset($_POST["selectBook"]) || isset($_POST["issueBook"])) {
   echo "<label class='col-form-label labFixed' for='bookSelect'>Select Book:</label>
     <div class='input-group inpFixed'>
       <select class='form-control' id='bookSelect' name='bookIDSelected'>";
+      // Loop through the Books and output "BookID > Title" for each
       foreach(new BookIDRows(new RecursiveArrayIterator($book->getBookIDs())) as $value) {
         echo $value;
       }
       echo "</select>
-    <div class='input-group-append'>
-      <button class='btn btn-primary' type='submit' name='selectBook'>Select</button>
-    </div>
-  </div>";
+      <div class='input-group-append'>
+        <button class='btn btn-primary' type='submit' name='selectBook'>Select</button>
+      </div>
+    </div>";
 }
 ?>

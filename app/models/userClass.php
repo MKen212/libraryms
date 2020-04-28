@@ -137,6 +137,5 @@ class User {
     $resUpdateStatus = $this->conn->exec($sqlUpdateStatus);
     return $resUpdateStatus;
   }
-
 }
 ?>

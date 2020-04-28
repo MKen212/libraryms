@@ -13,7 +13,7 @@ class UserIDRows extends RecursiveIteratorIterator {
     if ($parentKey == "UserID") {
       echo "<option value='$parentValue'";
       if (isset($_POST["userIDSelected"])) {
-        // If userIDSelected then make this the selected value in the option list
+        // If userIDSelected then make this the "selected" value in the option list
         if ($parentValue == $_POST["userIDSelected"]) echo " selected";
       }
       echo ">$parentValue > ";
@@ -23,6 +23,7 @@ class UserIDRows extends RecursiveIteratorIterator {
   }
 }
 
+// Loop through the Users and output "UserID > UserName" for each
 foreach(new UserIDRows(new RecursiveArrayIterator($user->getUserIDs())) as $value) {
   echo $value;
 }

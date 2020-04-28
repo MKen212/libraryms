@@ -12,6 +12,7 @@
       <label class="col-form-label labFixed" for="userSelect">Select User:</label>
       <div class="input-group inpFixed">
         <select class="form-control" id="userSelect" name="userIDSelected">
+          <!-- List all UserID > UserNames -->
           <?php include("../controllers/usersSelectID.php");?>
         </select>
         <div class="input-group-append">
@@ -29,9 +30,13 @@
     </div>
     <div class="form-group row">
       <!-- Show selected Book Details -->
-
-      <!-- UP TO HERE - NEED TO SHOW BOOK CHOSEN SIMILAR TO SHOWING USER CHOSEN -->
-      
+      <?php include("../controllers/booksShowSelected.php");?>
+    </div>
+    <div class="form-group row">
+      <!-- Enter Return Date -->
+      <?php include("../controllers/booksReturnDue.php");?>
+      <!-- Issue Book -->
+      <?php include("../controllers/booksIssue.php");?>
     </div>
   </form>
 </div>

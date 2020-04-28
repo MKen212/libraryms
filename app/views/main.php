@@ -29,14 +29,13 @@ include("../config/_config.php");
 </head>
 
 <body>
-  <!-- Top Navbar -->
+  <!-- Top -->
   <?php include("../views/main-navbar.php");?>
   <div class=container-fluid>
     <div class="row">
-      <!-- Sidebar -->
+      <!-- Side -->
       <?php include("../views/main-sidebar.php");?>
-      
-      <!-- Main Screen -->
+      <!-- Main -->
       <main class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <?php include("../views/main-booksIssue.php");?>
       </main>

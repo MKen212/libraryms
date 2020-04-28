@@ -27,7 +27,7 @@
       <th>Publisher</th>
       <th>ISBN</th>
       <th>Price (GBP)</th>
-      <th>Date Added</th>
+      <th>Added Date</th>
       <th>User ID</th>
     </thead>
     <tbody>

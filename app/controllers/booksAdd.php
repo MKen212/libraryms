@@ -48,10 +48,10 @@ if (isset($_POST["addBook"])) {
   } else {
     $imgFilename = NULL;
   }
-  $dateAdded = date("Y-m-d");
+  $addedDate = date("Y-m-d");
   $userID = $_SESSION["userID"];
 
-  $addBook = $book->addBook($title, $author, $publisher, $ISBN, $priceGBP, $imgFilename, $dateAdded, $userID);
+  $addBook = $book->addBook($title, $author, $publisher, $ISBN, $priceGBP, $imgFilename, $addedDate, $userID);
   unset($_POST, $_FILES);
   if ($addBook) {
     // Book Add Database Entry Success
