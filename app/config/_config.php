@@ -13,6 +13,7 @@ define("DBSERVER", $connDetails);
 $defaultValues = [
   "maxUploadSize" => 2000000,  // Maximum PHP upload file size in bytes - see phpInfo
   "booksImgPath" => "../../uploads/imgBooks/",  // Path to books images
+  "booksDisplayCols" => 3,  // Number of Columns for Books Display
   "returnDuration" => 14,  // Issued Book Return Duration
 ];
 

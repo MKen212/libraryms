@@ -1,12 +1,12 @@
-<!-- Issue Books Page -->
+<!-- Books Issued Add Page -->
 <!-- Let Browser handle basic form error checks -->
 <div class="pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2">Issue Books</h1>
+  <h1 class="h2">Add Issued Books</h1>
 </div>
 
-<!-- Issue Books Form -->
+<!-- Issued Books Add Form -->
 <div>
-  <form class="ml-3" action="" method="POST" name="selectUserForm">
+  <form class="ml-3" action="" method="POST" name="issBksAddForm">
     <div class="form-group row">
       <!-- Select User -->
       <label class="col-form-label labFixed" for="userSelect">Select User:</label>
@@ -36,7 +36,7 @@
       <!-- Enter Return Date -->
       <?php include("../controllers/booksReturnDue.php");?>
       <!-- Issue Book -->
-      <?php include("../controllers/booksIssue.php");?>
+      <?php include("../controllers/booksIssuedAdd.php");?>
     </div>
   </form>
 </div>

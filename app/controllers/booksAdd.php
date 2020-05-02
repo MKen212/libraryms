@@ -43,6 +43,7 @@ if (isset($_POST["addBook"])) {
   $publisher = htmlspecialchars($_POST["publisher"]);
   $ISBN = htmlspecialchars($_POST["ISBN"]);
   $priceGBP = htmlspecialchars($_POST["priceGBP"]);
+  $quantity = htmlspecialchars($_POST["quantity"]);
   if ($_FILES["imgFilename"]["error"] == 0) {
     $imgFilename = basename($_FILES["imgFilename"]["name"]);
   } else {
@@ -51,7 +52,7 @@ if (isset($_POST["addBook"])) {
   $addedDate = date("Y-m-d");
   $userID = $_SESSION["userID"];
 
-  $addBook = $book->addBook($title, $author, $publisher, $ISBN, $priceGBP, $imgFilename, $addedDate, $userID);
+  $addBook = $book->addBook($title, $author, $publisher, $ISBN, $priceGBP, $quantity, $imgFilename, $addedDate, $userID);
   unset($_POST, $_FILES);
   if ($addBook) {
     // Book Add Database Entry Success

@@ -37,7 +37,7 @@ include("../config/_config.php");
       <?php include("../views/main-sidebar.php");?>
       <!-- Main -->
       <main class="col-md-9 ml-sm-auto col-lg-10 px-4">
-        <?php include("../views/main-booksIssue.php");?>
+        <?php include("../views/main-booksDisplay.php");?>
       </main>
     </div>
   </div>

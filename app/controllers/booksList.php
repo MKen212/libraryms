@@ -1,4 +1,4 @@
-<?php  // List all Books
+<?php  // List all Books in column format without image
 include_once("../models/bookClass.php");
 $book = new Book();
 
@@ -15,11 +15,10 @@ class BookListRows extends RecursiveIteratorIterator {
       $_SESSION["curBookID"] = $parentValue;
     }
     if ($parentKey == "ImgFilename") {
-      // For ImgFileName output img with URL
-      $fullPath = DEFAULTS["booksImgPath"] . $_SESSION["curBookID"] . "/" . $parentValue;
-      $returnValue = "<img class='img-thumbnail' style='width:140px; height:220px' src='$fullPath' alt='$parentValue' />";
+      // For ImgFileName skip output
+      return;
     } else if ($parentKey == "DateAdded") {
-      // For DateAdded modify date format
+      // For Date Fields modify date format
       $returnValue = date("d/m/Y", strtotime($parentValue));
     } else {
       // For all others output original value

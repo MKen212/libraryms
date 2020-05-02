@@ -4,6 +4,7 @@ $book = new Book();
 
 if (isset($_POST["selectBook"]) || isset($_POST["issueBook"])) {
   $selBook = $book->getBookByID($_POST["bookIDSelected"]);
+  $_SESSION["qtyAvail"] = $selBook["QtyAvail"];  // Used to check availability when book issued
   echo "<table class='table table-striped table-sm'>
     <thead>
       <th>Book ID</th>
@@ -11,6 +12,7 @@ if (isset($_POST["selectBook"]) || isset($_POST["issueBook"])) {
       <th>Author</th>
       <th>Publisher</th>
       <th>ISBN</th>
+      <th>Qty Available</th>
     </thead>
     <tbody>
       <tr>
@@ -19,6 +21,7 @@ if (isset($_POST["selectBook"]) || isset($_POST["issueBook"])) {
         <td>" . $selBook["Author"] . "</td>
         <td>" . $selBook["Publisher"] . "</td>
         <td>" . $selBook["ISBN"] . "</td>
+        <td>" . $selBook["QtyAvail"] . "</td>
       </tr>
     </tbody>
   </table>";

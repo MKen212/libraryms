@@ -42,6 +42,13 @@
         <input class="form-control" type="number" name="priceGBP" id="priceGBP" placeholder="Enter Book Price in GBP" min="0" step="0.01" value="0.00" autocomplete="off" required />
       </div>
     </div>
+    <!-- Quantity -->
+    <div class="form-group row">
+      <label class="col-form-label labFixed" for="quantity">Quantity:</label>
+      <div class="inpFixed">
+        <input class="form-control" type="number" name="quantity" id="quantity" placeholder="Enter Quantity" min="1" value="1" autocomplete="off" required />
+      </div>
+    </div>
     <!-- Image Filename -->
     <div class="form-group row">
       <label class="col-form-label labFixed">Book Image:</label>

@@ -1,6 +1,6 @@
 <!-- Books Page -->
 <div class="pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2">Books</h1>
+  <h1 class="h2">Books List</h1>
 </div>
 
 <!-- Books Table Search -->
@@ -21,14 +21,15 @@
     <thead>
       <!-- Books Table Header -->
       <th>Book ID</th>
-      <th>Image</th>
       <th>Title</th>
       <th>Author</th>
       <th>Publisher</th>
       <th>ISBN</th>
       <th>Price (GBP)</th>
+      <th>Qty Total</th>
+      <th>Qty Available</th>
       <th>Added Date</th>
-      <th>User ID</th>
+      <th>Added User</th>
     </thead>
     <tbody>
       <!-- List All Books -->
