@@ -44,7 +44,7 @@ class Book {
    * @return array $resGetBooksAll  Returns all book records
    */
   public function getBooksAll() {
-    $sqlGetBooksAll = "SELECT BookID, ImgFilename, Title, Author, Publisher, ISBN, PriceGBP, QtyTotal, QtyAvail, ImgFilename, AddedDate, UserID FROM books";
+    $sqlGetBooksAll = "SELECT BookID, ImgFilename, Title, Author, Publisher, ISBN, PriceGBP, QtyTotal, QtyAvail, AddedDate, UserID FROM books";
     $stmtGetBooksAll = $this->conn->query($sqlGetBooksAll, PDO::FETCH_ASSOC);
     $resGetBooksAll = $stmtGetBooksAll->fetchAll();
     return $resGetBooksAll;

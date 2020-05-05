@@ -1,49 +1,82 @@
 <?php  // Display all Books in card format
 include_once("../models/bookClass.php");
 $book = new Book();
-$curColumn = 0;
 
-// Loop through ALL Books and output the values
-foreach($book->getBooksAll() as $value) {
-  $curColumn += 1;
-  if ($curColumn == 1) echo "<div class='row'>";
-  echo "<div class='col border rounded'>";
-    // Display Image
-    $filename = $value["ImgFilename"];
-    $fullPath = DEFAULTS["booksImgPath"] . $value["BookID"] . "/" . $filename;
-    echo "<img class='img-thumbnail float-left mt-3 mb-3 mr-3' style='width:140px; height:220px' src='$fullPath' alt='$filename' />";
-    // Output Book Details
-    echo "<div class='mt-3'>";
-      echo "<b>Book ID: </b>" . $value["BookID"] . "<br />";
-      echo "<b>Title: </b>" . $value["Title"] . "<br />";
-      echo "<b>Author: </b>" . $value["Author"] . "<br />";
-      echo "<b>Publisher: </b>" . $value["Publisher"] . "<br />";
-      echo "<b>ISBN: </b>" . $value["ISBN"] . "<br />";
-      echo "<b>Price (GBP): </b>" . $value["PriceGBP"] . "<br />";
-      echo "<b>Total Qty: </b>" . $value["QtyTotal"] . " - ";
-      echo "<b>Available: <span class='";
-      if ($value["QtyAvail"] == 0) {
-        echo "text-danger";
+// Extend the RecursiveIteratorIterator with div tags
+class BookDisplayRows extends RecursiveIteratorIterator {
+  public function __construct($result) {
+    parent::__construct($result, self::LEAVES_ONLY);
+  }
+  public function current() {
+    $parentKey = parent::key();
+    $parentValue = parent::current();
+    if ($parentKey == "BookID") {
+      // For BookID save the current value to $_SESSION
+      $_SESSION["curBookID"] = $parentValue;
+      return;
+    } else if ($parentKey == "ImgFilename") {
+      if (is_null($parentValue) || ($parentValue == "")) {  // No Image Uploaded - Use Default
+        $fullPath = DEFAULTS["noImgUploaded"];
       } else {
-        echo "text-success";
+        $fullPath = DEFAULTS["booksImgPath"] . $_SESSION["curBookID"] . "/" . $parentValue;
       }
-      echo "'>" . $value["QtyAvail"] . "</span></b><br />";
-      echo "<b>Date Added: </b>" . $value["AddedDate"] . " ";
-      echo "<b>by User: </b>" . $value["UserID"] . "<br />";
-    echo "</div>";
-
-  echo "</div>";
-  if ($curColumn == DEFAULTS["booksDisplayCols"]) {
-    echo "</div>";
-    $curColumn = 0;
+      $returnContent = "<img class='img-thumbnail float-left mt-3 mb-3 mr-3' style='width:140px; height:220px' src='$fullPath' alt='$parentValue' />" . 
+        "<div class='mt-3'>" .
+        "<b>Book ID: </b>" . $_SESSION["curBookID"]. "<br />";
+    } else if ($parentKey == "PriceGBP") {
+      $returnContent = "<b>Price (GBP): </b>$parentValue<br />";
+    } else if ($parentKey == "QtyTotal") {
+      $returnContent = "<b>Total Qty: </b>$parentValue - ";
+    } else if ($parentKey == "QtyAvail") {
+        $parentValue <= 0 ?
+          $returnClass="text-danger" : $returnClass="text-success";
+        $returnContent = "<b>Available: <span class=$returnClass>$parentValue</span></b><br />";
+    } else if ($parentKey == "AddedDate") {
+      $returnContent = "<b>Date added: </b>" . date("d/m/Y", strtotime($parentValue)) ." ";
+    } else if ($parentKey == "UserID") {
+      $returnContent = "<b>by User: </b>$parentValue<br />" .
+        "</div>";
+    } else {
+      $returnContent = "<b>$parentKey: </b>$parentValue<br />";
+    }
+    return $returnContent;
+  }
+  public function beginChildren() {
+    $_SESSION["curColumn"] += 1;
+    if ($_SESSION["curColumn"] == 1) echo "<div class='row'>";  // Create New Row div
+    echo "<div class='col border rounded'>"; // Create Col div
+  }
+  public function endChildren() {
+    echo "</div>";  // Close Col div
+    unset ($_SESSION["curBookID"]);
+    if ($_SESSION["curColumn"] == DEFAULTS["booksDisplayCols"]) {
+      echo "</div>";  // If Default Cols reached close row div
+      $_SESSION["curColumn"] = 0;
+    }
   }
 }
-if ($curColumn != 0) echo "</div>";  // Final </div> if not output
 
-// NEED TO SORT SEARCH BAR WIDTH (FOR BOTH) AND SEARCH DIFFERENCE
-/*
-echo "<pre>";
-print_r($value);
-echo "</pre>";
-*/
+$_SESSION["curColumn"] = 0;
+
+if (isset($_POST["bookSearch"])) {
+  $schString = trim($_POST["schTitle"]);
+  $schString = str_replace("?", "_", $schString);  // Fix MariaDB one char wildcard
+  $schString = str_replace("*", "%", $schString);  // Fix MariaDB multi char wildcard
+  foreach(new BookDisplayRows(new RecursiveArrayIterator($book->getBooksByTitle($schString))) as $value) {
+    echo $value;
+  }
+  unset($_POST);
+} else {
+  // Loop through ALL Books and output the values
+  foreach(new BookDisplayRows(new RecursiveArrayIterator($book->getBooksAll())) as $value) {
+    echo $value;
+  }
+}
+
+if ($_SESSION["curColumn"] == 2) { // Create 1 blank col & close row 
+  echo "<div class='col'></div></div>";
+} else if ($_SESSION["curColumn"] == 1) { // Create 2 blank cols & close row
+  echo "<div class='col'></div><div class='col'></div></div>";
+}
+unset ($_SESSION["curColumn"]);
 ?>

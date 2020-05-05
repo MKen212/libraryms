@@ -16,7 +16,7 @@
 </div>
 
 <!-- Books Table Display -->
-<div class="container-fluid">
+<div class="container-fluid mb-3">
   <!-- Display All Books -->
   <?php include("../controllers/booksDisplay.php");?>
 </div>
