@@ -24,7 +24,7 @@ class UserIDRows extends RecursiveIteratorIterator {
 }
 
 // Loop through the Users and output "UserID > UserName" for each
-foreach(new UserIDRows(new RecursiveArrayIterator($user->getUserIDs())) as $value) {
+foreach (new UserIDRows(new RecursiveArrayIterator($user->getUserIDs())) as $value) {
   echo $value;
 }
 ?>

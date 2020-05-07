@@ -28,8 +28,8 @@
       <th>Price (GBP)</th>
       <th>Qty Total</th>
       <th>Qty Available</th>
-      <th>Added Date</th>
-      <th>Added User</th>
+      <th>Date Added</th>
+      <th>Added By</th>
     </thead>
     <tbody>
       <!-- List All Books -->

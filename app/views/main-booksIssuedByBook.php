@@ -37,7 +37,34 @@ include("../config/_config.php");
       <?php include("../views/main-sidebar.php");?>
       <!-- Main -->
       <main class="col-md-9 ml-sm-auto col-lg-10 px-4">
-        <?php include("../views/main-messageSend.php");?>
+        <!-- Issued Books By Book Page -->
+        <div class="pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Currently Issued for Book <?php echo $_GET["bookID"]?></h1>
+        </div>
+
+        <?php include("../controllers/booksShowSelected.php")?>
+
+        <div class="table-responsive">
+          <table class="table table-striped table-sm">
+            <thead>
+              <!-- Books Issued Table Header -->
+              <th>Issued ID</th>
+              <th>User ID</th>
+              <th>User Name</th>
+              <th>Issued Date</th>
+              <th>Return Due Date</th>
+            </thead>
+            <tbody>
+              <!-- List All Outstanding Books -->
+              <?php include("../controllers/booksIssuedListByBook.php");?>
+            </tbody>
+          </table>
+          <?php  // List record count
+            echo "Issued Count: " . $_SESSION["rowCount"] . " book(s).<br />";
+            unset ($_SESSION["rowCount"]);
+          ?>
+          <a href="main.php">Return</a>
+        </div>
       </main>
     </div>
   </div>

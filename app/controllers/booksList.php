@@ -17,7 +17,7 @@ class BookListRows extends RecursiveIteratorIterator {
     if ($parentKey == "ImgFilename") {
       // For ImgFileName skip output
       return;
-    } else if ($parentKey == "DateAdded") {
+    } else if ($parentKey == "AddedDate") {
       // For Date Fields modify date format
       $returnValue = date("d/m/Y", strtotime($parentValue));
     } else {
@@ -39,13 +39,13 @@ if (isset($_POST["bookSearch"])) {
   $schString = trim($_POST["schTitle"]);
   $schString = str_replace("?", "_", $schString);  // Fix MariaDB one char wildcard
   $schString = str_replace("*", "%", $schString);  // Fix MariaDB multi char wildcard
-  foreach(new BookListRows(new RecursiveArrayIterator($book->getBooksByTitle($schString))) as $value) {
+  foreach (new BookListRows(new RecursiveArrayIterator($book->getBooksByTitle($schString))) as $value) {
     echo $value;
   }
   unset($_POST);
 } else {
   // Loop through ALL Books and output the values
-  foreach(new BookListRows(new RecursiveArrayIterator($book->getBooksAll())) as $value) {
+  foreach (new BookListRows(new RecursiveArrayIterator($book->getBooksAll())) as $value) {
     echo $value;
   }
 }

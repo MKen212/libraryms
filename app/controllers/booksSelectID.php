@@ -29,7 +29,7 @@ if (isset($_POST["selectUser"]) || isset($_POST["selectBook"]) || isset($_POST["
     <div class='input-group inpFixed'>
       <select class='form-control' id='bookSelect' name='bookIDSelected'>";
       // Loop through the Books and output "BookID > Title" for each
-      foreach(new BookIDRows(new RecursiveArrayIterator($book->getBookIDs())) as $value) {
+      foreach (new BookIDRows(new RecursiveArrayIterator($book->getBookIDs())) as $value) {
         echo $value;
       }
       echo "</select>

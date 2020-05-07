@@ -56,3 +56,16 @@ CREATE TABLE IF NOT EXISTS books_issued (
   FOREIGN KEY (BookID) REFERENCES books (BookID),
   FOREIGN KEY (UserID) REFERENCES users (UserID)
 );
+
+-- Create messages table
+CREATE TABLE IF NOT EXISTS messages (
+  MessageID INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  SenderID INT(11) NOT NULL,
+  ReceiverID INT(11) NOT NULL,
+  Subject VARCHAR(40) NOT NULL,
+  Body VARCHAR(500) NOT NULL,
+  MsgRead BOOLEAN NOT NULL DEFAULT 0,
+  FOREIGN KEY (SenderID) REFERENCES users (UserID),
+  FOREIGN KEY (ReceiverID) REFERENCES users (UserID)
+);
+

@@ -44,7 +44,7 @@ class Book {
    * @return array $resGetBooksAll  Returns all book records
    */
   public function getBooksAll() {
-    $sqlGetBooksAll = "SELECT BookID, ImgFilename, Title, Author, Publisher, ISBN, PriceGBP, QtyTotal, QtyAvail, AddedDate, UserID FROM books";
+    $sqlGetBooksAll = "SELECT books.BookID, books.ImgFilename, books.Title, books.Author, books.Publisher, books.ISBN, books.PriceGBP, books.QtyTotal, books.QtyAvail, books.AddedDate, users.Username FROM books LEFT JOIN users ON books.UserID = users.UserID";
     $stmtGetBooksAll = $this->conn->query($sqlGetBooksAll, PDO::FETCH_ASSOC);
     $resGetBooksAll = $stmtGetBooksAll->fetchAll();
     return $resGetBooksAll;
@@ -67,7 +67,7 @@ class Book {
    * @return array $resGetBookByID  Returns book record for $bookID
    */
   public function getBookByID($bookID) {
-    $sqlGetBookByID = "SELECT BookID, Title, Author, Publisher, ISBN, QtyAvail FROM books WHERE BookID = '$bookID'";
+    $sqlGetBookByID = "SELECT BookID, ImgFilename, Title, Author, Publisher, ISBN, QtyAvail FROM books WHERE BookID = '$bookID'";
     $stmtGetBookByID = $this->conn->query($sqlGetBookByID, PDO::FETCH_ASSOC);
     $resGetBookByID = $stmtGetBookByID->fetch();
     return $resGetBookByID;
@@ -79,7 +79,7 @@ class Book {
    * @return array $resGetBooksByTitle  Returns all book records with $title
    */
   public function getBooksByTitle($title) {
-    $sqlGetBooksByTitle = "SELECT BookID, ImgFilename, Title, Author, Publisher, ISBN, PriceGBP, QtyTotal, QtyAvail, AddedDate, UserID FROM books WHERE Title LIKE '%$title%'";
+    $sqlGetBooksByTitle = "SELECT books.BookID, books.ImgFilename, books.Title, books.Author, books.Publisher, books.ISBN, books.PriceGBP, books.QtyTotal, books.QtyAvail, books.AddedDate, users.Username FROM books LEFT JOIN users ON books.UserID = users.UserID WHERE Title LIKE '%$title%'";
     $stmtGetBooksByTitle = $this->conn->query($sqlGetBooksByTitle, PDO::FETCH_ASSOC);
     $resGetBooksByTitle = $stmtGetBooksByTitle->fetchAll();
     return $resGetBooksByTitle;

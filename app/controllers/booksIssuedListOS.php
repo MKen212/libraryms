@@ -18,7 +18,7 @@ class BooksOSListRows extends RecursiveIteratorIterator {
       // For BookID save the current value to $_SESSION
       $_SESSION["curBookID"] = $parentValue;
     }
-    if ($parentKey == "IssuedDate" || $parentKey == "ReturnDueDate") {
+    if ($parentKey == "IssuedDate") {
       if (!is_null($parentValue)) {
         // For Non-Null Date Fields modify date format
         $returnValue = date("d/m/Y", strtotime($parentValue));
@@ -47,24 +47,26 @@ if (isset($_POST["selectOSUser"])) {
   $selOSUser = $_POST["userIDSelected"];
   $_SESSION["rowCount"] = 0;
   // Output Table header
-  echo "<table class='table table-striped table-sm'>
-    <thead>
-      <th>Issued ID</th>
-      <th>Book ID</th>
-      <th>Book Title</th>
-      <th>User ID</th>
-      <th>User Name</th>
-      <th>Issued Date</th>
-      <th>Return Due Date</th>
-      <th>Return Book</th>
-    </thead>
-    <tbody>";
+  echo "<div class='table-responsive'>
+    <table class='table table-striped table-sm'>
+      <thead>
+        <th>Issued ID</th>
+        <th>Book ID</th>
+        <th>Book Title</th>
+        <th>User ID</th>
+        <th>User Name</th>
+        <th>Issued Date</th>
+        <th>Return Due Date</th>
+        <th>Return Book</th>
+      </thead>
+      <tbody>";
   // Loop through ALL Outstanding Issued Books for user and output the values
-  foreach(new BooksOSListRows(new RecursiveArrayIterator($bookIssued->getBooksOSByUserID($selOSUser))) as $value) {
+  foreach (new BooksOSListRows(new RecursiveArrayIterator($bookIssued->getBooksOSByUserID($selOSUser))) as $value) {
     echo $value;
   }
   echo "</tbody>
-    </table>";
+    </table>
+  </div>";
   echo "Record Count: " . $_SESSION["rowCount"] . " record(s).";
   unset ($_SESSION["rowCount"]);
 }

@@ -1,9 +1,9 @@
-<?php  // List all Issued Books for Logged-in User
+<?php  // List all Outstanding Issued Books for Particular Book
 include_once("../models/bookIssuedClass.php");
 $bookIssued = new BookIssued();
 
 // Extend the RecursiveIteratorIterator with table tags
-class BooksIssuedListRows extends RecursiveIteratorIterator {
+class BooksIssuedListByBookRows extends RecursiveIteratorIterator {
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);
   }
@@ -28,9 +28,12 @@ class BooksIssuedListRows extends RecursiveIteratorIterator {
   }
 }
 
-// Loop through ALL Issued Books for user and output the values
-$_SESSION["rowCount"] = 0;
-foreach (new BooksIssuedListRows(new RecursiveArrayIterator($bookIssued->getBooksIssuedByUserID($_SESSION["userID"]))) as $value) {
-  echo $value;
+if (isset($_GET["bookID"])) {
+  // Loop through ALL Outstanding Books for bookID and output the values
+  $_SESSION["rowCount"] = 0;
+  foreach (new BooksIssuedListByBookRows(new RecursiveArrayIterator($bookIssued->getBooksOSByBookID($_GET["bookID"]))) as $value) {
+    echo $value;
+  }
+  unset($_GET);
 }
 ?>

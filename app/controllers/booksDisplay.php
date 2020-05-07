@@ -15,7 +15,7 @@ class BookDisplayRows extends RecursiveIteratorIterator {
       $_SESSION["curBookID"] = $parentValue;
       return;
     } else if ($parentKey == "ImgFilename") {
-      if (is_null($parentValue) || ($parentValue == "")) {  // No Image Uploaded - Use Default
+      if ($parentValue == "") {  // No Image Uploaded - Use Default
         $fullPath = DEFAULTS["noImgUploaded"];
       } else {
         $fullPath = DEFAULTS["booksImgPath"] . $_SESSION["curBookID"] . "/" . $parentValue;
@@ -32,9 +32,9 @@ class BookDisplayRows extends RecursiveIteratorIterator {
           $returnClass="text-danger" : $returnClass="text-success";
         $returnContent = "<b>Available: <span class=$returnClass>$parentValue</span></b><br />";
     } else if ($parentKey == "AddedDate") {
-      $returnContent = "<b>Date added: </b>" . date("d/m/Y", strtotime($parentValue)) ." ";
-    } else if ($parentKey == "UserID") {
-      $returnContent = "<b>by User: </b>$parentValue<br />" .
+      $returnContent = "<b>Added: </b>" . date("d/m/Y", strtotime($parentValue)) ." ";
+    } else if ($parentKey == "Username") {
+      $returnContent = "<b>by: </b>$parentValue<br />" .
         "</div>";
     } else {
       $returnContent = "<b>$parentKey: </b>$parentValue<br />";
@@ -47,6 +47,8 @@ class BookDisplayRows extends RecursiveIteratorIterator {
     echo "<div class='col border rounded'>"; // Create Col div
   }
   public function endChildren() {
+    // Add Hyperlink to Show Books Issued for book
+    echo "<a class='badge badge-info' href='main-booksIssuedByBook.php?bookID=" . $_SESSION["curBookID"] . "'>Show Currently Issued</a>";
     echo "</div>";  // Close Col div
     unset ($_SESSION["curBookID"]);
     if ($_SESSION["curColumn"] == DEFAULTS["booksDisplayCols"]) {
@@ -62,21 +64,25 @@ if (isset($_POST["bookSearch"])) {
   $schString = trim($_POST["schTitle"]);
   $schString = str_replace("?", "_", $schString);  // Fix MariaDB one char wildcard
   $schString = str_replace("*", "%", $schString);  // Fix MariaDB multi char wildcard
-  foreach(new BookDisplayRows(new RecursiveArrayIterator($book->getBooksByTitle($schString))) as $value) {
+  foreach (new BookDisplayRows(new RecursiveArrayIterator($book->getBooksByTitle($schString))) as $value) {
     echo $value;
   }
   unset($_POST);
 } else {
   // Loop through ALL Books and output the values
-  foreach(new BookDisplayRows(new RecursiveArrayIterator($book->getBooksAll())) as $value) {
+  foreach (new BookDisplayRows(new RecursiveArrayIterator($book->getBooksAll())) as $value) {
     echo $value;
   }
 }
 
-if ($_SESSION["curColumn"] == 2) { // Create 1 blank col & close row 
-  echo "<div class='col'></div></div>";
-} else if ($_SESSION["curColumn"] == 1) { // Create 2 blank cols & close row
-  echo "<div class='col'></div><div class='col'></div></div>";
+// If in middle of a row then pad blank columns
+if ($_SESSION["curColumn"] > 0) {
+  for ($count = $_SESSION["curColumn"]; $count < DEFAULTS["booksDisplayCols"]; $count += 1) {
+    echo "<div class='col'></div>"; // Add Blank Columns
+  }
+  echo "</div>"; // Close final row
 }
+
 unset ($_SESSION["curColumn"]);
 ?>
+<a href=""></a>
