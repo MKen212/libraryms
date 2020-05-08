@@ -1,5 +1,6 @@
 <?php  // Confirm Issue Date & Return Due Date
 if (isset($_POST["selectBook"]) || isset($_POST["issueBook"])) {
+  // Issue Date
   isset($_POST["issueDate"]) ? 
     $issueDate = $_POST["issueDate"] :
     $issueDate = date("Y-m-d");
@@ -13,6 +14,7 @@ if (isset($_POST["selectBook"]) || isset($_POST["issueBook"])) {
   // Separator
   echo "</div>
     <div class='form-group row'>";
+  // Return Due Date
   isset($_POST["returnDate"]) ?
     $returnDueDate = $_POST["returnDate"] :
     $returnDueDate = date("Y-m-d", strtotime("+" . DEFAULTS["returnDuration"] . " days"));
@@ -23,5 +25,15 @@ if (isset($_POST["selectBook"]) || isset($_POST["issueBook"])) {
         <button class='btn btn-primary' type='button' name='selectReturnDate'>Select</button>
       </div>
     </div>";
+  // Separator with Line
+  echo "</div>
+    <hr />
+  <div class='form-group row'>";
+  // Submit Button
+  echo "<div class='col-form-label labFixed'>
+      <button class='btn btn-primary' type='submit' name='issueBook' id = 'issueBook'>Issue Book</button>
+    </div>";
+  // Results section
+  echo"<div class='inpFixed'>";
 }
 ?>

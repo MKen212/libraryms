@@ -1,31 +1,27 @@
 <?php  // Enter Message Content Once Recipient Selected
-if (isset($_POST["selectUser"])) {
-
-  // UPDATE FOLLOWING FOR ENTRY OF SUBJECT/BODY
-
-
-  isset($_POST["issueDate"]) ? 
-    $issueDate = $_POST["issueDate"] :
-    $issueDate = date("Y-m-d");
-  echo "<label class='col-form-label labFixed' for='issueDate'>Issued Date:</label>
-    <div class='input-group inpFixed'>
-      <input class='form-control' type='date' name='issueDate' id='issueDate' min='" . date("Y-m-d", strtotime("-" . DEFAULTS["returnDuration"] . " days")) . "' value='" . $issueDate . "' required />
-      <div class='input-group-append'>
-        <button class='btn btn-primary' type='button' name='selectIssueDate'>Select</button>
-      </div>
+if (isset($_POST["selectUser"]) || isset($_POST["sendMessage"])) {
+  // Message Subject
+  echo "<label class='col-form-label labFixed' for='subject'>Subject:</label>
+    <div class='inpFixed'>
+      <input class='form-control inpFixed' type='text' name='subject' id='subject' placeholder='Enter Subject' maxlength='40' autocomplete='off' required />
     </div>";
   // Separator
   echo "</div>
     <div class='form-group row'>";
-  isset($_POST["returnDate"]) ?
-    $returnDueDate = $_POST["returnDate"] :
-    $returnDueDate = date("Y-m-d", strtotime("+" . DEFAULTS["returnDuration"] . " days"));
-  echo "<label class='col-form-label labFixed' for='returnDate'>Return Due Date:</label>
-    <div class='input-group inpFixed'>
-      <input class='form-control' type='date' name='returnDate' id='returnDate' min='" . date("Y-m-d") . "' value='" . $returnDueDate . "' required />
-      <div class='input-group-append'>
-        <button class='btn btn-primary' type='button' name='selectReturnDate'>Select</button>
-      </div>
+  // Message Body
+  echo "<label class='col-form-label labFixed' for='body'>Message:</label>
+    <div class='inpFixed'>
+      <textarea class='form-control' name='body' id='body' rows='4' placeholder='Enter Message' maxlength='500' autocomplete='off' required /></textarea>
     </div>";
+  // Separator with Line
+  echo "</div>
+    <hr />
+    <div class='form-group row'>";
+  // Submit Button
+  echo "<div class='col-form-label labFixed'>
+      <button class='btn btn-primary' type='submit' name='sendMessage' id = 'sendMessage'>Send Message</button>
+    </div>";
+  // Results section
+  echo"<div class='inpFixed'>";
 }
 ?>

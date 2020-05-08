@@ -4,7 +4,7 @@
     <ul class="nav flex-column">
       <!-- Welcome -->
       <li class="nav-brand">
-        <h6 class="ml-2">Welcome, Mark</h6>
+        <h6 class="ml-2">Welcome, <?php include("../controllers/welcomeUser.php")?></h6>
         <hr>
       </li>
       <!-- Home -->

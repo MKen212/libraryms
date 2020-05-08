@@ -2,7 +2,7 @@
 include_once("../models/userClass.php");
 $user = new User();
 
-if (isset($_POST["selectUser"]) || isset($_POST["selectBook"]) || isset($_POST["issueBook"])) {
+if (isset($_POST["selectUser"]) || isset($_POST["selectBook"]) || isset($_POST["issueBook"]) || isset($_POST["sendMessage"])) {
   $selUser = $user->getUserByID($_POST["userIDSelected"]);
   echo "<div class='table-responsive'>
     <table class='table table-striped table-sm'>

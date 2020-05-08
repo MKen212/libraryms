@@ -28,6 +28,30 @@ class Message {
     $result = $this->conn->exec($sql);
     return $result;
   }
+
+  /**
+   * cntUnreadByUserID function - Count Unread Messages for User ID
+   * @param int $userID  User ID
+   * @return int $count  Count of Unread Messages for $userID
+   */
+  public function cntUnreadByUserID($userID) {
+    $sql = "SELECT MessageID FROM messages WHERE ReceiverID = '$userID' AND MsgRead = '0'";
+    $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
+    $count = $statement->rowCount();
+    return $count;
+  }
+
+  /**
+   * getMsgsByUserID function - Get all messages sent to User ID
+   * @param int $userID     User ID
+   * @return array $result  Returns all messages sent to $userID
+   */
+  public function getMsgsByUserID($userID) {
+    $sql = "SELECT messages.MessageID, messages.SenderID, users.Username, messages.Subject, messages.Body, messages.MsgTimestamp FROM messages LEFT JOIN users ON messages.SenderID = users.userID WHERE messages.ReceiverID = '$userID' ORDER BY messages.MsgTimestamp DESC";
+    $statement = $this->conn->query($sql);
+    $result = $statement->fetchAll();
+    return $result;
+  }
 }
 
 ?>
