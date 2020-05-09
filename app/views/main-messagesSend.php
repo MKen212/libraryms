@@ -26,9 +26,9 @@
     </div>
     <div class="form-group row">
       <!-- Enter Message -->
-      <?php include("../controllers/messageEnter.php");?>
+      <?php include("../controllers/messagesEnter.php");?>
       <!-- Send Message -->
-      <?php include("../controllers/messageSend.php");?>
+      <?php include("../controllers/messagesSend.php");?>
     </div>
   </form>
 </div>

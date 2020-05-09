@@ -15,8 +15,8 @@ CREATE TABLE IF NOT EXISTS users (
   LastName VARCHAR (40),
   Email VARCHAR (40),
   ContactNo VARCHAR(40),
-  IsAdmin BOOLEAN NOT NULL DEFAULT 0,
-  UserStatus BOOLEAN NOT NULL DEFAULT 0
+  IsAdmin TINYINT(1) NOT NULL DEFAULT 0, -- 0=NotAdmin/1=Admin
+  UserStatus TINYINT(1) NOT NULL DEFAULT 0  -- 0=Unapproved/1=Approved
 );
 
 -- Load initial test users - Better to use registration.php for Password Hashing
@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS books (
   ImgFilename VARCHAR(40) DEFAULT NULL,
   AddedDate DATE DEFAULT NULL,
   UserID INT(11) NOT NULL,
+  BookStatus TINYINT(1) NOT NULL DEFAULT 0, --0=Active/1=Deleted
   FOREIGN KEY (UserID) REFERENCES users (UserID)
 );
 
@@ -65,7 +66,8 @@ CREATE TABLE IF NOT EXISTS messages (
   Subject VARCHAR(40) NOT NULL,
   Body VARCHAR(500) NOT NULL,
   MsgTimestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
-  MsgRead BOOLEAN NOT NULL DEFAULT 0,
+  MsgRead TINYINT(1) NOT NULL DEFAULT 0,  --0=Unread/1=Read
+  MsgStatus TINYINT(1) NOT NULL DEFAULT 0, --0=Active/1=Deleted
   FOREIGN KEY (SenderID) REFERENCES users (UserID),
   FOREIGN KEY (ReceiverID) REFERENCES users (UserID)
 );

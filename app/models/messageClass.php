@@ -42,14 +42,26 @@ class Message {
   }
 
   /**
-   * getMsgsByUserID function - Get all messages sent to User ID
+   * getMsgsByUserID function - Get ALL messages sent to User ID
    * @param int $userID     User ID
-   * @return array $result  Returns all messages sent to $userID
+   * @return array $result  Returns All messages sent to $userID ordered by MsgRead, MsgTimestamp
    */
   public function getMsgsByUserID($userID) {
-    $sql = "SELECT messages.MessageID, messages.SenderID, users.Username, messages.Subject, messages.Body, messages.MsgTimestamp FROM messages LEFT JOIN users ON messages.SenderID = users.userID WHERE messages.ReceiverID = '$userID' ORDER BY messages.MsgTimestamp DESC";
-    $statement = $this->conn->query($sql);
+    $sql = "SELECT messages.MessageID, messages.MsgRead, messages.SenderID, users.Username, messages.Subject, messages.Body, messages.MsgTimestamp FROM messages LEFT JOIN users ON messages.SenderID = users.userID WHERE messages.ReceiverID = '$userID' ORDER BY messages.MsgTimestamp DESC";
+    $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
     $result = $statement->fetchAll();
+    return $result;
+  }
+
+  /**
+   * updateMsgRead function - Update Message MsgRead status
+   * @param int $messageID     Message ID
+   * @param bool $messageRead  True if Message Read / False if message UnRead
+   * @return bool              True if function success
+   */
+  public function UpdateMsgRead($messageID, $messageRead) {
+    $sql = "UPDATE messages SET MsgRead = '$messageRead' WHERE MessageID = '$messageID'";
+    $result = $this->conn->exec($sql);
     return $result;
   }
 }

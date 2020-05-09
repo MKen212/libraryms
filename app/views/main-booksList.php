@@ -30,6 +30,7 @@
       <th>Qty Available</th>
       <th>Date Added</th>
       <th>Added By</th>
+      <th>Status</th>
     </thead>
     <tbody>
       <!-- List All Books -->

@@ -44,7 +44,26 @@ include("../config/_config.php");
   <h1 class="h2">Display Messages</h1>
 </div>
 
-<!--  UP TO HERE - CLASS FUNCTION CREATED - NOW DISPLAY  -->
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <!-- Messages Table Header -->
+      <th>Message ID</th>
+      <th>Read / Unread</th>
+      <th>Sender ID</th>
+      <th>Sender Username</th>
+      <th>Subject</th>
+      <th>Message</th>
+      <th style="min-width: 180px">Sent Date/Time</th>
+      <th>Reply?</th>
+    </thead>
+    <tbody>
+      <!-- List All Users -->
+      <?php include("../controllers/messagesList.php");?>
+    </tbody>
+  </table>
+</div>
+
 
       </main>
     </div>

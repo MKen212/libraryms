@@ -7,7 +7,8 @@ echo $_SESSION["userName"];
 
 // Check Unread Message
 $unreadCount = $message->cntUnreadByUserID($_SESSION["userID"]);
-if ($unreadCount > 0) {
-  echo " <a class='badge badge-info' href='../views/main-messagesDisplay.php'><span data-feather='mail'></span> $unreadCount</a>";
-}
+$unreadCount == 0 ?
+  $linkClass = "badge badge-light" :
+  $linkClass = "badge badge-info";
+echo " <a class='$linkClass' href='../views/main-messagesDisplay.php'><span data-feather='mail'></span> $unreadCount</a>";
 ?>

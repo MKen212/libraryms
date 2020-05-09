@@ -129,7 +129,7 @@ class User {
   /**
    * updateStatus function - Updates the UserStatus of a user
    * @param int $userID       User ID
-   * @param bool $userStatus  True if User Approved / False if User Unapproved
+   * @param bool $userStatus  User Status Flag (0=Unapproved /  1=Approved)
    * @return bool             True if function success
    */
   public function updateStatus($userID, $userStatus) {

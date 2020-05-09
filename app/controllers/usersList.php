@@ -23,10 +23,10 @@ class UserListRows extends RecursiveIteratorIterator {
       }
     } else if ($parentKey == "UserStatus") {
       // For UserStatus output Approved/Unapproved + Change Link
-      if ($parentValue == 1) {
-        $returnValue = "<a class='badge badge-success' href='../controllers/usersUpdateStatus.php?updateID=" . $_SESSION["curUserID"] . "&newStatus=0'>Approved</a>";
-      } else {
+      if ($parentValue == 0) {
         $returnValue = "<a class='badge badge-danger' href='../controllers/usersUpdateStatus.php?updateID=" . $_SESSION["curUserID"] . "&newStatus=1'>Unapproved</a>";
+      } else {
+        $returnValue = "<a class='badge badge-success' href='../controllers/usersUpdateStatus.php?updateID=" . $_SESSION["curUserID"] . "&newStatus=0'>Approved</a>";
       }
     } else {
       // For all others output original value

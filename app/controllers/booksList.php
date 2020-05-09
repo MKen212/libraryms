@@ -20,6 +20,12 @@ class BookListRows extends RecursiveIteratorIterator {
     } else if ($parentKey == "AddedDate") {
       // For Date Fields modify date format
       $returnValue = date("d/m/Y", strtotime($parentValue));
+    } else if ($parentKey == "BookStatus") {
+      if ($parentValue == 0) {
+        $returnValue = "<a class='badge badge-success' href='../controllers/booksUpdateStatus.php?updateID=" . $_SESSION["curBookID"] . "&newStatus=1'>Active</a>";
+      } else {
+        $returnValue = "<a class='badge badge-danger' href='../controllers/booksUpdateStatus.php?updateID=" . $_SESSION["curBookID"] . "&newStatus=0'>Deleted</a>";
+      }
     } else {
       // For all others output original value
       $returnValue = $parentValue;
