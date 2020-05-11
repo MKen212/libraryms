@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../config/_config.php");
+include_once("../config/_config.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +15,6 @@ include("../config/_config.php");
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
   <link rel="stylesheet" href="css/extra.css" />
 
-  <script src="../controllers/registerCheck.js"></script>
 </head>
 
 <body class="text-center">
@@ -41,7 +40,7 @@ include("../config/_config.php");
           <div class="input-group-prepend">
             <span class="input-group-text form-labels">Password:</span>
           </div>
-          <input class="form-control" type="password" name="lmsPassword"  placeholder="Enter Password" required />
+          <input class="form-control" type="password" name="lmsPassword" minlength="5" placeholder="Enter Password" required />
         </div>
         <!-- First Name -->
         <div class="input-group">
@@ -73,9 +72,9 @@ include("../config/_config.php");
         </div>
         <br />
         <!-- Submit Button -->
-        <button class="btn btn-lg btn-primary btn-block" type="submit" name="register" onclick="return(registerCheck());">Register</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="register">Register</button> <!-- Removed onclick="return(registerCheck());" as browser can do validation -->
         <!-- Back to Login Link -->
-        <a href="../views/login.php">Back to Login</a>
+        <a href="../views/user-login.php">Back to Login</a>
         <br />
       </form>
     </div>

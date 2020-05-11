@@ -39,7 +39,7 @@ session_start();
 
     <!-- Re-Login -->
     <div class="row justify-content-center">
-      <a href="../views/login.php">Back to Login</a>
+      <a href="../views/user-login.php">Back to Login</a>
     </div>
   </div>
 

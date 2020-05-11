@@ -35,7 +35,7 @@ class Message {
    * @return int $count  Count of Unread Messages for $userID
    */
   public function cntUnreadByUserID($userID) {
-    $sql = "SELECT MessageID FROM messages WHERE ReceiverID = '$userID' AND MsgRead = '0'";
+    $sql = "SELECT MessageID FROM messages WHERE ReceiverID = '$userID' AND MsgRead = '0' AND MsgStatus = '1'";
     $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
     $count = $statement->rowCount();
     return $count;
@@ -54,16 +54,27 @@ class Message {
   }
 
   /**
-   * updateMsgRead function - Update Message MsgRead status
+   * updateMsgRead function - Update MsgRead status of a message
    * @param int $messageID     Message ID
    * @param bool $messageRead  True if Message Read / False if message UnRead
-   * @return bool              True if function success
+   * @return bool $result      True if function success
    */
-  public function UpdateMsgRead($messageID, $messageRead) {
+  public function updateMsgRead($messageID, $messageRead) {
     $sql = "UPDATE messages SET MsgRead = '$messageRead' WHERE MessageID = '$messageID'";
     $result = $this->conn->exec($sql);
     return $result;
   }
-}
 
+  /**
+   * updateMsgStatus function - Update the MsgStatus of a message
+   * @param int $messageID   Message ID
+   * @param bool $msgStatus  Message Status Flag (0=Deleted / 1=Active)
+   * @return bool $result    True if function success
+   */
+  public function updateMsgStatus($messageID, $msgStatus) {
+    $sql = "UPDATE messages SET MsgStatus = '$msgStatus' WHERE MessageID = '$messageID'";
+    $result = $this->conn->exec($sql);
+    return $result;
+  }
+}
 ?>

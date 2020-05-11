@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../config/_config.php");
+include_once("../config/_config.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +15,6 @@ include("../config/_config.php");
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
   <link rel="stylesheet" href="css/extra.css" />
 
-  <script src="../controllers/loginCheck.js"></script>
 </head>
 
 <body class="text-center">
@@ -45,10 +44,9 @@ include("../config/_config.php");
         </div>
         <br />
         <!-- Submit Button -->
-        <button class="btn btn-lg btn-primary btn-block" type="submit" name="login" onclick="return(loginCheck());">Sign in</button>
-        <!-- Lost Password / New Account Links -->
-        <a class="mr-3" href="#">Lost password?</a>
-        <a class="ml-3" href="../views/registration.php">Create new account</a>  
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="login" >Sign in</button><!-- Removed onclick="return(loginCheck());" as browser can do validation-->
+        <!-- New Account Links -->
+        <a href="../views/user-registration.php">Create new account</a>
       </form>
     </div>
     <!-- Result -->

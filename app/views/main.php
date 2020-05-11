@@ -1,12 +1,10 @@
 <?php
 session_start();
-/* Not used at present
 if (!$_SESSION["userLogin"] == true) {
   $_SESSION["message"] = "Sorry - You need to Login with a Valid User Account to proceed.";
-  header("location:../views/logout.php");
+  header("location:../views/user-logout.php");
 }
- */
-include("../config/_config.php");
+include_once("../config/_config.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +35,7 @@ include("../config/_config.php");
       <?php include("../views/main-sidebar.php");?>
       <!-- Main -->
       <main class="col-md-9 ml-sm-auto col-lg-10 px-4">
-        <?php include("../views/main-booksList.php");?>
+        <?php include("../views/main-home.php");?>
       </main>
     </div>
   </div>

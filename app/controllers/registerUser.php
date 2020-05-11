@@ -11,9 +11,13 @@ if (isset($_POST["register"])) {
   $contactNo = htmlspecialchars($_POST["lmsContactNo"]);
   $isAdmin = 0;
 
-  $register = $user->registerUser($username, $password, $firstName, $lastName, $email, $contactNo, $isAdmin);
+  $newUser = $user->registerUser($username, $password, $firstName, $lastName, $email, $contactNo, $isAdmin);
   unset($_POST, $password);
-  if ($register) {
+  if ($newUser) {
+    // Send Admin message
+    include_once("../models/messageClass.php");
+    $message = new Message();
+    $notify = $message->addMessage($newUser, DEFAULTS["userAdminUserID"], "New User", "Please process my New User registration.");
     // Registration Success
     echo "<div class='alert alert-success form-user'>" .
     "Registration of '$username' was successful.<br />" .
@@ -22,7 +26,8 @@ if (isset($_POST["register"])) {
   } else {
     // Registration Failure
     echo "<div class='alert alert-danger form-user'>" .
-    "Sorry - Registration of '$username' failed." .
+    "Sorry - Registration of '$username' failed. " .
+    $_SESSION["message"] .
     "</div>";
   }
 }

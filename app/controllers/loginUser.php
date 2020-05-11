@@ -12,7 +12,7 @@ if (isset($_POST["login"])){
     header("location:../views/main.php");
   } else {
     // Login Failure
-    header("location:../views/logout.php");
+    header("location:../views/user-logout.php");
   }
 }
 ?>

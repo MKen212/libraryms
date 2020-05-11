@@ -16,6 +16,7 @@ $defaultValues = [
   "noImgUploaded" => "../config/noImage.jpg" ,  // Default Image if no image file uploaded
   "booksDisplayCols" => 3,  // Number of Columns for Books Display
   "returnDuration" => 14,  // Issued Book Return Duration
+  "userAdminUserID" => 2,  // UserID for User Management Administrator
 ];
 
 define("DEFAULTS", $defaultValues);

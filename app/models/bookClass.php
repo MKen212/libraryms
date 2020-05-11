@@ -25,7 +25,7 @@ class Book {
    * @param int $quantity      Quantity of the Book Added
    * @param date $addedDate    Date Book Added
    * @param int $userID        User ID who added book
-   * @return int               Book ID of added book
+   * @return int lastInsertID  Book ID of added book or False
    */
   public function addBook($title, $author, $publisher, $ISBN, $priceGBP, $quantity, $imgFilename, $addedDate, $userID) {
     $sql = "INSERT INTO books
@@ -35,72 +35,72 @@ class Book {
     if ($result) {
       return ($this->conn->lastInsertId());
     } else {
-      return $result;
+      return false;
     }
   }
 
   /**
    * getBooksAll function - Retrieve ALL book records
-   * @return array $resGetBooksAll  Returns all book records
+   * @return array $result  Returns all book records
    */
   public function getBooksAll() {
-    $sqlGetBooksAll = "SELECT books.BookID, books.ImgFilename, books.Title, books.Author, books.Publisher, books.ISBN, books.PriceGBP, books.QtyTotal, books.QtyAvail, books.AddedDate, users.Username, books.BookStatus FROM books LEFT JOIN users ON books.UserID = users.UserID";
-    $stmtGetBooksAll = $this->conn->query($sqlGetBooksAll, PDO::FETCH_ASSOC);
-    $resGetBooksAll = $stmtGetBooksAll->fetchAll();
-    return $resGetBooksAll;
+    $sql = "SELECT books.BookID, books.ImgFilename, books.Title, books.Author, books.Publisher, books.ISBN, books.PriceGBP, books.QtyTotal, books.QtyAvail, books.AddedDate, users.Username, books.BookStatus FROM books LEFT JOIN users ON books.UserID = users.UserID";
+    $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
+    $result = $statement->fetchAll();
+    return $result;
   }
 
   /**
-   * getBookIDs function - Retrieve all active book IDs (with Title)
-   * @return array $resGetBookIDs  Returns all active BookIDs (with Title)
+   * getBookIDs function - Retrieve all Active book IDs (with Title)
+   * @return array $result  Returns all active BookIDs (with Title)
    */
   public function getBookIDs() {
-    $sqlGetBookIDs = "SELECT BookID, Title FROM books WHERE BookStatus = '0' ORDER BY Title";
-    $stmtGetBookIDs = $this->conn->query($sqlGetBookIDs, PDO::FETCH_ASSOC);
-    $resGetBookIDs = $stmtGetBookIDs->fetchAll();
-    return $resGetBookIDs;
+    $sql = "SELECT BookID, Title FROM books WHERE BookStatus = '1' ORDER BY Title";
+    $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
+    $result = $statement->fetchAll();
+    return $result;
   }
 
   /**
    * getBookByID function - Retrieve book record based on ID
-   * @param int    $bookID          Book ID
-   * @return array $resGetBookByID  Returns book record for $bookID
+   * @param int    $bookID  Book ID
+   * @return array $result  Returns book record for $bookID
    */
   public function getBookByID($bookID) {
-    $sqlGetBookByID = "SELECT BookID, ImgFilename, Title, Author, Publisher, ISBN, QtyAvail FROM books WHERE BookID = '$bookID'";
-    $stmtGetBookByID = $this->conn->query($sqlGetBookByID, PDO::FETCH_ASSOC);
-    $resGetBookByID = $stmtGetBookByID->fetch();
-    return $resGetBookByID;
+    $sql = "SELECT BookID, ImgFilename, Title, Author, Publisher, ISBN, QtyAvail FROM books WHERE BookID = '$bookID'";
+    $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
+    $result = $statement->fetch();
+    return $result;
   }
 
   /**
    * getBooksByTitle function - Retrieve book records based on Title
-   * @param string $title               Book Title
-   * @return array $resGetBooksByTitle  Returns all book records with $title
+   * @param string $title   Book Title
+   * @return array $result  Returns all book records with $title
    */
   public function getBooksByTitle($title) {
-    $sqlGetBooksByTitle = "SELECT books.BookID, books.ImgFilename, books.Title, books.Author, books.Publisher, books.ISBN, books.PriceGBP, books.QtyTotal, books.QtyAvail, books.AddedDate, users.Username, books.BookStatus FROM books LEFT JOIN users ON books.UserID = users.UserID WHERE Title LIKE '%$title%'";
-    $stmtGetBooksByTitle = $this->conn->query($sqlGetBooksByTitle, PDO::FETCH_ASSOC);
-    $resGetBooksByTitle = $stmtGetBooksByTitle->fetchAll();
-    return $resGetBooksByTitle;
+    $sql = "SELECT books.BookID, books.ImgFilename, books.Title, books.Author, books.Publisher, books.ISBN, books.PriceGBP, books.QtyTotal, books.QtyAvail, books.AddedDate, users.Username, books.BookStatus FROM books LEFT JOIN users ON books.UserID = users.UserID WHERE Title LIKE '%$title%'";
+    $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
+    $result = $statement->fetchAll();
+    return $result;
   }
 
   /**
    * updateBookQtyAvail function - Update QtyAvail for $bookID
    * @param int $bookID       Book ID
    * @param int $qtyAvailChg  (+/-)Quantity to change in $QtyAvail
-   * @return bool             True if function success
+   * @return bool $result     True if function success
    */
   public function updateBookQtyAvail($bookID, $qtyAvailChg) {
-    $sqlUpdBookQtyAvail = "UPDATE books SET QtyAvail = QtyAvail + $qtyAvailChg WHERE BookID = $bookID";
-    $resUpdBookQtyAvail = $this->conn->exec($sqlUpdBookQtyAvail);
-    return $resUpdBookQtyAvail;
+    $sql = "UPDATE books SET QtyAvail = QtyAvail + $qtyAvailChg WHERE BookID = $bookID";
+    $result = $this->conn->exec($sql);
+    return $result;
   }
 
   /**
    * updateBookStatus function - Update the BookStatus of a book
    * @param int $bookID      Book ID
-   * @param int $bookStatus  Book Status Flag (0=Active / 1=Deleted)
+   * @param int $bookStatus  Book Status Flag (0=Deleted / 1=Active)
    * @return bool $result    True if function success
    */
   public function updateBookStatus($bookID, $bookStatus) {

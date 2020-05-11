@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS books (
   ImgFilename VARCHAR(40) DEFAULT NULL,
   AddedDate DATE DEFAULT NULL,
   UserID INT(11) NOT NULL,
-  BookStatus TINYINT(1) NOT NULL DEFAULT 0, --0=Active/1=Deleted
+  BookStatus TINYINT(1) NOT NULL DEFAULT 1, --0=Deleted/1=Active
   FOREIGN KEY (UserID) REFERENCES users (UserID)
 );
 
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS messages (
   Body VARCHAR(500) NOT NULL,
   MsgTimestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
   MsgRead TINYINT(1) NOT NULL DEFAULT 0,  --0=Unread/1=Read
-  MsgStatus TINYINT(1) NOT NULL DEFAULT 0, --0=Active/1=Deleted
+  MsgStatus TINYINT(1) NOT NULL DEFAULT 1, --0=Deleted/1=Active
   FOREIGN KEY (SenderID) REFERENCES users (UserID),
   FOREIGN KEY (ReceiverID) REFERENCES users (UserID)
 );

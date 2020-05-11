@@ -23,20 +23,22 @@ class User {
    * @param string $lastName    User Last Name
    * @param string $email       User Email Address
    * @param string $contactNo   User Contact Number
-   * @return bool               True if Function success
+   * @return int lastInsertID   User ID of new user or False
    */
   public function registerUser($username, $password, $firstName, $lastName, $email, $contactNo) {
-    $sqlChkUser = "SELECT UserID FROM users WHERE UserName = '$username'";
-    $stmtChkUser = $this->conn->query($sqlChkUser, PDO::FETCH_ASSOC);
-    $cntChkUser = $stmtChkUser->rowCount();
-    if ($cntChkUser == 0) {
+    // Check Username does not exist
+    $sql = "SELECT UserID FROM users WHERE UserName = '$username'";
+    $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
+    $count = $statement->rowCount();
+    if ($count == 0) {  // Username is unique
       $passwordHash = password_hash($password, PASSWORD_ARGON2ID);
       $sqlInsUser = "INSERT INTO users
         (UserName, UserPassword, FirstName, LastName, Email, ContactNo) VALUES
         ('$username', '$passwordHash', '$firstName', '$lastName', '$email', '$contactNo')";
-      $resInsUser = $this->conn->exec($sqlInsUser);
-      return $resInsUser;
-    } else {
+      $result = $this->conn->exec($sqlInsUser);
+      return ($this->conn->lastInsertId());
+    } else {  // Username is not unique
+      $_SESSION["message"] = "User Name is already taken! Please try again.";
       return false;
     }
   }
@@ -48,29 +50,28 @@ class User {
    * @return bool             True if Function success
    */
   public function login($username, $password) {
-    $sqlChkLogin = "SELECT UserID, UserPassword, IsAdmin, UserStatus FROM users WHERE UserName = '$username'";
-    $stmtChkLogin = $this->conn->query($sqlChkLogin, PDO::FETCH_ASSOC);
-    $cntChkLogin = $stmtChkLogin->rowCount();
-    if ($cntChkLogin != 1) {
-      // Username not found
+    $sql = "SELECT UserID, UserPassword, IsAdmin, UserStatus FROM users WHERE UserName = '$username'";
+    $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
+    $count = $statement->rowCount();
+    if ($count != 1) {  // Username not found
       $_SESSION["message"] = "Incorrect User Name or Password entered!";
       return false;
     } else {
-      $resChkLogin = $stmtChkLogin->fetch();
-      $passwordStatus = password_verify($password, $resChkLogin["UserPassword"]);
-      $userID = $resChkLogin["UserID"];
-      $userIsAdmin = $resChkLogin["IsAdmin"];
-      $userStatus = $resChkLogin["UserStatus"];
-      $resChkLogin = NULL;
-      if ($passwordStatus == true) {
-        if ($userStatus == true) {
+      $result = $statement->fetch();
+      $passwordStatus = password_verify($password, $result["UserPassword"]);
+      $userID = $result["UserID"];
+      $userIsAdmin = $result["IsAdmin"];
+      $userStatus = $result["UserStatus"];
+      $result = NULL;
+      if ($passwordStatus == true) {  // Correct Password Entered
+        if ($userStatus == true) {  // User is approved
           $_SESSION["userLogin"] = true;
           $_SESSION["userIsAdmin"] = $userIsAdmin;
           $_SESSION["userID"] = $userID;
           $_SESSION["userName"] = $username;
           return true;
         } else {
-          // User Status False
+          // User is unapproved
           $_SESSION["message"] = "Sorry - User not yet approved!";
           return false;
         }
@@ -93,37 +94,37 @@ class User {
   }
 
   /**
-   * getUsersAll function - Retrieve all user records
-   * @return array $resultGetUsersAll  Returns all user records
+   * getUsersAll function - Retrieve ALL user records
+   * @return array $result  Returns all user records
    */
   public function getUsersAll() {
-    $sqlGetUsersAll = "SELECT UserID, UserName, FirstName, LastName, Email, ContactNo, IsAdmin, UserStatus FROM users";
-    $stmtGetUsersAll = $this->conn->query($sqlGetUsersAll, PDO::FETCH_ASSOC);
-    $resGetUsersAll = $stmtGetUsersAll->fetchAll();
-    return $resGetUsersAll;
+    $sql = "SELECT UserID, UserName, FirstName, LastName, Email, ContactNo, IsAdmin, UserStatus FROM users";
+    $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
+    $result = $statement->fetchAll();
+    return $result;
   }
 
   /**
-   * getUserIDs function - Retrieve all user IDs (with Username)
-   * @return array $resultGetUserIDs  Returns all UserIDs (with Username)
+   * getUserIDs function - Retrieve all Approved user IDs (with Username)
+   * @return array $result  Returns all Approved UserIDs (with Username)
    */
   public function getUserIDs() {
-    $sqlGetUserIDs = "SELECT UserID, UserName FROM users ORDER BY UserName";
-    $stmtGetUserIDs = $this->conn->query($sqlGetUserIDs, PDO::FETCH_ASSOC);
-    $resGetUserIDs = $stmtGetUserIDs->fetchAll();
-    return $resGetUserIDs;
+    $sql = "SELECT UserID, UserName FROM users WHERE UserStatus = '1' ORDER BY UserName";
+    $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
+    $result = $statement->fetchAll();
+    return $result;
   }
 
   /**
    * getUserByID function - Retrieve user record based on ID
-   * @param int    $userID             User ID
-   * @return array $resultGetUserByID  Returns user record for $userID
+   * @param int    $userID  User ID
+   * @return array $result  Returns user record for $userID
    */
   public function getUserByID($userID) {
-    $sqlGetUserByID = "SELECT UserID, UserName, FirstName, LastName, Email, ContactNo FROM users WHERE UserID = '$userID'";
-    $stmtGetUserByID = $this->conn->query($sqlGetUserByID, PDO::FETCH_ASSOC);
-    $resGetUserByID = $stmtGetUserByID->fetch();
-    return $resGetUserByID;
+    $sql = "SELECT UserID, UserName, FirstName, LastName, Email, ContactNo FROM users WHERE UserID = '$userID'";
+    $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
+    $result = $statement->fetch();
+    return $result;
   }
 
   /**
@@ -133,9 +134,9 @@ class User {
    * @return bool             True if function success
    */
   public function updateStatus($userID, $userStatus) {
-    $sqlUpdateStatus = "UPDATE users SET UserStatus = '$userStatus' WHERE UserID = '$userID'";
-    $resUpdateStatus = $this->conn->exec($sqlUpdateStatus);
-    return $resUpdateStatus;
+    $sql = "UPDATE users SET UserStatus = '$userStatus' WHERE UserID = '$userID'";
+    $result = $this->conn->exec($sql);
+    return $result;
   }
 }
 ?>

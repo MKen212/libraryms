@@ -5,6 +5,6 @@ $user = new User();
 if (isset($_GET["q"])) {
   $user->logout();
   unset($_GET);
-  header("location:../views/logout.php");
+  header("location:../views/user-logout.php");
   }
 ?>
