@@ -29,8 +29,8 @@ session_start();
     <!-- Logout Message & cleanup -->
     <div class="row justify-content-center mb-3">
       <h5>
-        <?php  // Clear the session
-        echo $_SESSION["message"];
+        <?php  // Display Message & Clear the session
+        if (isset($_SESSION["message"])) echo $_SESSION["message"];
         session_unset();
         session_destroy();
         ?>

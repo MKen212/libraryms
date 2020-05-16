@@ -9,63 +9,58 @@
       </li>
       <!-- Home -->
       <li class="nav-item">
-        <a class="nav-link active" href="#">
-          <span data-feather="home"></span>
-          Home<span class="sr-only">(current)</span>
-        </a>
+        <a class="nav-link active" href="main-home.php"><span data-feather="home"></span>Home<span class="sr-only">(current)</span></a>
       </li>
-      <!-- Forms -->
+      <!-- Books -->
       <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="edit"></span>
-          Forms
-        </a>
+        <a class="nav-link" href="main-booksDisplay.php"><span data-feather="book"></span>Books</a>
       </li>
-      <!-- UI Elements -->
+      <!-- Issued to Me -->
       <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="monitor"></span>
-          UI Elements
-        </a>
+        <a class="nav-link" href="main-booksIssuedToMe.php"><span data-feather="book-open"></span>Issued to Me</a>
       </li>
-      <!-- Tables -->
+      <!-- Send a Message -->
       <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="layout"></span>
-          Tables
-        </a>
-      </li>
-      <!-- Data Presentation -->
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="trending-up"></span>
-          Data Presentation
-        </a>
+        <a class="nav-link" href="main-messagesSend.php"><span data-feather="send"></span>Send a Message</a>
         <hr />
       </li>
-      <!-- Notifications -->
+      <!-- My Profile -->
       <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="mail"></span>
-          Notifications
-        </a>
-      </li>
-      <!-- Settings -->
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="settings"></span>
-          Settings
-        </a>
+        <a class="nav-link" href="main-usersProfile.php"><span data-feather="user"></span>My Profile</a>
         <hr />
       </li>
-      <!-- Users -->
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="settings"></span>
-          Users
-        </a>
-        <hr />
-      </li>
+    </ul>
+    
+    <!-- Admin Section -->
+    <?php if ($_SESSION["userIsAdmin"] == true) { ?>
+      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">Admin Section</h6>
+      <ul class="nav flex-column">
+        <!-- List Books -->
+        <li class="nav-item">
+          <a class="nav-link" href="main-booksList.php"><span data-feather="layers"></span>
+          List Books</a>
+        </li>
+        <!-- Add Books -->
+        <li class="nav-item">
+          <a class="nav-link" href="main-booksAdd.php"><span data-feather="plus-square"></span>
+          Add Books</a>
+        </li>
+        <!-- List Issued Books-->
+        <li class="nav-item">
+          <a class="nav-link" href="main-booksIssuedAdd.php"><span data-feather="file-text"></span>
+          List Issued Books</a>
+        </li>
+        <!-- Return Books -->
+        <li class="nav-item">
+          <a class="nav-link" href="main-booksIssuedRtn.php"><span data-feather="plus-circle"></span>
+          Return Books</a>  
+        </li>
+        <!-- List Users-->
+        <li class="nav-item">
+          <a class="nav-link" href="main-users.php"><span data-feather="users"></span>
+          List Users</a>
+        </li>
+      <?php ;}?>
     </ul>
   </div>
 </nav>

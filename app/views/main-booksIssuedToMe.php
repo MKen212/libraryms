@@ -1,6 +1,6 @@
-<!-- Issued Books Page -->
+<!-- Books Issued To Me Page -->
 <div class="pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2">My Issued Books</h1>
+  <h1 class="h2">Books Issued To Me</h1>
 </div>
 
 <div class="table-responsive">

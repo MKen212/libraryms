@@ -85,4 +85,3 @@ if ($_SESSION["curColumn"] > 0) {
 
 unset ($_SESSION["curColumn"]);
 ?>
-<a href=""></a>
