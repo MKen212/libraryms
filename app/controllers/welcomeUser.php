@@ -10,5 +10,5 @@ $unreadCount = $message->cntUnreadByUserID($_SESSION["userID"]);
 $unreadCount == 0 ?
   $linkClass = "badge badge-light" :
   $linkClass = "badge badge-info";
-echo " <a class='$linkClass' href='../views/main-messagesDisplay.php'><span data-feather='mail'></span> $unreadCount</a>";
+echo " <a class='$linkClass' href='../views/main-messagesIssuedToMe.php'><span data-feather='mail'></span> $unreadCount</a>";
 ?>

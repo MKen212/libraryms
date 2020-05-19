@@ -9,7 +9,7 @@ if (isset($_POST["login"])){
   unset($_POST, $password);
   if ($login) {
     // Login Success
-    header("location:../views/main.php");
+    header("location:../views/main-home.php");
   } else {
     // Login Failure
     header("location:../views/user-logout.php");

@@ -18,7 +18,7 @@
     </thead>
     <tbody>
       <!-- List All Issued Books -->
-      <?php include("../controllers/booksIssuedList.php");?>
+      <?php include("../controllers/booksIssuedListByUser.php");?>
     </tbody>
   </table>
   <?php  // List record count

@@ -14,7 +14,7 @@ include_once("../config/_config.php");
   <meta name="author" content="Malarena SA" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Library MS - Home</title>
+  <title>Library MS - My Messages</title>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="css/dashboard.css">
@@ -42,7 +42,7 @@ include_once("../config/_config.php");
             </li>
             <!-- Home -->
             <li class="nav-item">
-              <a class="nav-link active" href="main-home.php"><span data-feather="home"></span>Home<span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="main-home.php"><span data-feather="home"></span>Home<span class="sr-only">(current)</span></a>
             </li>
             <!-- Display Books -->
             <li class="nav-item">
@@ -97,15 +97,30 @@ include_once("../config/_config.php");
         </div>
       </nav>
 
-      <!-- Main Section - Home -->
+      <!-- Main Section - Messages -->
       <main class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div class="pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Home</h1>
+          <h1 class="h2">My Messages</h1>
         </div>
-        <div>
-          <pre>
-            <?php print_r($_SESSION);?>
-          </pre>
+
+        <div class="table-responsive">
+          <table class="table table-striped table-sm">
+            <thead>
+              <!-- Messages Table Header -->
+              <th>Message ID</th>
+              <th>Read / Unread</th>
+              <th>Sender ID</th>
+              <th>Sender Username</th>
+              <th>Subject</th>
+              <th>Message</th>
+              <th style="min-width: 180px">Sent Date/Time</th>
+              <th>Reply?</th>
+            </thead>
+            <tbody>
+              <!-- List All Users -->
+              <?php include("../controllers/messagesList.php");?>
+            </tbody>
+          </table>
         </div>
       </main>
     </div>
