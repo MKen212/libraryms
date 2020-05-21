@@ -101,6 +101,7 @@ include_once("../config/_config.php");
       <main class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
       </main>
+      
     </div>
   </div>
   

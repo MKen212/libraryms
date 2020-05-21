@@ -102,7 +102,6 @@ include_once("../config/_config.php");
         <div class="pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">My Messages</h1>
         </div>
-
         <div class="table-responsive">
           <table class="table table-striped table-sm">
             <thead>
@@ -117,12 +116,13 @@ include_once("../config/_config.php");
               <th>Reply?</th>
             </thead>
             <tbody>
-              <!-- List All Users -->
+              <!-- List All Messages -->
               <?php include("../controllers/messagesList.php");?>
             </tbody>
           </table>
         </div>
       </main>
+
     </div>
   </div>
   

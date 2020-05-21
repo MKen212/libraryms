@@ -14,7 +14,7 @@ include_once("../config/_config.php");
   <meta name="author" content="Malarena SA" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Library MS - Issued to Me</title>
+  <title>Library MS - My Profile</title>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="css/dashboard.css">
@@ -50,7 +50,7 @@ include_once("../config/_config.php");
             </li>
             <!-- My Issued Books -->
             <li class="nav-item">
-              <a class="nav-link active" href="main-booksIssuedToMe.php"><span data-feather="book-open"></span>My Issued Books</a>
+              <a class="nav-link" href="main-booksIssuedToMe.php"><span data-feather="book-open"></span>My Issued Books</a>
             </li>
             <!-- Send a Message -->
             <li class="nav-item">
@@ -59,7 +59,7 @@ include_once("../config/_config.php");
             </li>
             <!-- My Profile -->
             <li class="nav-item">
-              <a class="nav-link" href="main-usersProfile.php"><span data-feather="user"></span>My Profile</a>
+              <a class="nav-link active" href="main-usersProfile.php"><span data-feather="user"></span>My Profile</a>
               <hr />
             </li>
           </ul>
@@ -97,44 +97,23 @@ include_once("../config/_config.php");
         </div>
       </nav>
 
-      <!-- Main Section - Issued to Me -->
+      <!-- Main Section - My Profile -->
       <main class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div class="pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Books Issued To Me</h1>
+          <h1 class="h2">My Profile</h1>
         </div>
-        <div class="table-responsive">
-          <table class="table table-striped table-sm">
-            <thead>
-              <!-- Books Issued Table Header -->
-              <th>Issued ID</th>
-              <th>Book ID</th>
-              <th>Book Title</th>
-              <th>User ID</th>
-              <th>User Name</th>
-              <th>Issued Date</th>
-              <th>Return Due Date</th>
-              <th>Returned Date</th>
-            </thead>
-            <tbody>
-              <!-- List All Issued Books -->
-              <?php include("../controllers/booksIssuedListByUser.php");?>
-            </tbody>
-          </table>
-          <?php  // List record count
-            echo "Record Count: " . $_SESSION["rowCount"] . " record(s).";
-            unset ($_SESSION["rowCount"]);
-          ?>
-        </div>
+
+        <p>Will let me edit my profile</p>
       </main>
       
     </div>
   </div>
-    
+  
   <!--Update Feather Icons & Initialise Bootstrap CustomFileInput -->
   <script>
     feather.replace();
     bsCustomFileInput.init();
   </script>
-  
+
 </body>
 </html>

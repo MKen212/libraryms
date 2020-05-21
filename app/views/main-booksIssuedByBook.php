@@ -1,12 +1,10 @@
 <?php
 session_start();
-/* Not used at present
 if (!$_SESSION["userLogin"] == true) {
   $_SESSION["message"] = "Sorry - You need to Login with a Valid User Account to proceed.";
-  header("location:../views/logout.php");
+  header("location:../views/user-logout.php");
 }
- */
-include("../config/_config.php");
+include_once("../config/_config.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +14,7 @@ include("../config/_config.php");
   <meta name="author" content="Malarena SA" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Library MS - Main Page</title>
+  <title>Library MS - Books Issued</title>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="css/dashboard.css">
@@ -33,17 +31,78 @@ include("../config/_config.php");
   <?php include("../views/main-navbar.php");?>
   <div class=container-fluid>
     <div class="row">
-      <!-- Side -->
-      <?php include("../views/main-sidebar.php");?>
-      <!-- Main -->
+      <!-- Sidebar Menu -->
+      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column">
+            <!-- Welcome -->
+            <li class="nav-brand">
+              <h6 class="ml-2">Welcome, <?php include("../controllers/welcomeUser.php")?></h6>
+              <hr>
+            </li>
+            <!-- Home -->
+            <li class="nav-item">
+              <a class="nav-link" href="main-home.php"><span data-feather="home"></span>Home<span class="sr-only">(current)</span></a>
+            </li>
+            <!-- Display Books -->
+            <li class="nav-item">
+              <a class="nav-link active" href="main-booksDisplay.php"><span data-feather="book"></span>Display Books</a>
+            </li>
+            <!-- My Issued Books -->
+            <li class="nav-item">
+              <a class="nav-link" href="main-booksIssuedToMe.php"><span data-feather="book-open"></span>My Issued Books</a>
+            </li>
+            <!-- Send a Message -->
+            <li class="nav-item">
+              <a class="nav-link" href="main-messagesSend.php"><span data-feather="send"></span>Send a Message</a>
+              <hr />
+            </li>
+            <!-- My Profile -->
+            <li class="nav-item">
+              <a class="nav-link" href="main-usersProfile.php"><span data-feather="user"></span>My Profile</a>
+              <hr />
+            </li>
+          </ul>
+          <!-- Admin Section -->
+          <?php if ($_SESSION["userIsAdmin"] == true) { ?>
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">Admin Section</h6>
+            <ul class="nav flex-column">
+              <!-- Issue Books-->
+              <li class="nav-item">
+                <a class="nav-link" href="main-booksIssuedAdd.php"><span data-feather="arrow-up-circle"></span>
+                Issue Books</a>
+              </li>
+              <!-- Return Books -->
+              <li class="nav-item">
+                <a class="nav-link" href="main-booksIssuedRtn.php"><span data-feather="arrow-down-circle"></span>
+                Return Books</a>  
+              </li>
+              <!-- Add Books -->
+              <li class="nav-item">
+                <a class="nav-link" href="main-booksAdd.php"><span data-feather="plus-circle"></span>
+                Add Books</a>
+              </li>
+              <!-- List/Edit Books -->
+              <li class="nav-item">
+                <a class="nav-link" href="main-booksList.php"><span data-feather="layers"></span>
+                List/Edit Books</a>
+              </li>
+              <!-- List/Edit Users-->
+              <li class="nav-item">
+                <a class="nav-link" href="main-usersList.php"><span data-feather="users"></span>
+                List/Edit Users</a>
+              </li>
+            </ul>
+          <?php ;}?>
+        </div>
+      </nav>
+
+      <!-- Main Section - Books Issued -->
       <main class="col-md-9 ml-sm-auto col-lg-10 px-4">
-        <!-- Issued Books By Book Page -->
         <div class="pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">Currently Issued for Book <?php echo $_GET["bookID"]?></h1>
         </div>
-
         <?php include("../controllers/booksShowSelected.php")?>
-
         <div class="table-responsive">
           <table class="table table-striped table-sm">
             <thead>
@@ -63,9 +122,10 @@ include("../config/_config.php");
             echo "Issued Count: " . $_SESSION["rowCount"] . " book(s).<br />";
             unset ($_SESSION["rowCount"]);
           ?>
-          <a href="main.php">Return</a>
+          <a href="main-booksDisplay.php">Return to Display Books</a>
         </div>
       </main>
+
     </div>
   </div>
   

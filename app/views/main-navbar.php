@@ -12,7 +12,7 @@
   <!-- Logout -->
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="../views/main.php?q=logout">Sign out</a>
+      <a class="nav-link" href="../views/main-home.php?q=logout">Sign out</a>
         <?php include("../controllers/logoutUser.php");?>
     </li>
   </ul>
