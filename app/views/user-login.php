@@ -31,9 +31,9 @@ include_once("../config/_config.php");
         <!-- User Name -->
         <div class="input-group">
           <div class="input-group-prepend">
-            <span class="input-group-text form-labels">User Name:</span>
+            <span class="input-group-text form-labels">Username:</span>
           </div>
-          <input class="form-control" type="text" name="lmsUsername" placeholder="User Name" required autofocus />
+          <input class="form-control" type="text" name="lmsUsername" placeholder="Username" required autofocus />
         </div>
         <!-- Password -->
         <div class="input-group">

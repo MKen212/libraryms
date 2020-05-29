@@ -1,10 +1,11 @@
 <?php  // Enter Message Content Once Recipient Selected
-if (isset($_POST["selectUser"]) || isset($_POST["sendMessage"])) {
+if (isset($_POST["selectUser"]) || isset($_POST["sendMessage"]) || isset($_GET["s"])) {
   // Message Subject
   echo "<label class='col-form-label labFixed' for='subject'>Subject:</label>
     <div class='inpFixed'>
-      <input class='form-control inpFixed' type='text' name='subject' id='subject' placeholder='Enter Subject' maxlength='40' autocomplete='off' required />
-    </div>";
+      <input class='form-control' type='text' name='subject' id='subject' placeholder='Enter Subject' maxlength='40' autocomplete='off' required";
+  if (isset($_GET["s"])) echo " value='" . $_GET["s"] . "'";
+  echo "/></div>";
   // Separator
   echo "</div>
     <div class='form-group row'>";

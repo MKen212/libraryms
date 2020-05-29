@@ -62,7 +62,7 @@ class User {
       $userID = $result["UserID"];
       $userIsAdmin = $result["IsAdmin"];
       $userStatus = $result["UserStatus"];
-      $result = NULL;
+      $result = null;
       if ($passwordStatus == true) {  // Correct Password Entered
         if ($userStatus == true) {  // User is approved
           $_SESSION["userLogin"] = true;
@@ -137,6 +137,51 @@ class User {
     $sql = "UPDATE users SET UserStatus = '$userStatus' WHERE UserID = '$userID'";
     $result = $this->conn->exec($sql);
     return $result;
+  }
+
+  /**
+   * updateRecord function - Updates the User record of a user
+   * @param int $userID        User ID
+   * @param string $firstName  User First Name
+   * @param string $lastName   User Last Name
+   * @param string $email      User Email Address
+   * @param string $contactNo  User Contact Number
+   * @return bool              True if function success
+   */
+  public function updateRecord($userID, $firstName, $lastName, $email, $contactNo) {
+    $sql = "UPDATE users SET FirstName = '$firstName', LastName = '$lastName', Email = '$email', ContactNo = '$contactNo' WHERE UserID = '$userID'";
+    $result = $this->conn->exec($sql);
+    return $result;
+  }
+
+  /**
+   * updatePassword function - Updates the password of a user
+   * @param int $userID         User ID
+   * @param string $existingPW  User Existing Password
+   * @param string $newPW       User New Password
+   * @return bool               True if function success
+   */
+  public function updatePassword($userID, $existingPW, $newPW) {
+    $sqlChk = "SELECT UserID, UserPassword FROM users WHERE UserID = '$userID'";
+    $stmtChk = $this->conn->query($sqlChk, PDO::FETCH_ASSOC);
+    $result = $stmtChk->fetch();
+    $passwordStatus = password_verify($existingPW, $result["UserPassword"]);
+    $result = null;
+    if ($passwordStatus == true) {  // Correct Existing Password Entered
+      $passwordHash = password_hash($newPW, PASSWORD_ARGON2ID);
+      $sql = "UPDATE users SET UserPassword = '$passwordHash' WHERE UserID = '$userID'";
+      $result = $this->conn->exec($sql);
+      if ($result) {  // Update Successful
+        $_SESSION["message"] = "Password Successfully Updated.";
+        return true;
+      } else {  // Update Unsuccessful
+        $_SESSION["message"] = "Error - Password not Updated.";
+        return false;
+      }
+    } else {  // Incorrect Existing Password Entered
+      $_SESSION["message"] = "Error - Incorrect Existing Password!";
+        return false;
+    }
   }
 }
 ?>

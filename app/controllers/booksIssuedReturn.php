@@ -16,7 +16,7 @@ if (isset($_GET["updateID"])) {
     $updateBooks = $book->updateBookQtyAvail($bookID, +1);
     if ($updateBooks) {
       // Update to books also success
-      header("location:../views/main.php");
+      header("location:../views/main-booksIssuedRtn.php");
     } else {
       // Update to books Failure
       print_r($updateBooks);

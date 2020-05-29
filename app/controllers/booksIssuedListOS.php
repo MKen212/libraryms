@@ -67,7 +67,7 @@ if (isset($_POST["selectOSUser"])) {
   echo "</tbody>
     </table>
   </div>";
-  echo "Record Count: " . $_SESSION["rowCount"] . " record(s).";
+  echo "Record Count: " . $_SESSION["rowCount"] . " book(s).";
   unset ($_SESSION["rowCount"]);
 }
 ?>

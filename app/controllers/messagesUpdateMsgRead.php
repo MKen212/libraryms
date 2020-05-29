@@ -10,7 +10,7 @@ if (isset($_GET["updateID"])) {
   unset($_GET);
   if ($update) {
     // Update Success
-    header("location:../views/main-messagesDisplay.php");
+    header("location:../views/main-messages.php");
   } else {
     // Update Failure
     print_r($update);

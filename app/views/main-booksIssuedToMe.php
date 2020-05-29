@@ -121,7 +121,7 @@ include_once("../config/_config.php");
             </tbody>
           </table>
           <?php  // List record count
-            echo "Record Count: " . $_SESSION["rowCount"] . " record(s).";
+            echo "Record Count: " . $_SESSION["rowCount"] . " book(s).";
             unset ($_SESSION["rowCount"]);
           ?>
         </div>

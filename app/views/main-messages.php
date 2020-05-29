@@ -102,22 +102,40 @@ include_once("../config/_config.php");
         <div class="pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">My Messages</h1>
         </div>
+        <!-- Received Messages -->
         <div class="table-responsive">
+          <h3>Received:</h3>
           <table class="table table-striped table-sm">
             <thead>
-              <!-- Messages Table Header -->
-              <th>Message ID</th>
+              <!-- Received Messages Table Header -->
+              <th style="width: 180px">Received</th>
               <th>Read / Unread</th>
-              <th>Sender ID</th>
-              <th>Sender Username</th>
+              <th>Sender</th>
               <th>Subject</th>
               <th>Message</th>
-              <th style="min-width: 180px">Sent Date/Time</th>
               <th>Reply?</th>
             </thead>
             <tbody>
-              <!-- List All Messages -->
-              <?php include("../controllers/messagesList.php");?>
+              <!-- List All Received Messages -->
+              <?php include("../controllers/messagesListRcvd.php");?>
+            </tbody>
+          </table>
+        </div>
+        <hr />
+        <!-- Sent Messages -->
+        <div class="table-responsive">
+          <h3>Sent:</h3>
+          <table class="table table-striped table-sm">
+            <thead>
+              <!-- Messages Table Header -->
+              <th style="width: 180px">Sent</th>
+              <th>Receiver</th>
+              <th>Subject</th>
+              <th>Message</th>
+            </thead>
+            <tbody>
+              <!-- List All Sent Messages -->
+              <?php include("../controllers/messagesListSent.php");?>
             </tbody>
           </table>
         </div>

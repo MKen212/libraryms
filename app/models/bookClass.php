@@ -51,7 +51,30 @@ class Book {
   }
 
   /**
-   * getBookIDs function - Retrieve all Active book IDs (with Title)
+   * getBooksActive function - Retrieve all ACTIVE book records
+   * @return array $result  Returns all active book records
+   */
+  public function getBooksActive() {
+    $sql = "SELECT books.BookID, books.ImgFilename, books.Title, books.Author, books.Publisher, books.ISBN, books.PriceGBP, books.QtyTotal, books.QtyAvail, books.AddedDate, users.Username FROM books LEFT JOIN users ON books.UserID = users.UserID WHERE BookStatus = '1'";
+    $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
+    $result = $statement->fetchAll();
+    return $result;
+  }
+
+  /**
+   * getBooksByTitle function - Retrieve ACTIVE book records based on Title
+   * @param string $title   Book Title
+   * @return array $result  Returns ACTIVE book records with $title
+   */
+  public function getBooksByTitle($title) {
+    $sql = "SELECT books.BookID, books.ImgFilename, books.Title, books.Author, books.Publisher, books.ISBN, books.PriceGBP, books.QtyTotal, books.QtyAvail, books.AddedDate, users.Username, books.BookStatus FROM books LEFT JOIN users ON books.UserID = users.UserID WHERE Title LIKE '%$title%' AND BookStatus = '1'";
+    $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
+    $result = $statement->fetchAll();
+    return $result;
+  }
+
+  /**
+   * getBookIDs function - Retrieve all ACTIVE book IDs (with Title)
    * @return array $result  Returns all active BookIDs (with Title)
    */
   public function getBookIDs() {
@@ -70,18 +93,6 @@ class Book {
     $sql = "SELECT BookID, ImgFilename, Title, Author, Publisher, ISBN, QtyAvail FROM books WHERE BookID = '$bookID'";
     $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
     $result = $statement->fetch();
-    return $result;
-  }
-
-  /**
-   * getBooksByTitle function - Retrieve book records based on Title
-   * @param string $title   Book Title
-   * @return array $result  Returns all book records with $title
-   */
-  public function getBooksByTitle($title) {
-    $sql = "SELECT books.BookID, books.ImgFilename, books.Title, books.Author, books.Publisher, books.ISBN, books.PriceGBP, books.QtyTotal, books.QtyAvail, books.AddedDate, users.Username, books.BookStatus FROM books LEFT JOIN users ON books.UserID = users.UserID WHERE Title LIKE '%$title%'";
-    $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
-    $result = $statement->fetchAll();
     return $result;
   }
 

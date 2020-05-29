@@ -70,7 +70,7 @@ if (isset($_POST["bookSearch"])) {
   unset($_POST);
 } else {
   // Loop through ALL Books and output the values
-  foreach (new BookDisplayRows(new RecursiveArrayIterator($book->getBooksAll())) as $value) {
+  foreach (new BookDisplayRows(new RecursiveArrayIterator($book->getBooksActive())) as $value) {
     echo $value;
   }
 }

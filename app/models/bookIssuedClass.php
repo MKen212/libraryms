@@ -32,7 +32,7 @@ class BookIssued {
   }
 
   /**
-   * getBooksIssuedByUserID function - Retrieve books issued records based on User ID
+   * getBooksIssuedByUserID function - List books issued records for User ID
    * @param int $userID     User ID
    * @return array $result  Returns all books issued records for $userID
    */
@@ -44,7 +44,7 @@ class BookIssued {
   }
 
   /**
-   * getBooksIssuedByBookID function - Retrieve books issued records based on Book ID
+   * getBooksIssuedByBookID function - List books issued records for Book ID
    * @param int $bookID     Book ID
    * @return array $result  Returns all books issued records for $bookID
    */
@@ -56,7 +56,7 @@ class BookIssued {
   }
 
   /**
-   * getBooksOSByUserID function - Retrieve outstanding books issued records based on User ID
+   * getBooksOSByUserID function - List outstanding books issued for User ID
    * @param int $userID     User ID
    * @return array $result  Returns all outstanding books issued records for $userID
    */
@@ -68,7 +68,7 @@ class BookIssued {
   }
 
   /**
-   * getBooksOSByBookID function - Retrieve outstanding books issued records based on Book ID
+   * getBooksOSByBookID function - List outstanding books issued for Book ID
    * @param int $bookID     Book ID
    * @return array $result  Returns all outstanding books issued records for $bookID
    */

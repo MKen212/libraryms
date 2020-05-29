@@ -22,9 +22,9 @@ class BookListRows extends RecursiveIteratorIterator {
       $returnValue = date("d/m/Y", strtotime($parentValue));
     } else if ($parentKey == "BookStatus") {
       if ($parentValue == 0) {
-        $returnValue = "<a class='badge badge-success' href='../controllers/booksUpdateStatus.php?updateID=" . $_SESSION["curBookID"] . "&newStatus=1'>Active</a>";
+        $returnValue = "<a class='badge badge-danger' href='../controllers/booksUpdateStatus.php?updateID=" . $_SESSION["curBookID"] . "&newStatus=1'>Deleted</a>";
       } else {
-        $returnValue = "<a class='badge badge-danger' href='../controllers/booksUpdateStatus.php?updateID=" . $_SESSION["curBookID"] . "&newStatus=0'>Deleted</a>";
+        $returnValue = "<a class='badge badge-success' href='../controllers/booksUpdateStatus.php?updateID=" . $_SESSION["curBookID"] . "&newStatus=0'>Active</a>";
       }
     } else {
       // For all others output original value

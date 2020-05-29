@@ -102,10 +102,96 @@ include_once("../config/_config.php");
         <div class="pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">My Profile</h1>
         </div>
-
-        <p>Will let me edit my profile</p>
+        <!-- Edit User Form -->
+        <div>
+          <!-- Get Current User Details -->
+          <?php include("../controllers/usersGetCurrent.php");?>
+          <form class="ml-3" action="" method="POST" name="editUsersForm">
+            <!-- User Name -->
+            <div class="form-group row">
+              <label class ="col-form-label labFixed" for="username">Username:</label>
+              <div class="inpFixed">
+                <input class="form-control" type="text" name="lmsUsername" id="username" placeholder="Enter User Name" value="<?php echo $curuser["UserName"]?>" readonly />  
+              </div>
+            </div>
+            <!-- First Name -->
+            <div class="form-group row">
+              <label class ="col-form-label labFixed" for="firstName">First Name:</label>
+              <div class="inpFixed">
+                <input class="form-control" type="text" name="lmsFirstName" id="firstName" placeholder="Enter First Name" value="<?php echo $curuser["FirstName"]?>" required />  
+              </div>
+            </div>
+            <!-- Last Name -->
+            <div class="form-group row">
+              <label class ="col-form-label labFixed" for="lastName">Last Name:</label>
+              <div class="inpFixed">
+                <input class="form-control" type="text" name="lmsLastName" id="lastName" placeholder="Enter Last Name" value="<?php echo $curuser["LastName"]?>" required />  
+              </div>
+            </div>
+            <!-- Email -->
+            <div class="form-group row">
+              <label class ="col-form-label labFixed" for="email">Email:</label>
+              <div class="inpFixed">
+                <input class="form-control" type="email" name="lmsEmail" id="email" placeholder="Enter Email Address" value="<?php echo $curuser["Email"]?>" required />  
+              </div>
+            </div>
+            <!-- Contact Number -->
+            <div class="form-group row">
+              <label class ="col-form-label labFixed" for="contactNo">Contact No:</label>
+              <div class="inpFixed">
+                <input class="form-control" type="tel" name="lmsContactNo" id="contactNo" placeholder="Enter Contact Telephone Number" value="<?php echo $curuser["ContactNo"]?>" required />  
+              </div>
+            </div>
+            <!-- Submit Button -->
+            <div class="form-group row">
+              <div class="col-form-label labFixed">
+                 <button class="btn btn-primary" type="submit" name="updateUser" id="updateUser">Update Profile</button>
+               </div>
+               <!-- Results Section -->
+              <div class="inpFixed">
+                <?php include("../controllers/usersUpdateRecord.php");?>
+              </div>
+            </div>
+          </form>        
+        </div>
+        <hr />
+        <!-- Change Password Form -->
+        <div>
+          <form class="ml-3" action="" method="POST" name="changePasswordForm">
+            <!-- Existing Password -->
+            <div class="form-group row">
+              <label class ="col-form-label labFixed" for="existingPW">Existing Password:</label>
+              <div class="inpFixed">
+                <input class="form-control" type="password" name="lmsPassword" id="existingPW" placeholder="Enter Existing Password" required />  
+              </div>
+            </div>
+            <!-- New Password -->
+            <div class="form-group row">
+              <label class ="col-form-label labFixed" for="newPW">New Password:</label>
+              <div class="inpFixed">
+                <input class="form-control" type="password" name="lmsNewPassword" id="newPW" minlength="5" placeholder="Enter New Password" required />  
+              </div>
+            </div>
+            <!-- Repeat New Password -->
+            <div class="form-group row">
+              <label class ="col-form-label labFixed" for="repeatPW">Repeat Password:</label>
+              <div class="inpFixed">
+                <input class="form-control" type="password" name="lmsRepeatPassword" id="repeatPW" minlength="5" placeholder="Repeat New Password" required />  
+              </div>
+            </div>
+            <!-- Submit Button -->
+            <div class="form-group row">
+              <div class="col-form-label labFixed">
+                 <button class="btn btn-primary" type="submit" name="updatePassword" id="updatePassword">Update Password</button>
+               </div>
+               <!-- Results Section -->
+              <div class="inpFixed">
+                <?php include("../controllers/usersUpdatePassword.php");?>
+              </div>
+            </div>
+          </form>
+        </div>
       </main>
-      
     </div>
   </div>
   

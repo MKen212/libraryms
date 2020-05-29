@@ -1,4 +1,4 @@
-<?php  // Login User
+<?php  // Verify & Login User
 include_once("../models/userClass.php");
 $user = new User();
 
