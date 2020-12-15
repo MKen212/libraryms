@@ -17,15 +17,16 @@ class Book {
 
   /**
    * addBook function - Add book record
-   * @param string $title      Book Title
-   * @param string $author     Book Author
-   * @param string $publisher  Book Publisher
-   * @param string $ISBN       Book ISBN Code
-   * @param string $priceGBP   Book Price in GBP
-   * @param int $quantity      Quantity of the Book Added
-   * @param date $addedDate    Date Book Added
-   * @param int $userID        User ID who added book
-   * @return int lastInsertID  Book ID of added book or False
+   * @param string $title        Book Title
+   * @param string $author       Book Author
+   * @param string $publisher    Book Publisher
+   * @param string $ISBN         Book ISBN Code
+   * @param string $priceGBP     Book Price in GBP
+   * @param int $quantity        Quantity of the Book Added
+   * @param string $imgFilename  Filename for Book Image
+   * @param date $addedDate      Date Book Added
+   * @param int $userID          User ID who added book
+   * @return int lastInsertID    Book ID of added book or False
    */
   public function addBook($title, $author, $publisher, $ISBN, $priceGBP, $quantity, $imgFilename, $addedDate, $userID) {
     $sql = "INSERT INTO books
@@ -100,7 +101,7 @@ class Book {
    * updateBookQtyAvail function - Update QtyAvail for $bookID
    * @param int $bookID       Book ID
    * @param int $qtyAvailChg  (+/-)Quantity to change in $QtyAvail
-   * @return bool $result     True if function success
+   * @return bool $result     Number of affected records if function success
    */
   public function updateBookQtyAvail($bookID, $qtyAvailChg) {
     $sql = "UPDATE books SET QtyAvail = QtyAvail + $qtyAvailChg WHERE BookID = $bookID";
@@ -112,7 +113,7 @@ class Book {
    * updateBookStatus function - Update the BookStatus of a book
    * @param int $bookID      Book ID
    * @param int $bookStatus  Book Status Flag (0=Deleted / 1=Active)
-   * @return bool $result    True if function success
+   * @return bool $result    Number of affected records if function success
    */
   public function updateBookStatus($bookID, $bookStatus) {
     $sql = "UPDATE books SET BookStatus = '$bookStatus' WHERE BookID = '$bookID'";

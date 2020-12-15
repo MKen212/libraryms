@@ -1,20 +1,30 @@
 <?php
 session_start();
-if (!$_SESSION["userLogin"] == true) {
-  $_SESSION["message"] = "Sorry - You need to Login with a Valid User Account to proceed.";
-  header("location:../views/user-logout.php");
+require "../app/helpers/helperFunctions.php";
+
+// Reject User that is not logged in
+if (!isset($_SESSION["userLogin"])) {
+  $_SESSION["message"] = msgPrep("warning", "Sorry - You need to Login with a Valid User Account to proceed.");
+  header("location:index.php?p=logout");
 }
-include_once("../config/_config.php");
+
+require "../app/config/_config.php";
+
+// Get Page Details
+$page = "home";
+if (isset($_GET["p"])) {
+  $page = cleanInput($_GET["p"], "string");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="decription" content="Library Management System" />
+  <meta name="description" content="Library Management System" />
   <meta name="author" content="Malarena SA" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Library MS - ###</title>
+  <title>Library MS - <?= ucfirst($page) ?></title>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="css/dashboard.css">
@@ -28,6 +38,9 @@ include_once("../config/_config.php");
 
 <body>
   <!-- Top -->
+
+UP TO HERE - FIX THIS PAGE, NAVBAR & SIDEBAR
+
   <?php include("../views/main-navbar.php");?>
   <div class=container-fluid>
     <div class="row">
@@ -48,7 +61,7 @@ include_once("../config/_config.php");
             <li class="nav-item">
               <a class="nav-link" href="main-booksDisplay.php"><span data-feather="book"></span>Display Books</a>
             </li>
-            <!-- My Issued Books -->
+            <!-- Issued to Me -->
             <li class="nav-item">
               <a class="nav-link" href="main-booksIssuedToMe.php"><span data-feather="book-open"></span>My Issued Books</a>
             </li>
@@ -97,9 +110,16 @@ include_once("../config/_config.php");
         </div>
       </nav>
 
-      <!-- Main Section - ### -->
+      <!-- Main Section - Home -->
       <main class="col-md-9 ml-sm-auto col-lg-10 px-4">
-
+        <div class="pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Home</h1>
+        </div>
+        <div>
+          <pre>
+            <?php print_r($_SESSION);?>
+          </pre>
+        </div>
       </main>
       
     </div>

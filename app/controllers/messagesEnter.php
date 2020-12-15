@@ -12,7 +12,7 @@ if (isset($_POST["selectUser"]) || isset($_POST["sendMessage"]) || isset($_GET["
   // Message Body
   echo "<label class='col-form-label labFixed' for='body'>Message:</label>
     <div class='inpFixed'>
-      <textarea class='form-control' name='body' id='body' rows='4' placeholder='Enter Message' maxlength='500' autocomplete='off' required /></textarea>
+      <textarea class='form-control' name='body' id='body' rows='4' placeholder='Enter Message' maxlength='500' autocomplete='off' required></textarea>
     </div>";
   // Separator with Line
   echo "</div>
