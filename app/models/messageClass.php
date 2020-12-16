@@ -11,34 +11,41 @@ class Message {
       $this->conn = new PDO($connString, DBSERVER["username"], DBSERVER["password"]);
       $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $err) {
-      echo "Database Connection Failed: " . $err->getMessage() . "<br />";
+      $_SESSION["message"] = msgPrep("danger", "Error - Message/DB Connection Failed: {$err->getMessage()}");
     }
   }
 
   /**
-   * addMessage function - Add Message
+   * add function - Add Message Record
    * @param int $senderID    Sender User ID
-   * @param int $receiveID   Receiver User ID
+   * @param int $receiverID  Receiver User ID
    * @param string $subject  Message Subject
    * @param string $body     Message Body
-   * @return bool $result    True if Function success
+   * @return bool $newMsgID  MessageID of added Message record or False
    */
-  public function addMessage($senderID, $receiverID, $subject, $body) {
-    $sql = "INSERT INTO messages (SenderID, ReceiverID, Subject, Body) VALUES ('$senderID', '$receiverID', '$subject', '$body')";
-    $result = $this->conn->exec($sql);
-    return $result;
+  public function add($senderID, $receiverID, $subject, $body) {
+    $sql = "INSERT INTO `messages` (`SenderID`, `ReceiverID`, `Subject`, `Body`) VALUES ('{$senderID}', '{$receiverID}', '{$subject}', '{$body}')";
+    $this->conn->exec($sql);
+    $newMsgID = $this->conn->lastInsertId();
+    // Do Not set Session Message here as it overwrites when new user added
+    return $newMsgID;
   }
 
   /**
-   * cntUnreadByUserID function - Count Unread Messages for User ID
-   * @param int $userID  User ID
-   * @return int $count  Count of Unread Messages for $userID
+   * countUnreadByUserID function - Count Unread Messages for User ID
+   * @param int $userID   User ID
+   * @return int $result  Count of Unread Messages for $userID
    */
-  public function cntUnreadByUserID($userID) {
-    $sql = "SELECT MessageID FROM messages WHERE ReceiverID = '$userID' AND MsgRead = '0'";
-    $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
-    $count = $statement->rowCount();
-    return $count;
+  public function countUnreadByUserID($userID) {
+    try {
+      $sql = "SELECT COUNT(*) FROM `messages` WHERE `ReceiverID` = '{$userID}' AND `MsgStatus` = '0'";
+      $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+      $result = $stmt->fetchColumn();
+      return $result;
+    } catch (PDOException $err) {
+      $_SESSION["message"] = msgPrep("danger", "Error - Message/countUnreadByUserID Failed: {$err->getMessage()}");
+      return false;
+    }
   }
 
   /**
@@ -48,8 +55,8 @@ class Message {
    */
   public function getMsgsToUserID($userID) {
     $sql = "SELECT messages.MessageID, messages.MsgTimestamp, messages.MsgRead, messages.SenderID, users.Username, messages.Subject, messages.Body FROM messages LEFT JOIN users ON messages.SenderID = users.userID WHERE messages.ReceiverID = '$userID' ORDER BY messages.MsgTimestamp DESC";
-    $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
-    $result = $statement->fetchAll();
+    $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+    $result = $stmt->fetchAll();
     return $result;
   }
 
@@ -60,8 +67,8 @@ class Message {
    */
   public function getMsgsFromUserID($userID) {
     $sql = "SELECT messages.MessageID, messages.MsgTimestamp, users.Username, messages.Subject, messages.Body FROM messages LEFT JOIN users ON messages.ReceiverID = users.userID WHERE messages.SenderID = '$userID' ORDER BY messages.MsgTimestamp DESC";
-    $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
-    $result = $statement->fetchAll();
+    $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+    $result = $stmt->fetchAll();
     return $result;
   }
 

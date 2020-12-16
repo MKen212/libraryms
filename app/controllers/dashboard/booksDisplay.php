@@ -1,5 +1,5 @@
-<?php  // Display all Books in card format
-include_once("../models/bookClass.php");
+<?php  // DASHBOARD - Display all Books in card format
+include_once "../app/models/bookClass.php";
 $book = new Book();
 
 // Extend the RecursiveIteratorIterator with div tags

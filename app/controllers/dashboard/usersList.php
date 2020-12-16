@@ -1,9 +1,9 @@
-<?php  // List all Users
-include_once("../models/userClass.php");
+<?php  // DASHBOARD - List all Users
+include_once "../app/models/userClass.php";
 $user = new User();
 
 // Extend the RecursiveIteratorIterator with table tags
-class UserListRows extends RecursiveIteratorIterator {
+class UserListRow extends RecursiveIteratorIterator {
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);
   }
@@ -15,13 +15,14 @@ class UserListRows extends RecursiveIteratorIterator {
       $_SESSION["curUserID"] = $parentValue;
     }
     if ($parentKey == "IsAdmin") {
-      // For IsAdmin output Yes/No
-      if ($parentValue == 1) {
-        $returnValue = "<a class='badge badge-primary' href=''>Yes</a>";
-      } else {
-        $returnValue = "<a class='badge badge-secondary' href=''>No</a>";
-      }
+      // For IsAdmin output status hyperlink           
+
+    TO HERE!!!!
+
+
+      $returnValue = statusOutput("IsAdmin", $parentValue);
     } else if ($parentKey == "UserStatus") {
+
       // For UserStatus output Approved/Unapproved + Change Link
       if ($parentValue == 0) {
         $returnValue = "<a class='badge badge-danger' href='../controllers/usersUpdateStatus.php?updateID=" . $_SESSION["curUserID"] . "&newStatus=1'>Unapproved</a>";
@@ -43,8 +44,5 @@ class UserListRows extends RecursiveIteratorIterator {
   }
 }
 
-// Loop through the Users and output the values
-foreach (new UserListRows(new RecursiveArrayIterator($user->getUsersAll())) as $value) {
-  echo $value;
-}
+
 ?>

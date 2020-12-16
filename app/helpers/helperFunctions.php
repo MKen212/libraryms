@@ -67,4 +67,18 @@ function postValue($key, $default = null) {
   }
 }
 
+/**
+ * statusOutput function - Returns the HTML output relevant to the given status code
+ * @param string $type           Status Type (from Config/StatusCodes)
+ * @param int $status            Status Code
+ * @param string $link           HREF Link (Optional)
+ * @return string $statusOutput  Returns the HTML output for the Status Code
+ */
+function statusOutput($type, $status, $link = null) {
+  $text = STATUS_CODES[$type][$status]["text"];
+  $badge = STATUS_CODES[$type][$status]["badge"];
+  $statusOutput = "<a class='badge badge-{$badge}' href='{$link}'>{$text}</a>";
+  return $statusOutput;
+}
+
 ?>

@@ -19,9 +19,8 @@ if (isset($_POST["register"])) {
 
   if ($newUserID) {  // Database Entry Success
     $_POST = [];
-    // TODO Send Admin message
-    // $notify = $message->addMessage($newUser, DEFAULTS["userAdminUserID"], "New User", "Please process my New User registration.");
-    // Registration Success
+    // Send Admin message
+    $notify = $message->add($newUserID, DEFAULTS["userAdminUserID"], "New User", "Please process my New User registration.");
   } 
 }
 
