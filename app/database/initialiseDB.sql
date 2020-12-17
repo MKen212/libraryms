@@ -63,8 +63,8 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `ReceiverID` INT(11) NOT NULL,
   `Subject` VARCHAR(40) NOT NULL,
   `Body` VARCHAR(500) NOT NULL,
-  `MsgTimestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
-  `MsgStatus` TINYINT(1) NOT NULL DEFAULT 0 COMMENT '0=Unread, 1=Read',
+  `AddedTimestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+  `MessageStatus` TINYINT(1) NOT NULL DEFAULT 0 COMMENT '0=Unread, 1=Read',
   `RecordStatus` TINYINT(1) NOT NULL DEFAULT 1 COMMENT '0=Inactive, 1=Active',
   FOREIGN KEY (`SenderID`) REFERENCES `users` (`UserID`),
   FOREIGN KEY (`ReceiverID`) REFERENCES `users` (`UserID`)

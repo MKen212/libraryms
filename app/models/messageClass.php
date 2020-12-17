@@ -38,7 +38,7 @@ class Message {
    */
   public function countUnreadByUserID($userID) {
     try {
-      $sql = "SELECT COUNT(*) FROM `messages` WHERE `ReceiverID` = '{$userID}' AND `MsgStatus` = '0'";
+      $sql = "SELECT COUNT(*) FROM `messages` WHERE `ReceiverID` = '{$userID}' AND `MessageStatus` = '0'";
       $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
       $result = $stmt->fetchColumn();
       return $result;

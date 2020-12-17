@@ -1,24 +1,29 @@
 <!-- DASHBOARD - Users List -->
 <div class="pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2">Users List</h1>
-</div>
-<!-- System Messages -->
-<div><?php
-  msgShow(); ?>
+  <div class="row">
+    <!-- Title -->
+    <div class="col-6">
+      <h1 class="h2">Users</h1>
+    </div>
+    <!-- System Messages -->
+    <div class="col-6"><?php
+      msgShow(); ?>
+    </div>
+  </div>
 </div>
 
 <!-- Table of Users -->
 <div class="table-responsive">
   <table class="table table-striped table-sm">
     <thead>
-      <th>User ID</th>
-      <th>User Name</th>
+      <th>Username</th>
       <th>First Name</th>
       <th>Last Name</th>
       <th>Email</th>
       <th>Contact No</th>
-      <th>Admin User</th>
+      <th>Admin</th>
       <th>Status</th>
+      <th>Record</th>
     </thead>
     <tbody><?php
       if (empty($userList)) :  // No User Records Found ?>

@@ -42,7 +42,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text form-labels">Contact No:</span>
       </div>
-      <input class="form-control" type="tel" name="contactNo" placeholder="Enter Contact Telephone Number" value="<?= $newUserRecord["ContactNo"] ?>" />
+      <input class="form-control" type="tel" name="contactNo" maxlength="40" placeholder="Enter Contact Telephone Number" value="<?= $newUserRecord["ContactNo"] ?>" />
     </div>
     <br />
     <!-- Submit Button -->

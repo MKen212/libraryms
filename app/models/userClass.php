@@ -131,13 +131,18 @@ class User {
 
   /**
    * getList function - Retrieve list of user records
-   * @return array $result  Returns all user records
+   * @return array $result  Returns all user records, in Username order
    */
-  public function getUsersAll() {
-    $sql = "SELECT UserID, UserName, FirstName, LastName, Email, ContactNo, IsAdmin, UserStatus FROM users";
-    $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-    $result = $stmt->fetchAll();
-    return $result;
+  public function getList() {
+    try {
+      $sql = "SELECT `UserID`, `Username`, `FirstName`, `LastName`, `Email`, `ContactNo`, `IsAdmin`, `UserStatus`, `RecordStatus` FROM `users` ORDER BY `Username`";
+      $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+      $result = $stmt->fetchAll();
+      return $result;
+    } catch (PDOException $err) {
+      $_SESSION["message"] = msgPrep("danger", "Error - User/getList Failed: {$err->getMessage()}");
+      return false;
+    }
   }
 
   /**
@@ -152,71 +157,107 @@ class User {
   }
 
   /**
-   * getUserByID function - Retrieve user record based on ID
+   * getRecord function - Retrieve user record based on ID
    * @param int    $userID  User ID
-   * @return array $result  Returns user record for $userID
+   * @return array $result  Returns user record for $userID or False
    */
-  public function getUserByID($userID) {
-    $sql = "SELECT UserID, UserName, FirstName, LastName, Email, ContactNo FROM users WHERE UserID = '$userID'";
-    $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-    $result = $stmt->fetch();
-    return $result;
+  public function getRecord($userID) {
+    try {
+      $sql = "SELECT `Username`, `FirstName`, `LastName`, `Email`, `ContactNo` FROM `users` WHERE `UserID` = '{$userID}'";
+      $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+      $result = $stmt->fetch();
+      return $result;
+    } catch (PDOException $err) {
+      $_SESSION["message"] = msgPrep("danger", "Error - User/getRecord Failed: {$err->getMessage()}");
+      return false;
+    }
   }
 
   /**
-   * updateStatus function - Updates the UserStatus of a user
-   * @param int $userID       User ID
-   * @param bool $userStatus  User Status Flag (0=Unapproved /  1=Approved)
-   * @return bool             True if function success
-   */
-  public function updateStatus($userID, $userStatus) {
-    $sql = "UPDATE users SET UserStatus = '$userStatus' WHERE UserID = '$userID'";
-    $result = $this->conn->exec($sql);
-    return $result;
-  }
-
-  /**
-   * updateRecord function - Updates the User record of a user
+   * updateRecord function - Updates an existing User record
    * @param int $userID        User ID
+   * @param int $username      Username
    * @param string $firstName  User First Name
    * @param string $lastName   User Last Name
    * @param string $email      User Email Address
    * @param string $contactNo  User Contact Number
-   * @return bool              True if function success
+   * @return int $result       Number of records updated (=1) or False
    */
-  public function updateRecord($userID, $firstName, $lastName, $email, $contactNo) {
-    $sql = "UPDATE users SET FirstName = '$firstName', LastName = '$lastName', Email = '$email', ContactNo = '$contactNo' WHERE UserID = '$userID'";
-    $result = $this->conn->exec($sql);
-    return $result;
+  public function updateRecord($userID, $username, $firstName, $lastName, $email, $contactNo) {
+    try {
+      // Check update username does not already exist (other than in current record)
+      $exists = $this->exists($username);
+      if (!empty($exists) && $exists != $userID) {  // Username is NOT unique
+        $_SESSION["message"] = msgPrep("danger", "Error - Username '{$username}' is already in use! Please try again.");
+        return false;
+      } else {  // Update User Record
+        $sql = "UPDATE `users` SET `Username` = '{$username}', `FirstName` = '{$firstName}', `LastName` = '{$lastName}', `Email` = '{$email}', `ContactNo` = '{$contactNo}' WHERE `UserID` = '{$userID}'";
+        $result = $this->conn->exec($sql);
+        if ($result == 1) {  // Only 1 record should have been updated
+          $_SESSION["message"] = msgPrep("success", "Update of User ID: '{$userID}' was successful.");
+          if ($userID == $_SESSION["userID"]) {  // User has updated their own record
+            $_SESSION["userName"] = $username;
+          }
+        } else {
+          throw new PDOException("Update unsuccessful or multiple records updated.");
+        }
+        return $result;
+      }
+    } catch (PDOException $err) {
+      $_SESSION["message"] = msgPrep("danger", "Error - User/updateRecord Failed: {$err->getMessage()}");
+      return false;
+    }
   }
 
   /**
-   * updatePassword function - Updates the password of a user
-   * @param int $userID         User ID
-   * @param string $existingPW  User Existing Password
-   * @param string $newPW       User New Password
-   * @return bool               True if function success
+   * updatePassword function - Updates the password of a user record
+   * @param int $userID               User ID
+   * @param string $existingPassword  User Existing Password
+   * @param string $newPassword       User New Password
+   * @return int $result              Number of records updated (=1) or False
    */
-  public function updatePassword($userID, $existingPW, $newPW) {
-    $sqlChk = "SELECT UserID, UserPassword FROM users WHERE UserID = '$userID'";
-    $stmtChk = $this->conn->query($sqlChk, PDO::FETCH_ASSOC);
-    $result = $stmtChk->fetch();
-    $passwordStatus = password_verify($existingPW, $result["UserPassword"]);
-    $result = null;
-    if ($passwordStatus == true) {  // Correct Existing Password Entered
-      $passwordHash = password_hash($newPW, PASSWORD_ARGON2ID);
-      $sql = "UPDATE users SET UserPassword = '$passwordHash' WHERE UserID = '$userID'";
-      $result = $this->conn->exec($sql);
-      if ($result) {  // Update Successful
-        $_SESSION["message"] = "Password Successfully Updated.";
-        return true;
-      } else {  // Update Unsuccessful
-        $_SESSION["message"] = "Error - Password not Updated.";
+  public function updatePassword($userID, $existingPassword, $newPassword) {
+    try {
+      $sqlChk = "SELECT `UserID`, `Password` FROM `users` WHERE `UserID` = '{$userID}'";
+      $stmtChk = $this->conn->query($sqlChk, PDO::FETCH_ASSOC);
+      $resultChk = $stmtChk->fetch();
+      $passwordStatus = password_verify($existingPassword, $resultChk["Password"]);
+      $result = null;
+      if ($passwordStatus == true) {  // Correct Existing Password Entered
+        $passwordHash = password_hash($newPassword, PASSWORD_ARGON2ID);
+        $sql = "UPDATE `users` SET `Password` = '{$passwordHash}' WHERE `UserID` = '{$userID}'";
+        $result = $this->conn->exec($sql);
+        if ($result == 1) {  // Only 1 record should have been updated
+          $_SESSION["message"] = msgPrep("success", "Password Successfully Updated.");
+          return true;
+        } else {
+          throw new PDOException("Update unsuccessful or multiple records updated.");
+        }
+      } else {  // Incorrect Existing Password Entered
+        $_SESSION["message"] = msgPrep("danger", "Error - Incorrect Existing Password!");
         return false;
       }
-    } else {  // Incorrect Existing Password Entered
-      $_SESSION["message"] = "Error - Incorrect Existing Password!";
-        return false;
+    } catch (PDOException $err) {
+      $_SESSION["message"] = msgPrep("danger", "Error - User/updatePassword Failed: {$err->getMessage()}");
+      return false;
+    }
+  }
+
+  /**
+   * updateStatus function - Updates the relevant Status Code of a user record
+   * @param string $field   Field in users table to be updated
+   * @param int $userID     User ID
+   * @param int $newStatus  New Status code for field
+   * @return int $result    Number of records updated (=1) or False
+   */
+  public function updateStatus($field, $userID, $newStatus) {
+    try {
+      $sql = "UPDATE `users` SET {$field} = '$newStatus' WHERE `UserID` = '{$userID}'";
+      $result = $this->conn->exec($sql);
+      return $result;
+    } catch (PDOException $err) {
+      $_SESSION["message"] = msgPrep("danger", "Error - User/updateStatus Failed: {$err->getMessage()}");
+      return false;
     }
   }
 }

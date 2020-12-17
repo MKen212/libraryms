@@ -1,10 +1,15 @@
 <!-- DASHBOARD - Home -->
 <div class="pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2">Home</h1>
-</div>
-<!-- System Messages -->
-<div><?php
-  msgShow(); ?>
+  <div class="row">
+    <!-- Title -->
+    <div class="col-6">
+      <h1 class="h2">Home</h1>
+    </div>
+    <!-- System Messages -->
+    <div class="col-6"><?php
+      msgShow(); ?>
+    </div>
+  </div>
 </div><?php
 
 // Display Testing Information if in Testing Mode

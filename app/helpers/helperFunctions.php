@@ -81,4 +81,16 @@ function statusOutput($type, $status, $link = null) {
   return $statusOutput;
 }
 
+/**
+ * statusCycle function - Returns next status code or reverts to zero
+ * @param string $type  Status Type (from Config/StatusCodes)
+ * @param int $current  Current Status Code
+ * @return int $new     Next Status Code or 0
+ */
+function statusCycle($type, $current) {
+  $max = count(STATUS_CODES[$type]) - 1;
+  $new = ($current == $max) ? 0 : $current + 1;
+  return $new;
+}
+
 ?>

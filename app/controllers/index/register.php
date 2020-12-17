@@ -19,7 +19,7 @@ if (isset($_POST["register"])) {
 
   if ($newUserID) {  // Database Entry Success
     $_POST = [];
-    // Send Admin message
+    // Send User Admin message
     $notify = $message->add($newUserID, DEFAULTS["userAdminUserID"], "New User", "Please process my New User registration.");
   } 
 }

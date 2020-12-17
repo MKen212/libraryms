@@ -116,3 +116,8 @@
  .inpFixed {
    width: 350px;
  }
+
+ /* Fix Bootstrap Alert Bottom Margin */
+ .alert {
+   margin-bottom: 0;
+ }
