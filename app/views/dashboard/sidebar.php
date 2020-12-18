@@ -15,7 +15,7 @@
       <li class="nav-item">
         <a class="nav-link" href="main-booksDisplay.php"><span data-feather="book"></span>Display Books</a>
       </li>
-      <!-- Issued to Me -->
+      <!-- My Issued Books -->
       <li class="nav-item">
         <a class="nav-link" href="main-booksIssuedToMe.php"><span data-feather="book-open"></span>My Issued Books</a>
       </li>
@@ -35,29 +35,29 @@
       <!-- Admin Section -->
       <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">Admin Section</h6>
       <ul class="nav flex-column">
-        <!-- Issue Books-->
+        <!-- Issue Book-->
         <li class="nav-item">
           <a class="nav-link" href="main-booksIssuedAdd.php"><span data-feather="arrow-up-circle"></span>
-          Issue Books</a>
+          Issue Book</a>
         </li>
-        <!-- Return Books -->
+        <!-- Return Book -->
         <li class="nav-item">
           <a class="nav-link" href="main-booksIssuedRtn.php"><span data-feather="arrow-down-circle"></span>
-          Return Books</a>  
+          Return Book</a>  
         </li>
-        <!-- Add Books -->
+        <!-- Add Book -->
         <li class="nav-item">
-          <a class="nav-link" href="main-booksAdd.php"><span data-feather="plus-circle"></span>
-          Add Books</a>
+          <a class="nav-link<?= ($page == "bookAdd") ? " active" : "";?>" href="dashboard.php?p=bookAdd"><span data-feather="plus-circle"></span>
+          Add Book</a>
         </li>
         <!-- List/Edit Books -->
         <li class="nav-item">
-          <a class="nav-link" href="main-booksList.php"><span data-feather="layers"></span>
+          <a class="nav-link<?= ($page == "booksList" || $page == "bookDetails") ? " active" : "";?>" href="dashboard.php?p=booksList"><span data-feather="layers"></span>
           List/Edit Books</a>
         </li>
         <!-- List/Edit Users-->
         <li class="nav-item">
-          <a class="nav-link<?= ($page == "usersList") ? " active" : "";?>" href="dashboard.php?p=usersList"><span data-feather="users"></span>
+          <a class="nav-link<?= ($page == "usersList" || $page == "userDetails") ? " active" : "";?>" href="dashboard.php?p=usersList"><span data-feather="users"></span>
           List/Edit Users</a>
         </li>
       </ul><?php

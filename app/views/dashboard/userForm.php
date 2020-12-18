@@ -55,7 +55,7 @@ else :  // Display Forms ?>
     <!-- Submit Button -->
     <div class="form-group row">
       <div class="col-form-label labFixed">
-        <button class="btn btn-primary" type="submit" name="updateUser" id="updateUser"><?= $formData["submitText"] ?></button>
+        <button class="btn btn-primary" type="submit" name="<?= $formData["submitName"] ?>"><?= $formData["submitText"] ?></button>
       </div>
       <div class="inpFixed"></div>
     </div>
@@ -76,13 +76,6 @@ else :  // Display Forms ?>
       <label class ="col-form-label labFixed" for="newPW">New Password:</label>
       <div class="inpFixed">
         <input class="form-control" type="password" name="newPassword" id="newPW" minlength="5" placeholder="Enter New Password" required />  
-      </div>
-    </div>
-    <!-- Repeat New Password -->
-    <div class="form-group row">
-      <label class ="col-form-label labFixed" for="repeatPW">Repeat Password:</label>
-      <div class="inpFixed">
-        <input class="form-control" type="password" name="repeatPassword" id="repeatPW" minlength="5" placeholder="Repeat New Password" required />  
       </div>
     </div>
     <!-- Submit Button -->

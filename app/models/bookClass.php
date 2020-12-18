@@ -11,32 +11,55 @@ class Book {
       $this->conn = new PDO($connString, DBSERVER["username"], DBSERVER["password"]);
       $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $err) {
-      echo "Database Connection Failed: " . $err->getMessage() . "<br />";
+      $_SESSION["message"] = msgPrep("danger", "Error - Book/DB Connection Failed: {$err->getMessage()}");
     }
   }
 
   /**
-   * addBook function - Add book record
+   * exists function - Check if Book Title already exists in DB
+   * @param string $title  Book Title
+   * @return int $bookID   Book ID of record with selected Title or False
+   */
+  public function exists($title) {
+    try {
+      $sql = "SELECT `BookID` FROM `books` WHERE `Title` = '{$title}'";
+      $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+      $bookID = $stmt->fetchColumn();
+      return $bookID;
+    } catch (PDOException $err) {
+      $_SESSION["message"] = msgPrep("danger", "Error - Book/exists Failed: {$err->getMessage()}");
+      return false;
+    }
+  }
+
+  /**
+   * add function - Add book record
    * @param string $title        Book Title
    * @param string $author       Book Author
    * @param string $publisher    Book Publisher
    * @param string $ISBN         Book ISBN Code
-   * @param string $priceGBP     Book Price in GBP
+   * @param string $price        Book Price
    * @param int $quantity        Quantity of the Book Added
    * @param string $imgFilename  Filename for Book Image
-   * @param date $addedDate      Date Book Added
-   * @param int $userID          User ID who added book
-   * @return int lastInsertID    Book ID of added book or False
+   * @return int newBookID       Book ID of added book or False
    */
-  public function addBook($title, $author, $publisher, $ISBN, $priceGBP, $quantity, $imgFilename, $addedDate, $userID) {
-    $sql = "INSERT INTO books
-    (Title, Author, Publisher, ISBN, PriceGBP, QtyTotal, QtyAvail, ImgFilename, AddedDate, UserID) VALUES
-    ('$title', '$author', '$publisher', '$ISBN', '$priceGBP', '$quantity','$quantity', '$imgFilename', '$addedDate', '$userID')";
-    $result = $this->conn->exec($sql);
-    if ($result) {
-      return ($this->conn->lastInsertId());
-    } else {
-      return false;
+  public function add($title, $author, $publisher, $ISBN, $price, $quantity, $imgFilename) {
+    try {
+      // Check Book Title does not already exist
+      $exists = $this->exists($title);
+      if (!empty($exists)) {  // Title is not unique
+        $_SESSION["message"] = msgPrep("danger", "Error - Book Title '{$title}' is already in use! Please try again.");
+        return false;
+      } else {  // Insert Book Record
+        $addedUserID = $_SESSION["userID"];
+        $sql = "INSERT INTO `books` (`Title`, `Author`, `Publisher`, `ISBN`, `Price`, `QtyTotal`, `QtyAvail`, `ImgFilename`, `AddedUserID`) VALUES ('{$title}', '{$author}', '{$publisher}', '{$ISBN}', '{$price}', '{$quantity}','{$quantity}', '{$imgFilename}', '{$addedUserID}')";
+        $this->conn->exec($sql);
+        $newBookID = $this->conn->lastInsertId();
+        $_SESSION["message"] = "Book Title '{$title}' added successfully as Book ID '{$newBookID}'.";
+        return $newBookID;
+      }
+    } catch (PDOException $err) {
+      $_SESSION["message"] = msgPrep("danger", "Error - Book/add Failed: {$err->getMessage()}");
     }
   }
 

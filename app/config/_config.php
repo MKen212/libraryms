@@ -15,6 +15,7 @@ $defaultValues = [
   "maxUploadSize" => 2000000,  // Maximum PHP upload file size in bytes - see phpInfo
   "booksImgPath" => "uploads/imgBooks/",  // Path to books images
   "noImgUploaded" => "images/noImage.jpg" ,  // Default Image if no image file uploaded
+  "currency" => "CHF",  // Default Currency
   "booksDisplayCols" => 3,  // Number of Columns for Books Display
   "returnDuration" => 14,  // Issued Book Return Duration
   "userAdminUserID" => 1,  // UserID for User Management Administrator

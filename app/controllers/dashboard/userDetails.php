@@ -29,14 +29,8 @@ if (isset($_POST["updateUser"])) {  // Update User record if UpdateUser POSTed
 } elseif (isset($_POST["updatePassword"])) {  // Update Password if UpdatePassword POSTed
   $existingPassword = cleanInput($_POST["existingPassword"], "password");
   $newPassword = cleanInput($_POST["newPassword"], "password");
-  $repeatPassword = cleanInput($_POST["repeatPassword"], "password");
-  // Check New Password & Repeat Password match
-  if ($newPassword != $repeatPassword) {
-    $_SESSION["message"] = msgPrep("warning", "Sorry - New Password & Repeat Password do not match.");
-  } else {
-    // Update Database Entry for User Password
-    $updatePassword = $user->updatePassword($userID, $existingPassword, $newPassword);
-  }
+  // Update Database Entry for User Password
+  $updatePassword = $user->updatePassword($userID, $existingPassword, $newPassword);
   unset($existingPassword, $newPassword, $repeatPassword);
 }
 $_POST = [];
@@ -46,7 +40,9 @@ $userRecord = $user->getRecord($userID);
 
 // Prep User Form Data
 $formData = [
+  "formUsage" => "Update",
   "formTitle" => "User Details - ID: {$userID}",
+  "submitName" => "updateUser",
   "submitText" => "Update User",
 ];
 
