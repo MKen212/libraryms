@@ -12,7 +12,7 @@ define("DBSERVER", $connDetails);
 /* Default Values */
 $defaultValues = [
   "testing" => true,  // Flag to set whether to show test information
-  "maxUploadSize" => 2000000,  // Maximum PHP upload file size in bytes - see phpInfo
+  "maxUploadSize" => 200000,  // Maximum PHP upload file size in bytes - see phpInfo
   "booksImgPath" => "uploads/imgBooks/",  // Path to books images
   "noImgUploaded" => "images/noImage.jpg" ,  // Default Image if no image file uploaded
   "currency" => "CHF",  // Default Currency

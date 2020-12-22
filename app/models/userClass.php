@@ -131,11 +131,15 @@ class User {
 
   /**
    * getList function - Retrieve list of user records
-   * @return array $result  Returns all user records, in Username order
+   * @param string $username  Username (Optional)
+   * @return array $result    Returns all/selected user records (Username order) or False
    */
-  public function getList() {
+  public function getList($username = null) {
     try {
-      $sql = "SELECT `UserID`, `Username`, `FirstName`, `LastName`, `Email`, `ContactNo`, `IsAdmin`, `UserStatus`, `RecordStatus` FROM `users` ORDER BY `Username`";
+      // Build WHERE clause
+      $whereClause = null;
+      if (!empty($username)) $whereClause = "WHERE `Username` LIKE '%{$username}%'";
+      $sql = "SELECT `UserID`, `Username`, `FirstName`, `LastName`, `Email`, `ContactNo`, `IsAdmin`, `UserStatus`, `RecordStatus` FROM `users` {$whereClause}ORDER BY `Username`";
       $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
       $result = $stmt->fetchAll();
       return $result;

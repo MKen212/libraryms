@@ -55,7 +55,7 @@ class Book {
         $sql = "INSERT INTO `books` (`Title`, `Author`, `Publisher`, `ISBN`, `Price`, `QtyTotal`, `QtyAvail`, `ImgFilename`, `AddedUserID`) VALUES ('{$title}', '{$author}', '{$publisher}', '{$ISBN}', '{$price}', '{$quantity}','{$quantity}', '{$imgFilename}', '{$addedUserID}')";
         $this->conn->exec($sql);
         $newBookID = $this->conn->lastInsertId();
-        $_SESSION["message"] = "Book Title '{$title}' added successfully as Book ID '{$newBookID}'.";
+        $_SESSION["message"] = "Book '{$title}' added successfully as Book ID '{$newBookID}'.";
         return $newBookID;
       }
     } catch (PDOException $err) {
@@ -64,37 +64,38 @@ class Book {
   }
 
   /**
-   * getBooksAll function - Retrieve ALL book records
-   * @return array $result  Returns all book records
+   * getList function - Retrieve list of ALL book records (optionally based on title)
+   * @param string $title      Book Title (Optional)
+   * @return array $result     Returns all/selected book records (Title order) or False
    */
-  public function getBooksAll() {
-    $sql = "SELECT books.BookID, books.ImgFilename, books.Title, books.Author, books.Publisher, books.ISBN, books.PriceGBP, books.QtyTotal, books.QtyAvail, books.AddedDate, users.Username, books.BookStatus FROM books LEFT JOIN users ON books.UserID = users.UserID";
-    $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
-    $result = $statement->fetchAll();
-    return $result;
+  public function getList($title = null) {
+    try {
+      // Build WHERE clause
+      $whereClause = null;
+      if (!empty($title)) $whereClause = "WHERE `Title` LIKE '%{$title}%' ";
+      $sql = "SELECT `BookID`, `Title`, `Author`, `Publisher`, `ISBN`, `Price`, `QtyTotal`, `QtyAvail`, `RecordStatus` FROM `books` {$whereClause}ORDER BY `Title`";
+      $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+      $result = $stmt->fetchAll();
+      return $result;
+    } catch (PDOException $err) {
+      $_SESSION["message"] = msgPrep("danger", "Error - Book/getList Failed: {$err->getMessage()}");
+    }
   }
 
   /**
-   * getBooksActive function - Retrieve all ACTIVE book records
-   * @return array $result  Returns all active book records
+   * getRecord function - Retrieve book record based on ID
+   * @param int    $bookID  Book ID
+   * @return array $result  Returns book record for $bookID or False
    */
-  public function getBooksActive() {
-    $sql = "SELECT books.BookID, books.ImgFilename, books.Title, books.Author, books.Publisher, books.ISBN, books.PriceGBP, books.QtyTotal, books.QtyAvail, books.AddedDate, users.Username FROM books LEFT JOIN users ON books.UserID = users.UserID WHERE BookStatus = '1'";
-    $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
-    $result = $statement->fetchAll();
-    return $result;
-  }
-
-  /**
-   * getBooksByTitle function - Retrieve ACTIVE book records based on Title
-   * @param string $title   Book Title
-   * @return array $result  Returns ACTIVE book records with $title
-   */
-  public function getBooksByTitle($title) {
-    $sql = "SELECT books.BookID, books.ImgFilename, books.Title, books.Author, books.Publisher, books.ISBN, books.PriceGBP, books.QtyTotal, books.QtyAvail, books.AddedDate, users.Username, books.BookStatus FROM books LEFT JOIN users ON books.UserID = users.UserID WHERE Title LIKE '%$title%' AND BookStatus = '1'";
-    $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
-    $result = $statement->fetchAll();
-    return $result;
+  public function getRecord($bookID) {
+    try {
+      $sql = "SELECT `Title`, `Author`, `Publisher`, `ISBN`, `Price`, `QtyTotal`, `QtyAvail`, `ImgFilename` FROM `books` WHERE `BookID` = '{$bookID}'";
+      $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+      $result = $stmt->fetch();
+      return $result;
+    } catch (PDOException $err) {
+      $_SESSION["message"] = msgPrep("danger", "Error - Book/getRecord Failed: {$err->getMessage()}");
+    }
   }
 
   /**
@@ -109,15 +110,38 @@ class Book {
   }
 
   /**
-   * getBookByID function - Retrieve book record based on ID
-   * @param int    $bookID  Book ID
-   * @return array $result  Returns book record for $bookID
+   * updateRecord function - Updates an existing Book record
+   * @param int $bookID          Book ID
+   * @param string $title        Book Title
+   * @param string $author       Book Author
+   * @param string $publisher    Book Publisher
+   * @param string $ISBN         Book ISBN Code
+   * @param string $price        Book Price
+   * @param int $qtyTotal        Total Quantity
+   * @param int $qtyAvail        Available Quantity
+   * @param string $imgFilename  Filename for Book Image
+   * @return int $result         Number of records updated (=1) or False
    */
-  public function getBookByID($bookID) {
-    $sql = "SELECT BookID, ImgFilename, Title, Author, Publisher, ISBN, QtyAvail FROM books WHERE BookID = '$bookID'";
-    $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
-    $result = $statement->fetch();
-    return $result;
+  public function updateRecord ($bookID, $title, $author, $publisher, $ISBN, $price, $qtyTotal, $qtyAvail, $imgFilename) {
+    try {
+      // Check update title does not already exist (other than in current record)
+      $exists = $this->exists($title);
+      if (!empty($exists) && $exists != $bookID) {  // Book Title is NOT unique
+        $_SESSION["message"] = msgPrep("danger", "Error - Book Title '{$title}' is already in use! Please try again.");
+        return false;
+      } else {  // Update Book Record
+        $sql = "UPDATE `books` SET `Title` = '{$title}', `Author` = '{$author}', `Publisher` = '{$publisher}', `ISBN` = '{$ISBN}', `Price` = '{$price}', `QtyTotal` = '{$qtyTotal}', `QtyAvail` = '{$qtyAvail}', `ImgFilename` = '{$imgFilename}' WHERE `BookID` = '{$bookID}'";
+        $result = $this->conn->exec($sql);
+        if ($result == 1) {  // Only 1 record should have been updated
+          $_SESSION["message"] = msgPrep("success", "Update of Book ID: '{$bookID}' was successful.");
+        } else {
+          throw new PDOException("Update unsuccessful or multiple records updated.");
+        }
+        return $result;
+      }
+    } catch (PDOException $err) {
+      $_SESSION["message"] = msgPrep("danger", "Error - Book/updateRecord Failed: {$err->getMessage()}");
+    }
   }
 
   /**
@@ -133,15 +157,19 @@ class Book {
   }
 
   /**
-   * updateBookStatus function - Update the BookStatus of a book
-   * @param int $bookID      Book ID
-   * @param int $bookStatus  Book Status Flag (0=Deleted / 1=Active)
-   * @return bool $result    Number of affected records if function success
+   * updateRecordStatus function - Update the RecordStatus of a book
+   * @param int $bookID        Book ID
+   * @param int $recordStatus  New RecordStatus for Book
+   * @return bool $result      Number of records updated (=1) or False
    */
-  public function updateBookStatus($bookID, $bookStatus) {
-    $sql = "UPDATE books SET BookStatus = '$bookStatus' WHERE BookID = '$bookID'";
-    $result = $this->conn->exec($sql);
-    return $result;
+  public function updateRecordStatus($bookID, $recordStatus) {
+    try {
+      $sql = "UPDATE `books` SET `RecordStatus` = '$recordStatus' WHERE `BookID` = '{$bookID}'";
+      $result = $this->conn->exec($sql);
+      return $result;
+    } catch (PDOException $err) {
+      $_SESSION["message"] = msgPrep("danger", "Error - Book/updateRecordStatus Failed: {$err->getMessage()}");
+    }
   }
 }
 ?>

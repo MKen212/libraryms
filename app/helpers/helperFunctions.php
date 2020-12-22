@@ -54,6 +54,19 @@ function msgShow() {
 }
 
 /**
+ * fixSearch function - Used to clean and fix Search String to be MariaDB compliant
+ * @param string $searcgString  Original Input Search String
+ * @return string $fixed        Cleaned and fixed MariaDB-Compliant Search String
+ */
+function fixSearch($searchString) {
+  $fixed = htmlspecialchars($searchString);
+  $fixed = trim($fixed);
+  $fixed = str_replace("?", "_", $fixed);  // Fix MariaDB one char wildcard
+  $fixed = str_replace("*", "%", $fixed);  // Fix MariaDB multi char wildcard
+  return $fixed;
+}
+
+/**
  * postValue function - Returns the value in a $_POST key field IF it's set
  * @param string $key            Name of $_POST["key"] to return
  * @param string $default        Default value to return if "key" NOT set (optional)

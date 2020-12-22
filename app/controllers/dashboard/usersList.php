@@ -19,6 +19,7 @@ class UserListRow extends RecursiveIteratorIterator {
   public function current() {
     $parentKey = parent::key();
     $parentValue = parent::current();
+    $returnValue = "";
     if ($parentKey == "UserID") {
       // For UserID save the current value to $_SESSION & skip output
       $_SESSION["curUserID"] = $parentValue;
@@ -32,7 +33,7 @@ class UserListRow extends RecursiveIteratorIterator {
     } else if ($parentKey == "UserStatus") {
       $returnValue = statusOutput("UserStatus", $parentValue, "dashboard.php?p=usersList&id={$_SESSION["curUserID"]}&cur={$parentValue}&updUserStatus");
     } else if ($parentKey == "RecordStatus") {
-      $returnValue = statusOutput("RecordStatus", $parentValue, "dashboard.php?p=usersList&id={$_SESSION["curUserID"]}&cur={$parentValue}&updRecordStatus");  
+      $returnValue = statusOutput("RecordStatus", $parentValue, "dashboard.php?p=usersList&id={$_SESSION["curUserID"]}&cur={$parentValue}&updRecordStatus");
     } else {
       // For all others output original value
       $returnValue = $parentValue;
@@ -72,8 +73,12 @@ if (isset($_GET["id"])) {
 }
 $_GET = [];
 
+// Fix Username Search, if entered
+$username = null;
+if (isset($_POST["userSearch"])) $username = fixSearch($_POST["schUsername"]);
+
 // Get List of users
-$userList = $user->getList();
+$userList = $user->getList($username);
 
 // Display Users List View
 include "../app/views/dashboard/usersList.php";

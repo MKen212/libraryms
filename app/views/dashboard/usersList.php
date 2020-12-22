@@ -12,6 +12,21 @@
   </div>
 </div>
 
+<div class="row">
+  <!-- Users Table Search -->
+  <div class="col-4 mb-3">
+    <form action="" method="post" name="schUsers" autocomplete="off">
+      <div class="input-group">
+        <input class="form-control" type="text" name="schUsername" maxlength="40" placeholder="Search Username" />
+        <div class="input-group-append">
+          <button class="btn btn-secondary" type="submit" name="userSearch"><span data-feather="search"></span></button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-8"></div>
+</div>
+
 <!-- Table of Users -->
 <div class="table-responsive">
   <table class="table table-striped table-sm">

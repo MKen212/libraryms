@@ -18,7 +18,8 @@ if (isset($_GET["id"])) {
 }
 $_GET = [];
 
-if (isset($_POST["updateUser"])) {  // Update User record if UpdateUser POSTed
+// Update User record if updateUser POSTed
+if (isset($_POST["updateUser"])) {
   $username = cleanInput($_POST["username"], "string");
   $firstName = cleanInput($_POST["firstName"], "string");
   $lastName = cleanInput($_POST["lastName"], "string");
