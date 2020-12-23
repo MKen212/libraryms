@@ -8,6 +8,13 @@ $page = "login";
 if (isset($_GET["p"])) {
   $page = cleanInput($_GET["p"], "string");
 }
+
+// Check Valid Page is entered
+if (!in_array($page, VALID_PAGES["index"])) {
+  $_SESSION["message"] = msgPrep("danger", "Error - Page Not Found.");
+  $page = "login";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

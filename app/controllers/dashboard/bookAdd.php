@@ -1,13 +1,4 @@
 <?php  // DASHBOARD - Add Book
-// Check User is Admin
-if ($_SESSION["userIsAdmin"] != 1) {
-  $_SESSION["message"] = msgPrep("warning", "Sorry - You need Admin Privileges to view the '{$page}' page.");
-  ob_start();
-  header("location:dashboard.php?p=home");
-  ob_end_flush();
-  exit();
-}
-
 include_once "../app/models/bookClass.php";
 $book = new Book();
 include_once "../app/models/uploadImgClass.php";

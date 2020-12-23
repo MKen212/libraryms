@@ -64,9 +64,28 @@ class Book {
   }
 
   /**
+   * getDisplay function - Retrieve list of ACTIVE book records (optionally based on title)
+   * @param string $title   Book Title (Optional)
+   * @return array $result  Returns all/selected ACTIVE book records (Title order) or False
+   */
+  public function getDisplay($title = null) {
+    try {
+      // Build WHERE clause
+      $whereClause = "WHERE (`RecordStatus` = '1') ";
+      if (!empty($title)) $whereClause .= "AND (`Title` LIKE '%{$title}%') ";
+      $sql = "SELECT `BookID`, `ImgFilename`, `Title`, `Author`, `Publisher`, `ISBN`, `Price`, `QtyTotal`, `QtyAvail` FROM `books` {$whereClause}ORDER BY `Title`";
+      $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+      $result = $stmt->fetchAll();
+      return $result;
+    } catch (PDOException $err) {
+      $_SESSION["message"] = msgPrep("danger", "Error - Book/getDisplay Failed: {$err->getMessage()}");
+    }
+  }
+
+  /**
    * getList function - Retrieve list of ALL book records (optionally based on title)
-   * @param string $title      Book Title (Optional)
-   * @return array $result     Returns all/selected book records (Title order) or False
+   * @param string $title   Book Title (Optional)
+   * @return array $result  Returns all/selected book records (Title order) or False
    */
   public function getList($title = null) {
     try {
@@ -89,7 +108,7 @@ class Book {
    */
   public function getRecord($bookID) {
     try {
-      $sql = "SELECT `Title`, `Author`, `Publisher`, `ISBN`, `Price`, `QtyTotal`, `QtyAvail`, `ImgFilename` FROM `books` WHERE `BookID` = '{$bookID}'";
+      $sql = "SELECT * FROM `books` WHERE `BookID` = '{$bookID}'";
       $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
       $result = $stmt->fetch();
       return $result;
@@ -133,7 +152,7 @@ class Book {
         $sql = "UPDATE `books` SET `Title` = '{$title}', `Author` = '{$author}', `Publisher` = '{$publisher}', `ISBN` = '{$ISBN}', `Price` = '{$price}', `QtyTotal` = '{$qtyTotal}', `QtyAvail` = '{$qtyAvail}', `ImgFilename` = '{$imgFilename}' WHERE `BookID` = '{$bookID}'";
         $result = $this->conn->exec($sql);
         if ($result == 1) {  // Only 1 record should have been updated
-          $_SESSION["message"] = msgPrep("success", "Update of Book ID: '{$bookID}' was successful.");
+          $_SESSION["message"] = "Update of Book ID: '{$bookID}' was successful.";
         } else {
           throw new PDOException("Update unsuccessful or multiple records updated.");
         }

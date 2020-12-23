@@ -81,6 +81,22 @@ function postValue($key, $default = null) {
 }
 
 /**
+ * getFilePath function - Used to return full path for image or default No Image
+ * @param int $bookID          Book ID for image
+ * @param string $imgFilename  Product Image Filename
+ * @return string $filePath    Full filepath to specified image
+ * 
+ */
+function getFilePath($bookID, $imgFilename) {
+  if (empty($imgFilename)) {
+    $filePath = DEFAULTS["noImgUploaded"];
+  } else {
+    $filePath = DEFAULTS["booksImgPath"] . $bookID . "/" . $imgFilename;
+  }
+  return $filePath;
+}
+
+/**
  * statusOutput function - Returns the HTML output relevant to the given status code
  * @param string $type           Status Type (from Config/StatusCodes)
  * @param int $status            Status Code

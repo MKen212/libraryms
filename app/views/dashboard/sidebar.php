@@ -9,11 +9,11 @@
       </li>
       <!-- Home -->
       <li class="nav-item">
-        <a class="nav-link<?= ($page == "home") ? " active" : "";?>" href="dashboard.php?p=home"><span data-feather="home"></span>Home</a>
+        <a class="nav-link<?= ($page == "home") ? " active" : ""; ?>" href="dashboard.php?p=home"><span data-feather="home"></span>Home</a>
       </li>
       <!-- Display Books -->
       <li class="nav-item">
-        <a class="nav-link" href="main-booksDisplay.php"><span data-feather="book"></span>Display Books</a>
+        <a class="nav-link<?= ($page == "booksDisplay") ? " active" : ""; ?>" href="dashboard.php?p=booksDisplay"><span data-feather="book"></span>Display Books</a>
       </li>
       <!-- My Issued Books -->
       <li class="nav-item">
@@ -47,17 +47,17 @@
         </li>
         <!-- Add Book -->
         <li class="nav-item">
-          <a class="nav-link<?= ($page == "bookAdd") ? " active" : "";?>" href="dashboard.php?p=bookAdd"><span data-feather="plus-circle"></span>
+          <a class="nav-link<?= ($page == "bookAdd") ? " active" : ""; ?>" href="dashboard.php?p=bookAdd"><span data-feather="plus-circle"></span>
           Add Book</a>
         </li>
         <!-- List/Edit Books -->
         <li class="nav-item">
-          <a class="nav-link<?= ($page == "booksList" || $page == "bookDetails") ? " active" : "";?>" href="dashboard.php?p=booksList"><span data-feather="layers"></span>
+          <a class="nav-link<?= ($page == "booksList" || $page == "bookDetails") ? " active" : ""; ?>" href="dashboard.php?p=booksList"><span data-feather="layers"></span>
           List/Edit Books</a>
         </li>
         <!-- List/Edit Users-->
         <li class="nav-item">
-          <a class="nav-link<?= ($page == "usersList" || $page == "userDetails") ? " active" : "";?>" href="dashboard.php?p=usersList"><span data-feather="users"></span>
+          <a class="nav-link<?= ($page == "usersList" || $page == "userDetails") ? " active" : ""; ?>" href="dashboard.php?p=usersList"><span data-feather="users"></span>
           List/Edit Users</a>
         </li>
       </ul><?php

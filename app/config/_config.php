@@ -16,12 +16,20 @@ $defaultValues = [
   "booksImgPath" => "uploads/imgBooks/",  // Path to books images
   "noImgUploaded" => "images/noImage.jpg" ,  // Default Image if no image file uploaded
   "currency" => "CHF",  // Default Currency
-  "booksDisplayCols" => 3,  // Number of Columns for Books Display
   "returnDuration" => 14,  // Issued Book Return Duration
   "userAdminUserID" => 1,  // UserID for User Management Administrator
 ];
 
 define("DEFAULTS", $defaultValues);
+
+/* Valid Pages */
+$validPages = [
+  "index" => ["login", "logout", "register",],
+  "dashboard" => ["home", "booksDisplay",],
+  "dashboard_admin" => ["bookAdd", "bookDetails", "booksList", "userDetails", "usersList",],
+];
+
+define("VALID_PAGES", $validPages);
 
 /* Status Codes */
 $statusCodes = [

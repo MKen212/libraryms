@@ -5,7 +5,10 @@ require "../app/helpers/helperFunctions.php";
 // Reject User that is not logged in
 if (!isset($_SESSION["userLogin"])) {
   $_SESSION["message"] = msgPrep("warning", "Sorry - You need to Login with a Valid User Account to proceed.");
+  ob_start();
   header("location:index.php?p=logout");
+  ob_end_flush();
+  exit();
 }
 
 require "../app/config/_config.php";
@@ -15,6 +18,19 @@ $page = "home";
 if (isset($_GET["p"])) {
   $page = cleanInput($_GET["p"], "string");
 }
+
+// Check Valid Page is entered
+if (!in_array($page, VALID_PAGES["dashboard"]) && !in_array($page, VALID_PAGES["dashboard_admin"])) {
+  $_SESSION["message"] = msgPrep("danger", "Error - Page Not Found.");
+  $page = "home";
+}
+
+// Check User IsAdmin to view admin pages
+if ($_SESSION["userIsAdmin"] == 0 && in_array($page, VALID_PAGES["dashboard_admin"])) {
+  $_SESSION["message"] = msgPrep("warning", "Sorry - You need Admin Privileges to view the '{$page}' page.");
+  $page = "home";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

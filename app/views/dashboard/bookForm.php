@@ -53,7 +53,7 @@ else :  // Display Book Form ?>
             <input class="form-control" type="number" name="price" id="price" placeholder="Enter Price in <?= DEFAULTS["currency"] ?>" min="0" max="99999999.99" step="0.01" value="<?= $bookRecord["Price"] ?>" required />
           </div>
         </div><?php
-        if ($formData["formUsage"] == "Add") :  // Display Just Quantity Entry ?>
+        if ($formData["formUsage"] == "Add") :  // Display Just Quantity ?>
           <!-- Quantity -->
           <div class="form-group row">
             <label class="col-form-label labFixed" for="quantity">Quantity:</label>
@@ -61,7 +61,7 @@ else :  // Display Book Form ?>
               <input class="form-control" type="number" name="quantity" id="quantity" placeholder="Enter Quantity" min="0" value="<?= $bookRecord["Quantity"] ?>" required />
             </div>
           </div><?php
-        else :  // Display QtyTotal and QtyAvail Entries ?>
+        else :  // Display QtyTotal, QtyAvail & Added Details ?>
           <!-- QtyTotal -->
           <div class="form-group row">
             <label class="col-form-label labFixed" for="qtyTotal">Total Quantity:</label>
@@ -75,7 +75,15 @@ else :  // Display Book Form ?>
             <div class="inpFixed">
               <input class="form-control" type="number" name="qtyAvail" id="qtyAvail" placeholder="Enter Quantity Available" min="1" max="2147483647" value="<?= $bookRecord["QtyAvail"] ?>" required />
             </div>
-          </div><?php
+          </div>
+          <!-- Added Details -->
+          <div class="form-group row">
+            <label class="col-form-label labFixed" for="added">Added:</label>
+            <div class="inpFixed">
+              <p class="form-control" id="added"><?= date("d/m/Y @ H:i", strtotime($bookRecord["AddedTimestamp"])) . " by UserID: " ?><a class="badge badge-info" href="dashboard.php?p=userDetails&id=<?= $bookRecord["AddedUserID"] ?>"><?= $bookRecord["AddedUserID"] ?></a></p>
+            </div>
+          </div>
+          <?php
         endif; ?>
       </div>
 
@@ -89,8 +97,15 @@ else :  // Display Book Form ?>
             <label class="custom-file-label" for="imgFilename">Choose file</label>
             <input class="custom-file-input" type="file" name="imgFilename" id="imgFilename" />
           </div> 
-        </div>
-        <div class="form-group row">
+        </div><?php
+        if ($formData["formUsage"] == "Update") : ?>
+          <!-- Current Image -->
+          <div class="form-group row">
+            <label class="col-form-label labFixed" for="image">Current Image:</label>
+            <img class="img-thumbnail" width="140" height="220" id="image" src="<?= getFilePath($bookID, $bookRecord["ImgFilename"]) ?>" alt="<?= $bookRecord["ImgFilename"] ?>" />
+          </div><?php
+        endif; ?>
+        <div class="form-group row mt-4">
           <!-- Submit Button -->
           <div class="col-form-label labFixed">
             <button class="btn btn-primary" type="submit" name="<?= $formData["submitName"] ?>"><?= $formData["submitText"] ?></button>
