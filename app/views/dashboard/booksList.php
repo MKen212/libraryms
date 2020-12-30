@@ -27,34 +27,32 @@
   <div class="col-8"></div>
 </div>
 
-<div class="row">
-  <!-- Books Table List -->
-  <div class="table-responsive">
-    <table class="table table-striped table-sm">
-      <thead>
+<!-- Books Table List -->
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Publisher</th>
+        <th>ISBN</th>
+        <th>Price<br />(<?= DEFAULTS["currency"] ?>)</th>
+        <th>Qty<br />Total</th>
+        <th>Qty<br />Available</th>
+        <th>Record</th>
+      </tr>
+    </thead>
+    <tbody><?php
+      if (empty($bookList)) :  // No Book Records Found ?>
         <tr>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Publisher</th>
-          <th>ISBN</th>
-          <th>Price<br />(<?= DEFAULTS["currency"] ?>)</th>
-          <th>Qty<br />Total</th>
-          <th>Qty<br />Available</th>
-          <th>Record</th>
-        </tr>
-      </thead>
-      <tbody><?php
-        if (empty($bookList)) :  // No Book Records Found ?>
-          <tr>
-            <td colspan="10">No Books to Display</td>
-          </tr><?php
-        else : 
-          // Loop through the Users and output the values
-          foreach (new BookListRow(new RecursiveArrayIterator($bookList)) as $value) :
-            echo $value;
-          endforeach;
-        endif; ?>
-      </tbody>
-    </table>
-  </div>
+          <td colspan="10">No Books to Display</td>
+        </tr><?php
+      else : 
+        // Loop through the Books and output the values
+        foreach (new BookListRow(new RecursiveArrayIterator($bookList)) as $value) :
+          echo $value;
+        endforeach;
+      endif; ?>
+    </tbody>
+  </table>
 </div>

@@ -31,12 +31,9 @@ if (isset($_POST["updateBook"])) {
     $imgFilename = null;
     if ($_FILES["imgFilename"]["error"] == 0) {
       $imgFilename = basename($_FILES["imgFilename"]["name"]);
+    } else {
+      $imgFilename = $_POST["origImgFilename"];
     }
-
-
-    //  TO HERE TO FIX - NO IMAGE SHOULD NOT DELETE IMAGE  . ALSO FIX IMAGE BORDER. CHANGE TITLES FOR BOOKS/BOOK LIST
-
-
 
     // Update Database Entry
     $updateBook = $book->updateRecord($bookID, $title, $author, $publisher, $ISBN, $price, $qtyTotal, $qtyAvail, $imgFilename);

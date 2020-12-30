@@ -122,4 +122,39 @@ function statusCycle($type, $current) {
   return $new;
 }
 
+/**
+ * userOptions function - Outputs all Approved/Active Users as HTML options
+ * @param string $selID  UserID that is marked as 'selected'
+ * @return bool          Returns true on completion
+ */
+function userOptions($selID = null) {
+  include_once "../app/models/userClass.php";
+  $user = new User();
+  foreach (new RecursiveArrayIterator($user->getUserIDs()) as $value) {
+    if ($value["UserID"] == $selID) {
+      echo "<option value='{$value["UserID"]}' selected>{$value["UserID"]}: {$value["Username"]}</option>";
+    } else {
+      echo "<option value='{$value["UserID"]}'>{$value["UserID"]}: {$value["Username"]}</option>";
+    }
+  }
+  return true;
+}
+
+/**
+ * bookOptions function - Outputs all Active Books as HTML options
+ * @param string $selID  BookID that is marked as 'selected'
+ * @return bool          Returns true on completion
+ */
+function bookOptions($selID = null) {
+  include_once "../app/models/bookClass.php";
+  $book = new Book();
+  foreach (new RecursiveArrayIterator($book->getBookIDs()) as $value) {
+    if ($value["BookID"] == $selID) {
+      echo "<option value='{$value["BookID"]}' selected>{$value["BookID"]}: {$value["Title"]}</option>";
+    } else {
+      echo "<option value='{$value["BookID"]}'>{$value["BookID"]}: {$value["Title"]}</option>";
+    }
+  }
+  return true;
+}
 ?>

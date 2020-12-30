@@ -121,12 +121,17 @@ class User {
 
   /**
    * logout function - Logout user
-   * @return bool  True if function success
+   * @return bool  True if function success or False
    */
   public function logout() {
-    unset($_SESSION["userLogin"], $_SESSION["userIsAdmin"], $_SESSION["userID"], $_SESSION["username"]);
-    $_SESSION["message"] = msgPrep("success", "You are successfully logged out. Thanks for using the LibraryMS.");
-    return true;
+    try {
+      unset($_SESSION["userLogin"], $_SESSION["userIsAdmin"], $_SESSION["userID"], $_SESSION["username"]);
+      $_SESSION["message"] = msgPrep("success", "You are successfully logged out. Thanks for using the LibraryMS.");
+      return true;
+    } catch (PDOException $err) {
+      $_SESSION["message"] = msgPrep("danger", "Error - User/Logout Failed: {$err->getMessage()}");
+      return false;
+    }
   }
 
   /**
@@ -150,14 +155,19 @@ class User {
   }
 
   /**
-   * getUserIDs function - Retrieve all Approved user IDs (with Username)
-   * @return array $result  Returns all Approved UserIDs (with Username)
+   * getUserIDs function - Retrieve all Approved/Active User IDs with Username
+   * @return array $result  Returns all Approved/Active records or False
    */
   public function getUserIDs() {
-    $sql = "SELECT UserID, UserName FROM users WHERE UserStatus = '1' ORDER BY UserName";
-    $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-    $result = $stmt->fetchAll();
-    return $result;
+    try {
+      $sql = "SELECT `UserID`, `Username` FROM `users` WHERE `UserStatus` = '1' AND `RecordStatus` = '1' ORDER BY `Username`";
+      $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+      $result = $stmt->fetchAll();
+      return $result;
+    } catch (PDOException $err) {
+      $_SESSION["message"] = msgPrep("danger", "Error - User/getUserIDs Failed: {$err->getMessage()}");
+      return false;
+    }
   }
 
   /**
@@ -197,7 +207,9 @@ class User {
       } else {  // Update User Record
         $sql = "UPDATE `users` SET `Username` = '{$username}', `FirstName` = '{$firstName}', `LastName` = '{$lastName}', `Email` = '{$email}', `ContactNo` = '{$contactNo}' WHERE `UserID` = '{$userID}'";
         $result = $this->conn->exec($sql);
-        if ($result == 1) {  // Only 1 record should have been updated
+        if ($result == 0) {  // No Changes made
+          $_SESSION["message"] = msgPrep("warning", "Warning - No changes made to User ID '{$userID}'.");
+        } elseif ($result == 1) {  // Only 1 record should have been updated
           $_SESSION["message"] = msgPrep("success", "Update of User ID: '{$userID}' was successful.");
           if ($userID == $_SESSION["userID"]) {  // User has updated their own record
             $_SESSION["userName"] = $username;
@@ -231,7 +243,9 @@ class User {
         $passwordHash = password_hash($newPassword, PASSWORD_ARGON2ID);
         $sql = "UPDATE `users` SET `Password` = '{$passwordHash}' WHERE `UserID` = '{$userID}'";
         $result = $this->conn->exec($sql);
-        if ($result == 1) {  // Only 1 record should have been updated
+        if ($result == 0) {  // No Changes made
+          $_SESSION["message"] = msgPrep("warning", "Warning - No changes made to User ID '{$userID}'.");
+        } elseif ($result == 1) {  // Only 1 record should have been updated
           $_SESSION["message"] = msgPrep("success", "Password Successfully Updated.");
           return true;
         } else {

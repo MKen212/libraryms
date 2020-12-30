@@ -49,11 +49,26 @@ CREATE TABLE IF NOT EXISTS `books_issued` (
   `UserID` INT(11) NOT NULL,
   `IssuedDate` DATE NOT NULL,
   `ReturnDueDate` DATE NOT NULL,
-  `ReturnedDate` DATE DEFAULT NULL,
-  `RecordStatus` TINYINT(1) NOT NULL DEFAULT 1 COMMENT '0=Inactive, 1=Active'
+  `ReturnActualDate` DATE DEFAULT NULL,
+  `RecordStatus` TINYINT(1) NOT NULL DEFAULT 1 COMMENT '0=Inactive, 1=Active',
   FOREIGN KEY (`BookID`) REFERENCES `books` (`BookID`),
   FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`)
 );
+
+-- Create books_issued_view uncoded view
+CREATE VIEW IF NOT EXISTS `books_issued_view` AS SELECT
+  `books_issued`.`IssuedID` AS `IssuedID`,
+  `books_issued`.`BookID` AS `BookID`,
+  `books`.`Title` AS `Title`,
+  `books_issued`.`UserID` AS `UserID`,
+  `users`.`Username` AS `Username`,
+  `books_issued`.`IssuedDate` AS `IssuedDate`,
+  `books_issued`.`ReturnDueDate` AS `ReturnDueDate`,
+  `books_issued`.`ReturnActualDate` AS `ReturnActualDate`,
+  `books_issued`.`RecordStatus` AS `RecordStatus`
+  FROM `books_issued`
+  LEFT JOIN `books` ON `books`.`BookID` = `books_issued`.`BookID`
+  LEFT JOIN `users` ON `users`.`UserID` = `books_issued`.`UserID`;
 
 -- Create messages table
 CREATE TABLE IF NOT EXISTS `messages` (

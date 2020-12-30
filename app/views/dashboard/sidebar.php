@@ -37,7 +37,7 @@
       <ul class="nav flex-column">
         <!-- Issue Book-->
         <li class="nav-item">
-          <a class="nav-link" href="main-booksIssuedAdd.php"><span data-feather="arrow-up-circle"></span>
+          <a class="nav-link<?= ($page == "bookIssue") ? " active" : ""; ?>" href="dashboard.php?p=bookIssue"><span data-feather="arrow-up-circle"></span>
           Issue Book</a>
         </li>
         <!-- Return Book -->

@@ -41,7 +41,7 @@ class Book {
    * @param string $price        Book Price
    * @param int $quantity        Quantity of the Book Added
    * @param string $imgFilename  Filename for Book Image
-   * @return int newBookID       Book ID of added book or False
+   * @return int $newBookID      Book ID of added book or False
    */
   public function add($title, $author, $publisher, $ISBN, $price, $quantity, $imgFilename) {
     try {
@@ -102,6 +102,21 @@ class Book {
   }
 
   /**
+   * getBookIDs function - Retrieve all Active Book IDs with Title
+   * @return array $result  Returns all Active records or False
+   */
+  public function getBookIDs() {
+    try {
+      $sql = "SELECT `BookID`, `Title` FROM `books` WHERE `RecordStatus` = '1' ORDER BY `Title`";
+      $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+      $result = $stmt->fetchAll();
+      return $result;
+    } catch (PDOException $err) {
+      $_SESSION["message"] = msgPrep("danger", "Error - Book/getBookIDs Failed: {$err->getMessage()}");
+    }
+  }
+
+  /**
    * getRecord function - Retrieve book record based on ID
    * @param int    $bookID  Book ID
    * @return array $result  Returns book record for $bookID or False
@@ -115,17 +130,6 @@ class Book {
     } catch (PDOException $err) {
       $_SESSION["message"] = msgPrep("danger", "Error - Book/getRecord Failed: {$err->getMessage()}");
     }
-  }
-
-  /**
-   * getBookIDs function - Retrieve all ACTIVE book IDs (with Title)
-   * @return array $result  Returns all active BookIDs (with Title)
-   */
-  public function getBookIDs() {
-    $sql = "SELECT BookID, Title FROM books WHERE BookStatus = '1' ORDER BY Title";
-    $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
-    $result = $statement->fetchAll();
-    return $result;
   }
 
   /**
@@ -151,7 +155,9 @@ class Book {
       } else {  // Update Book Record
         $sql = "UPDATE `books` SET `Title` = '{$title}', `Author` = '{$author}', `Publisher` = '{$publisher}', `ISBN` = '{$ISBN}', `Price` = '{$price}', `QtyTotal` = '{$qtyTotal}', `QtyAvail` = '{$qtyAvail}', `ImgFilename` = '{$imgFilename}' WHERE `BookID` = '{$bookID}'";
         $result = $this->conn->exec($sql);
-        if ($result == 1) {  // Only 1 record should have been updated
+        if ($result == 0) {  // No Changes made
+          $_SESSION["message"] = msgPrep("warning", "Warning - No changes made to Book ID '{$bookID}'.");
+        } elseif ($result == 1) {  // Only 1 record should have been updated
           $_SESSION["message"] = "Update of Book ID: '{$bookID}' was successful.";
         } else {
           throw new PDOException("Update unsuccessful or multiple records updated.");
@@ -166,13 +172,22 @@ class Book {
   /**
    * updateBookQtyAvail function - Update QtyAvail for $bookID
    * @param int $bookID       Book ID
-   * @param int $qtyAvailChg  (+/-)Quantity to change in $QtyAvail
-   * @return bool $result     Number of affected records if function success
+   * @param int $qtyAvailChg  (+/-)Quantity to change
+   * @return int $result      Number of records updated (=1) or False
    */
   public function updateBookQtyAvail($bookID, $qtyAvailChg) {
-    $sql = "UPDATE books SET QtyAvail = QtyAvail + $qtyAvailChg WHERE BookID = $bookID";
-    $result = $this->conn->exec($sql);
-    return $result;
+    try {
+      $sql = "UPDATE `books` SET `QtyAvail` = `QtyAvail` + '{$qtyAvailChg}' WHERE `BookID` = '{$bookID}'";
+      $result = $this->conn->exec($sql);
+      if ($result == 0) {  // No Changes made
+        $_SESSION["message"] = msgPrep("warning", "Warning - No changes made to QtyAvail for Book ID '{$bookID}'.");
+      } elseif ($result != 1) {  // Only 1 record should have been updated
+        throw new PDOException("Update unsuccessful or multiple records updated.");
+      }
+      return $result;
+    } catch (PDOException $err) {
+      $_SESSION["message"] = msgPrep("danger", "Error - Book/updateBookQtyAvail Failed: {$err->getMessage()}");
+    }
   }
 
   /**

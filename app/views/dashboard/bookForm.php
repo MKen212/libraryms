@@ -93,7 +93,6 @@ else :  // Display Book Form ?>
           <label class="col-form-label labFixed">Book Image:</label>
           <div class="custom-file inpFixed">
             <input type="hidden" name="MAX_FILE_SIZE" value="<?= DEFAULTS['maxUploadSize']?>" />
-            <input type="hidden" name="origImgFilename" value="<?= $bookRecord["ImgFilename"] ?>" />
             <label class="custom-file-label" for="imgFilename">Choose file</label>
             <input class="custom-file-input" type="file" name="imgFilename" id="imgFilename" />
           </div> 
@@ -103,6 +102,7 @@ else :  // Display Book Form ?>
           <div class="form-group row">
             <label class="col-form-label labFixed" for="image">Current Image:</label>
             <img class="img-thumbnail" width="140" height="220" id="image" src="<?= getFilePath($bookID, $bookRecord["ImgFilename"]) ?>" alt="<?= $bookRecord["ImgFilename"] ?>" />
+            <input type="hidden" name="origImgFilename" value="<?= $bookRecord["ImgFilename"] ?>" />
           </div><?php
         endif; ?>
         <div class="form-group row mt-4">
