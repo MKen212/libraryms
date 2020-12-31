@@ -23,7 +23,7 @@ else :  // Display Selected Book Record
         <tr>
           <th>Issued ID</th>
           <th>User ID</th>
-          <th>User Name</th>
+          <th>Username</th>
           <th>Issued Date</th>
           <th>Return Due Date</th>
         </tr>
@@ -37,15 +37,14 @@ else :  // Display Selected Book Record
           // Loop through the books_issued and output the values
           foreach (new BooksIssuedListRow(new RecursiveArrayIterator($booksIssuedList)) as $value) :
             echo $value;
-          endforeach;
+          endforeach; ?>
+          <!-- Show record count -->
+          <tr class="table-info">
+            <td colspan="5"><b>Total currently issued: <?= count($booksIssuedList) ?></b></td>
+          </tr><?php
         endif; ?>
       </tbody>
     </table>
-    <!-- List record count & Hyperlink to Display Books -->
-    Issued Count: <?= count($booksIssuedList) ?> book(s).<br />
-    <a href="dashboard.php?p=booksDisplay">Return to Display Books</a>
   </div>
 <?php
-// TO FIX: unset ($_SESSION["rowCount"]);
 endif;?>
-

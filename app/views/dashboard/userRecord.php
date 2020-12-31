@@ -13,7 +13,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><?= $booksIssuedRecord["UserID"] ?></td>
+        <td><?= $userRecord["UserID"] ?></td>
         <td><?= $userRecord["Username"] ?></td>
         <td><?= $userRecord["FirstName"] ?></td>
         <td><?= $userRecord["LastName"] ?></td>

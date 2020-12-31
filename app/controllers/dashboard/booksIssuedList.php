@@ -13,7 +13,10 @@ class BooksIssuedListRow extends RecursiveIteratorIterator {
     $parentKey = parent::key();
     $parentValue = parent::current();
     $returnValue = "";
-    if (($parentKey == "IssuedDate" || $parentKey == "ReturnDueDate" || $parentKey == "ReturnActualDate") && (!empty($parentValue))) {
+    if ($parentKey == "BookID" || $parentKey == "Title" || $parentKey == "ReturnActualDate" || $parentKey == "RecordStatus") {
+      // Skip ouput for BookID, Title, ReturnActualDate and RecordStatus
+      return;
+    } elseif (($parentKey == "IssuedDate" || $parentKey == "ReturnDueDate") && (!empty($parentValue))) {
       // For Non-Empty Date Fields modify date format
       $returnValue = date("d/m/Y", strtotime($parentValue));
     } else {
@@ -24,7 +27,6 @@ class BooksIssuedListRow extends RecursiveIteratorIterator {
   }
   public function beginChildren() {
     echo "<tr>";
-    $_SESSION["rowCount"] += 1;
   }
   public function endChildren() {
     echo "</tr>";
@@ -50,6 +52,4 @@ $listData = [
 
 // Display Books Issued List View
 include "../app/views/dashboard/booksIssuedList.php";
-
-// TO HERE - NOT WORKING!!
 ?>

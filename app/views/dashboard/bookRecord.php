@@ -14,8 +14,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><?= $booksIssuedRecord["BookID"] ?></td>
-        <td><img class="img-thumbnail" style="width:105px; height:165px" src="<?= getFilePath($booksIssuedRecord["BookID"], $bookRecord["ImgFilename"]) ?>" alt="<?= $bookRecord["ImgFilename"] ?>" /></td>
+        <td><?= $bookRecord["BookID"] ?></td>
+        <td><img class="img-thumbnail" style="width:105px; height:165px" src="<?= getFilePath($bookRecord["BookID"], $bookRecord["ImgFilename"]) ?>" alt="<?= $bookRecord["ImgFilename"] ?>" /></td>
         <td><?= $bookRecord["Title"] ?></td>
         <td><?= $bookRecord["Author"] ?></td>
         <td><?= $bookRecord["Publisher"] ?></td>

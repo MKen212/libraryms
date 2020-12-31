@@ -177,7 +177,7 @@ class User {
    */
   public function getRecord($userID) {
     try {
-      $sql = "SELECT `Username`, `FirstName`, `LastName`, `Email`, `ContactNo` FROM `users` WHERE `UserID` = '{$userID}'";
+      $sql = "SELECT `UserID`, `Username`, `FirstName`, `LastName`, `Email`, `ContactNo` FROM `users` WHERE `UserID` = '{$userID}'";
       $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
       $result = $stmt->fetch();
       return $result;
