@@ -3,7 +3,7 @@
   <div class="row">
     <!-- Title -->
     <div class="col-6">
-      <h1 class="h2"><?= $listData["listTitle"] ?></h1>
+      <h1 class="h2">Currently Issued for Book ID: <?= $bookID ?></h1>
     </div>
     <!-- System Messages -->
     <div class="col-6"><?php

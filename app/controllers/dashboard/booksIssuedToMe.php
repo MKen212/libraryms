@@ -1,43 +1,40 @@
-<?php  
-
-
-// STARTING THIS...
-
-
-
-// List all Issued Books for Logged-in User
-include_once("../models/bookIssuedClass.php");
+<?php  // DASHBOARD - List all Issued Books for Logged-in User
+include_once "../app/models/bookIssuedClass.php";
 $bookIssued = new BookIssued();
 
 // Extend the RecursiveIteratorIterator with table tags
-class BooksIssuedListRows extends RecursiveIteratorIterator {
+class BooksIssuedToMeRow extends RecursiveIteratorIterator {
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);
   }
   public function current() {
     $parentKey = parent::key();
     $parentValue = parent::current();
-    if (($parentKey == "IssuedDate" || $parentKey == "ReturnDueDate" || $parentKey == "ReturnedDate") && (!is_null($parentValue))) {
-      // For Non-Null Date Fields modify date format
+    $returnValue = "";
+    if (($parentKey == "IssuedDate" || $parentKey == "ReturnDueDate" || $parentKey == "ReturnActualDate") && (!empty($parentValue))) {
+      // For Non-Empty Date Fields modify date format
       $returnValue = date("d/m/Y", strtotime($parentValue));
+    } elseif ($parentKey == "RecordStatus") {
+      //Skip RecordStatus
+      return;
     } else {
       // For all others output original value
       $returnValue = $parentValue;
     }
-    return "<td>" . $returnValue . "</td>";
+    return "<td>{$returnValue}</td>";
   }
   public function beginChildren() {
     echo "<tr>";
-    $_SESSION["rowCount"] += 1;
   }
   public function endChildren() {
     echo "</tr>";
   }
 }
 
-// Loop through ALL Issued Books for user and output the values
-$_SESSION["rowCount"] = 0;
-foreach (new BooksIssuedListRows(new RecursiveArrayIterator($bookIssued->getBooksIssuedByUserID($_SESSION["userID"]))) as $value) {
-  echo $value;
-}
+// Get List of ACTIVE books_issued for current user
+$userID = $_SESSION["userID"];
+$booksIssuedToMe = $bookIssued->getListByUser($userID, 1, false);
+
+// Display Books Issued To Me View
+include "../app/views/dashboard/booksIssuedToMe.php";
 ?>

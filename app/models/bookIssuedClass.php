@@ -37,100 +37,102 @@ class BookIssued {
   }
 
   /**
-   * getList function - Retrieve list of ALL books_issued records (optionally based on UserID and/or BookID and/or if Outstanding) from books_issued_view
-   * @param int $userID        User ID (Optional)
-   * @param int $bookID        Book ID (Optional)
-   * @param book $outstanding  True/False if only include outstanding records (Optional)
-   * @return array $result     Returns all/selected books_issued records (ReturnDueDate Order) or False
+   * getListByUser function - Retrieve list of books_issued records for UserID (optionally by RecordStatus and/or if Outstanding) from books_issued_view
+   * @param int $userID        User ID
+   * @param int $recordStatus  Record Status (Optional)
+   * @param bool $outstanding  True/False if only include outstanding records (Optional)
+   * @return array $result     Returns all/selected books_issued records (IssuedDate Descending Order) or False
    */
-  public function getList($userID = null, $bookID = null, $outstanding = false) {
+  public function getListByUser($userID, $recordStatus = null, $outstanding = false) {
     try {
-      if ($userID == null && $bookID == null && $outstanding == false) {  // Select ALL records
-        $sql = "SELECT * FROM `books_issued_view` ORDER BY `ReturnDueDate`";
+      if ($recordStatus == null && $outstanding == false) {  // Select ALL records
+        $sql = "SELECT `IssuedID`, `BookID`, `Title`, `IssuedDate`, `ReturnDueDate`, `ReturnActualDate`, `RecordStatus` FROM `books_issued_view` WHERE (`UserID` = '{$userID}') ORDER BY `IssuedDate` DESC";
       } else {
         // Build WHERE clause
-        $whereClause = "";
-        if (!empty($userID)) $whereClause .= "(`UserID` = '{$userID}')";
-        if (!empty($bookID)) {
+        $whereClause = "(`UserID` = '{$userID}')";
+        if (!empty($recordStatus)) {
           if (!empty($whereClause)) $whereClause .= " AND ";
-          $whereClause .= "(`BookID` = '{$bookID}')";
+          $whereClause .= "(`RecordStatus` = '{$recordStatus}')";
         }
         if ($outstanding == true) {
           if (!empty($whereClause)) $whereClause .= " AND ";
-          $whereClause .= "(`ReturnActualDate` IS NULL) AND (`RecordStatus` = '1')";
+          $whereClause .= "(`ReturnActualDate` IS NULL)";
         }
-        $sql = "SELECT * FROM `books_issued_view` WHERE {$whereClause} ORDER BY `ReturnDueDate`";
+        $sql = "SELECT `IssuedID`, `BookID`, `Title`, `IssuedDate`, `ReturnDueDate`, `ReturnActualDate`, `RecordStatus` FROM `books_issued_view` WHERE {$whereClause} ORDER BY `IssuedDate` DESC";
       }
       $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
       $result = $stmt->fetchAll();
       return $result;
     } catch (PDOException $err) {
-      $_SESSION["message"] = msgPrep("danger", "Error - BookIssued/getList Failed: {$err->getMessage()}");
+      $_SESSION["message"] = msgPrep("danger", "Error - BookIssued/getListByUser Failed: {$err->getMessage()}");
       return false;
     }
   }
 
-  
-
-  // /**
-  //  * getBooksIssuedByUserID function - List books issued records for User ID
-  //  * @param int $userID     User ID (Optional)
-  //  * @param int $bookID     Book ID (Optional)
-  //  * @return array $result  Returns all/selected books_issued records (ReturnDueDate Order) or False
-  //  */
-  // public function getBooksIssuedByUserID($userID) {
-  //   $sql = "SELECT books_issued.IssuedID, books_issued.BookID, books.Title, books_issued.UserID, users.UserName, books_issued.IssuedDate, books_issued.ReturnDueDate, books_issued.ReturnedDate FROM books_issued LEFT JOIN books ON books_issued.BookID = books.BookID LEFT JOIN users ON books_issued.UserID = users.UserID WHERE books_issued.UserID = '$userID' ORDER BY books_issued.IssuedID DESC";
-  //   $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
-  //   $result = $statement->fetchAll();
-  //   return $result;
-  // }
-
-  // /**
-  //  * getBooksIssuedByBookID function - List books issued records for Book ID
-  //  * @param int $bookID     Book ID
-  //  * @return array $result  Returns all books issued records for $bookID
-  //  */
-  // public function getBooksIssuedByBookID($bookID) {
-  //   $sql = "SELECT books_issued.IssuedID, books_issued.BookID, books.Title, books_issued.UserID, users.UserName, books_issued.IssuedDate, books_issued.ReturnDueDate, books_issued.ReturnedDate FROM books_issued LEFT JOIN books ON books_issued.BookID = books.BookID LEFT JOIN users ON books_issued.UserID = users.UserID WHERE books_issued.BookID = '$bookID' ORDER BY books_issued.ReturnDueDate";
-  //   $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
-  //   $result = $statement->fetchAll();
-  //   return $result;
-  // }
-
-  // /**
-  //  * getBooksOSByUserID function - List outstanding books issued for User ID
-  //  * @param int $userID     User ID
-  //  * @return array $result  Returns all outstanding books issued records for $userID
-  //  */
-  // public function getBooksOSByUserID($userID) {
-  //   $sql = "SELECT books_issued.IssuedID, books_issued.BookID, books.Title, books_issued.UserID, users.UserName, books_issued.IssuedDate, books_issued.ReturnDueDate, books_issued.ReturnedDate FROM books_issued LEFT JOIN books ON books_issued.BookID = books.BookID LEFT JOIN users ON books_issued.UserID = users.UserID WHERE books_issued.UserID = '$userID' AND books_issued.ReturnedDate IS NULL ORDER BY books.Title, books_issued.IssuedID";
-  //   $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
-  //   $result = $statement->fetchAll();
-  //   return $result;
-  // }
-
-  // /**
-  //  * getBooksOSByBookID function - List outstanding books issued for Book ID
-  //  * @param int $bookID     Book ID
-  //  * @return array $result  Returns all outstanding books issued records for $bookID
-  //  */
-  // public function getBooksOSByBookID($bookID) {
-  //   $sql = "SELECT books_issued.IssuedID, books_issued.UserID, users.UserName, books_issued.IssuedDate, books_issued.ReturnDueDate FROM books_issued LEFT JOIN books ON books_issued.BookID = books.BookID LEFT JOIN users ON books_issued.UserID = users.UserID WHERE books_issued.BookID = '$bookID' AND books_issued.ReturnedDate IS NULL ORDER BY books_issued.ReturnDueDate";
-  //   $statement = $this->conn->query($sql, PDO::FETCH_ASSOC);
-  //   $result = $statement->fetchAll();
-  //   return $result;
-  // }
+  /**
+   * getListByBook function - Retrieve list of books_issued records for BookID (optionally by RecordStatus and/or if Outstanding) from books_issued_view
+   * @param int $bookID        Book ID
+   * @param int $recordStatus  Record Status (Optional)
+   * @param bool $outstanding  True/False if only include outstanding records (Optional)
+   * @return array $result     Returns all/selected books_issued records (ReturnDueDate Order) or False
+   */
+  public function getListByBook($bookID, $recordStatus = null, $outstanding = false) {
+    try {
+      if ($recordStatus == null && $outstanding == false) {  // Select ALL records
+        $sql = "SELECT `IssuedID`, `UserID`, `Username`, `IssuedDate`, `ReturnDueDate` FROM `books_issued_view` WHERE (`BookID` = '{$bookID}') ORDER BY `ReturnDueDate`";
+      } else {
+        // Build WHERE clause
+        $whereClause = "(`BookID` = '{$bookID}')";
+        if (!empty($recordStatus)) {
+          if (!empty($whereClause)) $whereClause .= " AND ";
+          $whereClause .= "(`RecordStatus` = '{$recordStatus}')";
+        }
+        if ($outstanding == true) {
+          if (!empty($whereClause)) $whereClause .= " AND ";
+          $whereClause .= "(`ReturnActualDate` IS NULL)";
+        }
+        $sql = "SELECT `IssuedID`, `UserID`, `Username`, `IssuedDate`, `ReturnDueDate` FROM `books_issued_view` WHERE {$whereClause} ORDER BY `ReturnDueDate`";
+      }
+      $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+      $result = $stmt->fetchAll();
+      return $result;
+    } catch (PDOException $err) {
+      $_SESSION["message"] = msgPrep("danger", "Error - BookIssued/getListByBook Failed: {$err->getMessage()}");
+      return false;
+    }
+  }
 
   /**
-   * returnBookIssued function - Return issued book
+   * returnBook function - Return issued book
    * @param int $issuedID       Issued ID
    * @param date $returnedDate  Date Book Returned
-   * @return bool $result       True if function success
+   * @return int $result        Number of records updated (=1) or False
    */
-  public function returnBookIssued($issuedID, $returnedDate) {
-    $sql = "UPDATE books_issued SET ReturnedDate = '$returnedDate' WHERE IssuedID = '$issuedID'";
-    $result = $this->conn->exec($sql);
-    return $result; 
+  public function returnBook($issuedID, $returnedDate) {
+    try {
+      $sql = "UPDATE `books_issued` SET `ReturnActualDate` = '{$returnedDate}' WHERE `IssuedID` = '{$issuedID}'";
+      $result = $this->conn->exec($sql);
+      return $result; 
+    } catch (PDOException $err) {
+      $_SESSION["message"] = msgPrep("danger", "Error - BookIssued/returnBook Failed: {$err->getMessage()}");
+      return false;
+    }
+  }
+
+  /**
+   * updateRecordStatus function - Update the RecordStatus of a books_issued record
+   * @param int $issuedID      Issued ID
+   * @param int $recordStatus  New RecordStatus for Book
+   * @return int $result       Number of records updated (=1) or False
+   */
+  public function updateRecordStatus($issuedID, $recordStatus) {
+    try {
+      $sql = "UPDATE `books_issued` SET `RecordStatus` = '{$recordStatus}' WHERE `IssuedID` = '{$issuedID}'";
+      $result = $this->conn->exec($sql);
+      return $result;
+    } catch (PDOException $err) {
+      $_SESSION["message"] = msgPrep("danger", "Error - BookIssued/updateRecordStatus Failed: {$err->getMessage()}");
+    }
   }
 }
 ?>

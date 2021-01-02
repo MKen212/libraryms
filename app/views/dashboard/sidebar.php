@@ -17,7 +17,7 @@
       </li>
       <!-- My Issued Books -->
       <li class="nav-item">
-        <a class="nav-link" href="main-booksIssuedToMe.php"><span data-feather="book-open"></span>My Issued Books</a>
+        <a class="nav-link<?= ($page == "booksIssuedToMe") ? " active" : ""; ?>" href="dashboard.php?p=booksIssuedToMe"><span data-feather="book-open"></span>My Issued Books</a>
       </li>
       <!-- Send a Message -->
       <li class="nav-item">
@@ -42,8 +42,8 @@
         </li>
         <!-- Return Book -->
         <li class="nav-item">
-          <a class="nav-link" href="main-booksIssuedRtn.php"><span data-feather="arrow-down-circle"></span>
-          Return Book</a>  
+          <a class="nav-link<?= ($page == "bookReturn") ? " active" : ""; ?>" href="dashboard.php?p=bookReturn"><span data-feather="arrow-down-circle"></span>
+          List/Return Issued Books</a>  
         </li>
         <!-- Add Book -->
         <li class="nav-item">

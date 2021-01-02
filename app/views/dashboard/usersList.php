@@ -31,14 +31,16 @@
 <div class="table-responsive">
   <table class="table table-striped table-sm">
     <thead>
-      <th>Username</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Email</th>
-      <th>Contact No</th>
-      <th>Admin</th>
-      <th>Status</th>
-      <th>Record</th>
+      <tr>
+        <th>Username</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Contact No</th>
+        <th>Admin</th>
+        <th>Status</th>
+        <th>Record</th>
+      </tr>
     </thead>
     <tbody><?php
       if (empty($userList)) :  // No User Records Found ?>

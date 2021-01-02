@@ -13,10 +13,7 @@ class BooksIssuedListRow extends RecursiveIteratorIterator {
     $parentKey = parent::key();
     $parentValue = parent::current();
     $returnValue = "";
-    if ($parentKey == "BookID" || $parentKey == "Title" || $parentKey == "ReturnActualDate" || $parentKey == "RecordStatus") {
-      // Skip ouput for BookID, Title, ReturnActualDate and RecordStatus
-      return;
-    } elseif (($parentKey == "IssuedDate" || $parentKey == "ReturnDueDate") && (!empty($parentValue))) {
+    if (($parentKey == "IssuedDate" || $parentKey == "ReturnDueDate") && (!empty($parentValue))) {
       // For Non-Empty Date Fields modify date format
       $returnValue = date("d/m/Y", strtotime($parentValue));
     } else {
@@ -42,13 +39,8 @@ if (isset($_GET["id"])) {
 }
 $_GET = [];
 
-// Get List of outstanding books_issued for BookID
-$booksIssuedList = $bookIssued->getList(null, $bookID, true);
-
-// Prep Book List Data
-$listData = [
-  "listTitle" => "Currently Issued for Book ID: {$bookID}",
-];
+// Get List of ACTIVE & OUTSTANDING books_issued for BookID
+$booksIssuedList = $bookIssued->getListByBook($bookID, 1, true);
 
 // Display Books Issued List View
 include "../app/views/dashboard/booksIssuedList.php";

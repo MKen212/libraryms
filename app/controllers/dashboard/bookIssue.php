@@ -1,4 +1,4 @@
-<?php  // Add Issued Book
+<?php  // DASHBOARD - Add Issued Book
 include_once "../app/models/bookIssuedClass.php";
 $bookIssued = new BookIssued();
 include_once "../app/models/userClass.php";
@@ -22,7 +22,7 @@ if (isset($_POST["issueBook"])) {
     if ($issuedBookID) {  // Book Issue Success
       $_POST = [];
       // Update books database with reduced QtyAvail
-      $updateBooks = $book->updateBookQtyAvail($bookID, -1); 
+      $updateBooks = $book->updateBookQtyAvail($bookID, -1);
     }
   }  
 }
