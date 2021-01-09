@@ -25,7 +25,7 @@ define("DEFAULTS", $defaultValues);
 /* Valid Pages */
 $validPages = [
   "index" => ["login", "logout", "register",],
-  "dashboard" => ["home", "booksDisplay","booksIssuedByBook", "booksIssuedToMe",],
+  "dashboard" => ["home", "myMessages", "booksDisplay","booksIssuedByBook", "myIssuedBooks",],
   "dashboard_admin" => ["bookIssue", "booksIssuedList", "bookAdd", "booksList", "bookDetails", "usersList", "userDetails",],
 ];
 
@@ -63,8 +63,17 @@ $statusCodes = [
       "badge" => "success",
     ],
   ],
+  "MessageStatus" => [  // messages Table / MessageStatus Field
+    0 => [
+      "text" => "UnRead",
+      "badge" => "info",
+    ],
+    1 => [
+      "text" => "Read",
+      "badge" => "light",
+    ],
+  ],
 ];
 
 define("STATUS_CODES", $statusCodes);
-
 ?>

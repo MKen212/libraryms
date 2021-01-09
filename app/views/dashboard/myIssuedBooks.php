@@ -1,9 +1,9 @@
-<!-- DASHBOARD - Books Issued To Me -->
+<!-- DASHBOARD - My Issued Books -->
 <div class="pt-3 pb-2 mb-3 border-bottom">
   <div class="row">
     <!-- Title -->
     <div class="col-6">
-      <h1 class="h2">Books Issued to Me</h1>
+      <h1 class="h2">My Issued Books</h1>
     </div>
     <!-- System Messages -->
     <div class="col-6"><?php

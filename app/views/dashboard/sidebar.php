@@ -4,7 +4,7 @@
     <ul class="nav flex-column">
       <!-- Welcome -->
       <li class="nav-brand">
-        <h6 class="ml-2">Welcome, <?= $_SESSION["username"] ?> <a class="<?= $unreadClass ?>" href="dashboard.php?p=messages"><span data-feather="mail"></span> <?= $unreadCount ?></a></h6>
+        <h6 class="ml-2">Welcome, <?= $_SESSION["username"] ?> <a class="<?= $unreadClass ?>" href="dashboard.php?p=myMessages"><span data-feather="mail"></span> <?= $unreadCount ?></a></h6>
         <hr>
       </li>
       <!-- Home -->
@@ -17,7 +17,7 @@
       </li>
       <!-- My Issued Books -->
       <li class="nav-item">
-        <a class="nav-link<?= ($page == "booksIssuedToMe") ? " active" : ""; ?>" href="dashboard.php?p=booksIssuedToMe"><span data-feather="book-open"></span>My Issued Books</a>
+        <a class="nav-link<?= ($page == "myIssuedBooks") ? " active" : ""; ?>" href="dashboard.php?p=myIssuedBooks"><span data-feather="book-open"></span>My Issued Books</a>
       </li>
       <!-- Send a Message -->
       <li class="nav-item">

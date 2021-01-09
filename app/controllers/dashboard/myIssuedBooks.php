@@ -51,6 +51,6 @@ class BooksIssuedToMeRow extends RecursiveIteratorIterator {
 $userID = $_SESSION["userID"];
 $booksIssuedToMe = $bookIssued->getListByUser($userID, 1, false);
 
-// Display Books Issued To Me View
-include "../app/views/dashboard/booksIssuedToMe.php";
+// Display My Issued Books View
+include "../app/views/dashboard/myIssuedBooks.php";
 ?>

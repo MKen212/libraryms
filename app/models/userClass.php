@@ -145,6 +145,7 @@ class User {
       // Build WHERE clause
       $whereClause = null;
       if (!empty($username)) $whereClause = "WHERE `Username` LIKE '%{$username}%'";
+      // Build SQL & Execute
       $sql = "SELECT `UserID`, `Username`, `FirstName`, `LastName`, `Email`, `ContactNo`, `IsAdmin`, `UserStatus`, `RecordStatus` FROM `users` {$whereClause}ORDER BY `Username`";
       $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
       $result = $stmt->fetchAll();

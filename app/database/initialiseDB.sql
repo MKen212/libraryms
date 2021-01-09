@@ -83,3 +83,19 @@ CREATE TABLE IF NOT EXISTS `messages` (
   FOREIGN KEY (`SenderID`) REFERENCES `users` (`UserID`),
   FOREIGN KEY (`ReceiverID`) REFERENCES `users` (`UserID`)
 );
+
+-- Create messages_view uncoded view
+CREATE VIEW IF NOT EXISTS `messages_view` AS SELECT
+  `messages`.`MessageID` AS `MessageID`,
+  `messages`.`SenderID` AS `SenderID`,
+  `users_s`.`username` AS `SenderName`,
+  `messages`.`ReceiverID` AS `ReceiverID`,
+  `users_r`.`username` AS `ReceiverName`,
+  `messages`.`Subject` AS `Subject`,
+  `messages`.`Body` AS `Body`,
+  `messages`.`AddedTimestamp` AS `AddedTimestamp`,
+  `messages`.`MessageStatus` AS `MessageStatus`,
+  `messages`.`RecordStatus` AS `RecordStatus`
+  FROM `messages`
+  LEFT JOIN `users` AS `users_s` ON `users_s`.`UserID` = `messages`.`SenderID`
+  LEFT JOIN `users` AS `users_r` ON `users_r`.`UserID` = `messages`.`ReceiverID`;

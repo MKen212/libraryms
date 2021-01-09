@@ -73,6 +73,7 @@ class Book {
       // Build WHERE clause
       $whereClause = "WHERE `RecordStatus` = '1' ";
       if (!empty($title)) $whereClause .= "AND `Title` LIKE '%{$title}%' ";
+      // Build SQL & Execute
       $sql = "SELECT `BookID`, `ImgFilename`, `Title`, `Author`, `Publisher`, `ISBN`, `Price`, `QtyTotal`, `QtyAvail` FROM `books` {$whereClause}ORDER BY `Title`";
       $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
       $result = $stmt->fetchAll();
@@ -92,6 +93,7 @@ class Book {
       // Build WHERE clause
       $whereClause = null;
       if (!empty($title)) $whereClause = "WHERE `Title` LIKE '%{$title}%' ";
+      // Build SQL & Execute
       $sql = "SELECT `BookID`, `Title`, `Author`, `Publisher`, `ISBN`, `Price`, `QtyTotal`, `QtyAvail`, `RecordStatus` FROM `books` {$whereClause}ORDER BY `Title`";
       $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
       $result = $stmt->fetchAll();

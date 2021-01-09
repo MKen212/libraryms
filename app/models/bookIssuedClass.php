@@ -46,6 +46,7 @@ class BookIssued {
       // Build WHERE clause
       $whereClause = null;
       if (!empty($schString)) $whereClause = "WHERE `Title` LIKE '%{$schString}%' OR `Username` LIKE '%{$schString}%'";
+      // Build SQL & Execute
       $sql = "SELECT * FROM `books_issued_view` {$whereClause}ORDER BY `ReturnDueDate` DESC";
       $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
       $result = $stmt->fetchAll();
@@ -69,6 +70,7 @@ class BookIssued {
       $whereClause = "WHERE `UserID` = '{$userID}' ";
       if (!empty($recordStatus)) $whereClause .= "AND `RecordStatus` = '{$recordStatus}' ";
       if ($outstanding == true) $whereClause .= "AND `ReturnActualDate` IS NULL ";
+      // Build SQL & Execute
       $sql = "SELECT `ReturnDueDate`, `ReturnActualDate`, `IssuedDate`, `Title` FROM `books_issued_view` {$whereClause}ORDER BY `ReturnDueDate` DESC";
       $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
       $result = $stmt->fetchAll();
@@ -92,6 +94,7 @@ class BookIssued {
       $whereClause = "WHERE `BookID` = '{$bookID}' ";
       if (!empty($recordStatus)) $whereClause .= "AND `RecordStatus` = '{$recordStatus}' ";
       if ($outstanding == true) $whereClause .= "AND `ReturnActualDate` IS NULL ";
+      // Build SQL & Execute
       $sql = "SELECT `ReturnDueDate`, `IssuedDate`, `Username` FROM `books_issued_view` {$whereClause}ORDER BY `ReturnDueDate`";
       $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
       $result = $stmt->fetchAll();
