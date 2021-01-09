@@ -25,8 +25,8 @@ define("DEFAULTS", $defaultValues);
 /* Valid Pages */
 $validPages = [
   "index" => ["login", "logout", "register",],
-  "dashboard" => ["home", "booksDisplay","booksIssuedList", "booksIssuedToMe",],
-  "dashboard_admin" => ["bookIssue", "bookReturn", "bookAdd", "booksList", "bookDetails", "usersList", "userDetails",],
+  "dashboard" => ["home", "booksDisplay","booksIssuedByBook", "booksIssuedToMe",],
+  "dashboard_admin" => ["bookIssue", "booksIssuedList", "bookAdd", "booksList", "bookDetails", "usersList", "userDetails",],
 ];
 
 define("VALID_PAGES", $validPages);

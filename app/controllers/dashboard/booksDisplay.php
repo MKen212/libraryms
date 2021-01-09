@@ -16,9 +16,9 @@ class BookDisplayCard extends RecursiveIteratorIterator {
       $_SESSION["curBookID"] = $parentValue;
       return;
     } elseif ($parentKey == "ImgFilename") {
-      $returnValue = "<img class='img-thumbnail float-left mt-3 mb-3 mr-3' style='width:140px; height:220px;' src='" . getFilePath($_SESSION["curBookID"], $parentValue) . "' alt='{$parentValue}' /><div class='mt-3'><b>Book ID: </b>{$_SESSION["curBookID"]}<br />";
+      $returnValue = "<img class='img-thumbnail float-left mt-3 mb-3 mr-3' style='width:140px; height:220px;' src='" . getFilePath($_SESSION["curBookID"], $parentValue) . "' alt='{$parentValue}' /><div class='mt-3'><br />";
     } elseif ($parentKey == "Price") {
-      $returnValue = "<b>Price (" . DEFAULTS["currency"] . "): </b>{$parentValue}<br /><br />";
+      $returnValue = "<b>Price (" . DEFAULTS["currency"] . "): </b>{$parentValue}<br />";
     } elseif ($parentKey == "QtyTotal") {
       $returnValue = "<b>Total Qty: </b>{$parentValue} - ";
     } elseif ($parentKey == "QtyAvail") {
@@ -42,7 +42,7 @@ class BookDisplayCard extends RecursiveIteratorIterator {
   }
   public function endChildren() {
     // Add Hyperlink to Show Books Issued for book
-    echo "<a class='badge badge-info' href='dashboard.php?p=booksIssuedList&id={$_SESSION["curBookID"]}'>Show Currently Issued</a>";
+    echo "<a class='badge badge-info' href='dashboard.php?p=booksIssuedByBook&id={$_SESSION["curBookID"]}'>Show Currently Issued</a>";
     echo "</div>";  // Close Col div
     unset ($_SESSION["curBookID"]);
     if ($_SESSION["curColumn"] == 3) {

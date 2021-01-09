@@ -80,11 +80,12 @@ class User {
         $_SESSION["message"] = msgPrep("danger", "Incorrect Username or Password entered!");
         return false;
       } else {  // Confirm Password
-        $sql = "SELECT `UserID`, `Password`, `IsAdmin`, `UserStatus`, `RecordStatus` FROM `users` WHERE `Username` = '{$username}'";
+        $sql = "SELECT `UserID`, `Username`, `Password`, `IsAdmin`, `UserStatus`, `RecordStatus` FROM `users` WHERE `Username` = '{$username}'";
         $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
         $result = $stmt->fetch();
         $passwordStatus = password_verify($password, $result["Password"]);
         $userID = $result["UserID"];
+        $usernameDB = $result["Username"];
         $userIsAdmin = $result["IsAdmin"];
         $userStatus = $result["UserStatus"];
         $recordStatus = $result["RecordStatus"];
@@ -95,7 +96,7 @@ class User {
               $_SESSION["userLogin"] = true;
               $_SESSION["userIsAdmin"] = $userIsAdmin;
               $_SESSION["userID"] = $userID;
-              $_SESSION["username"] = $username;
+              $_SESSION["username"] = $usernameDB;  // Use username from DB
               return true;
             } else {
               // User is inactive

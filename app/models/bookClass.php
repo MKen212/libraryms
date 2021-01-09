@@ -71,8 +71,8 @@ class Book {
   public function getDisplay($title = null) {
     try {
       // Build WHERE clause
-      $whereClause = "WHERE (`RecordStatus` = '1') ";
-      if (!empty($title)) $whereClause .= "AND (`Title` LIKE '%{$title}%') ";
+      $whereClause = "WHERE `RecordStatus` = '1' ";
+      if (!empty($title)) $whereClause .= "AND `Title` LIKE '%{$title}%' ";
       $sql = "SELECT `BookID`, `ImgFilename`, `Title`, `Author`, `Publisher`, `ISBN`, `Price`, `QtyTotal`, `QtyAvail` FROM `books` {$whereClause}ORDER BY `Title`";
       $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
       $result = $stmt->fetchAll();

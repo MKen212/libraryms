@@ -13,7 +13,7 @@
       </li>
       <!-- Display Books -->
       <li class="nav-item">
-        <a class="nav-link<?= ($page == "booksDisplay") ? " active" : ""; ?>" href="dashboard.php?p=booksDisplay"><span data-feather="book"></span>Display Books</a>
+        <a class="nav-link<?= (($page == "booksDisplay") || ($page == "booksIssuedByBook")) ? " active" : ""; ?>" href="dashboard.php?p=booksDisplay"><span data-feather="book"></span>Display Books</a>
       </li>
       <!-- My Issued Books -->
       <li class="nav-item">
@@ -42,7 +42,7 @@
         </li>
         <!-- Return Book -->
         <li class="nav-item">
-          <a class="nav-link<?= ($page == "bookReturn") ? " active" : ""; ?>" href="dashboard.php?p=bookReturn"><span data-feather="arrow-down-circle"></span>
+          <a class="nav-link<?= ($page == "booksIssuedList") ? " active" : ""; ?>" href="dashboard.php?p=booksIssuedList"><span data-feather="arrow-down-circle"></span>
           List/Return Issued Books</a>  
         </li>
         <!-- Add Book -->

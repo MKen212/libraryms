@@ -3,7 +3,6 @@
   <table class="table table-striped table-sm">
     <thead>
       <tr>
-        <th>User ID</th>
         <th>Username</th>
         <th>First Name</th>
         <th>Last Name</th>
@@ -13,7 +12,6 @@
     </thead>
     <tbody>
       <tr>
-        <td><?= $userRecord["UserID"] ?></td>
         <td><?= $userRecord["Username"] ?></td>
         <td><?= $userRecord["FirstName"] ?></td>
         <td><?= $userRecord["LastName"] ?></td>
