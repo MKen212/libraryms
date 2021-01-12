@@ -1,6 +1,9 @@
-<?php  // Send Message
-include_once("../models/messageClass.php");
+<?php  // DASHBOARD - Send Message
+include_once "../app/models/messageClass.php";
 $message = new Message();
+
+
+// TO HERE
 
 // Create New issued_books Record once Submit button selected
 if (isset($_POST["sendMessage"])) {

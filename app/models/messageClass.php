@@ -36,13 +36,13 @@ class Message {
   }
 
   /**
-   * countUnreadByUserID function - Count Unread Messages for User ID
+   * countUnreadByUserID function - Count ACTIVE Unread Messages for User ID
    * @param int $userID   User ID
-   * @return int $result  Count of Unread Messages for $userID
+   * @return int $result  Count of ACTIVE Unread Messages for $userID
    */
   public function countUnreadByUserID($userID) {
     try {
-      $sql = "SELECT COUNT(*) FROM `messages` WHERE `ReceiverID` = '{$userID}' AND `MessageStatus` = '0'";
+      $sql = "SELECT COUNT(*) FROM `messages` WHERE `ReceiverID` = '{$userID}' AND `MessageStatus` = '0' AND `RecordStatus` = '1'";
       $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
       $result = $stmt->fetchColumn();
       return $result;

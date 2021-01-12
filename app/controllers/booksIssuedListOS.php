@@ -23,7 +23,7 @@ class BooksOSListRows extends RecursiveIteratorIterator {
         // For Non-Null Date Fields modify date format
         $returnValue = date("d/m/Y", strtotime($parentValue));
       }
-    } else if ($parentKey == "ReturnedDate") {
+    } elseif ($parentKey == "ReturnedDate") {
       // For Returned Date (which is Null) provide return link
       $returnValue = "<a class='badge badge-success' href='../controllers/booksIssuedReturn.php?updateID=" . $_SESSION["curIssuedID"] . "&bookID=" . $_SESSION["curBookID"] . 
       "'>Return</a>";
@@ -31,7 +31,7 @@ class BooksOSListRows extends RecursiveIteratorIterator {
       // For all others output original value
       $returnValue = $parentValue;
     }
-    return "<td>" . $returnValue . "</td>";
+    return "<td>{$returnValue}</td>";
   }
   public function beginChildren() {
     echo "<tr>";

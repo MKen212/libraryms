@@ -15,12 +15,12 @@ class UserIDRows extends RecursiveIteratorIterator {
       if (isset($_POST["userIDSelected"])) {
         // If userIDSelected then make this the "selected" value in the option list
         if ($parentValue == $_POST["userIDSelected"]) echo " selected";
-      } else if (isset($_GET["r"])) {
+      } elseif (isset($_GET["r"])) {
         // If reply recipient then make this the "selected" value in the option list
         if ($parentValue == $_GET["r"]) echo " selected";
       }
       echo ">$parentValue > ";
-    } else if ($parentKey == "UserName") {
+    } elseif ($parentKey == "UserName") {
       echo "$parentValue</option>";
     }
   }

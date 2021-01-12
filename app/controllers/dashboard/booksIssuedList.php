@@ -35,7 +35,7 @@ class BooksIssuedListRow extends RecursiveIteratorIterator {
       } else {
         $returnValue = date("d/m/Y", strtotime($parentValue));
       }
-    } else if ($parentKey == "RecordStatus") {
+    } elseif ($parentKey == "RecordStatus") {
       $returnValue = statusOutput("RecordStatus", $parentValue, "dashboard.php?p=booksIssuedList&id={$_SESSION["curIssuedID"]}&cur={$parentValue}&updRecordStatus");
     } else {
       // For all others output original value

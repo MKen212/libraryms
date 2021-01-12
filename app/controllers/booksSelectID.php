@@ -17,7 +17,7 @@ class BookIDRows extends RecursiveIteratorIterator {
         if ($parentValue == $_POST["bookIDSelected"]) echo " selected";
       }
       echo ">$parentValue > ";
-    } else if ($parentKey == "Title") {
+    } elseif ($parentKey == "Title") {
       echo "$parentValue</option>";
     }
   }

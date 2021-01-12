@@ -21,9 +21,9 @@ class UserListRow extends RecursiveIteratorIterator {
     } elseif ($parentKey == "IsAdmin") {
       // For Status Codes output texts with update hyperlinks
       $returnValue = statusOutput("IsAdmin", $parentValue, "dashboard.php?p=usersList&id={$_SESSION["curUserID"]}&cur={$parentValue}&updIsAdmin");
-    } else if ($parentKey == "UserStatus") {
+    } elseif ($parentKey == "UserStatus") {
       $returnValue = statusOutput("UserStatus", $parentValue, "dashboard.php?p=usersList&id={$_SESSION["curUserID"]}&cur={$parentValue}&updUserStatus");
-    } else if ($parentKey == "RecordStatus") {
+    } elseif ($parentKey == "RecordStatus") {
       $returnValue = statusOutput("RecordStatus", $parentValue, "dashboard.php?p=usersList&id={$_SESSION["curUserID"]}&cur={$parentValue}&updRecordStatus");
     } else {
       // For all others output original value

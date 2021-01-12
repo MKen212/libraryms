@@ -4,7 +4,7 @@
     <ul class="nav flex-column">
       <!-- Welcome -->
       <li class="nav-brand">
-        <h6 class="ml-2">Welcome, <?= $_SESSION["username"] ?> <a class="<?= $unreadClass ?>" href="dashboard.php?p=myMessages"><span data-feather="mail"></span> <?= $unreadCount ?></a></h6>
+        <h6 class="ml-2">Welcome, <?= $_SESSION["username"] ?><span style="margin-left:10px" id="msgsUnread"><?= $msgsUnreadLink ?></span></h6>
         <hr>
       </li>
       <!-- Home -->
