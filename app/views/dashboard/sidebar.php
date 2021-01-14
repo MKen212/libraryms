@@ -26,7 +26,7 @@
       </li>
       <!-- My Profile -->
       <li class="nav-item">
-        <a class="nav-link" href="main-usersProfile.php"><span data-feather="user"></span>My Profile</a>
+        <a class="nav-link<?= ($page == "myProfile") ? " active" : ""; ?>" href="dashboard.php?p=myProfile"><span data-feather="user"></span>My Profile</a>
         <hr />
       </li>
     </ul><?php

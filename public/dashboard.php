@@ -30,7 +30,6 @@ if ($_SESSION["userIsAdmin"] == 0 && in_array($page, VALID_PAGES["dashboard_admi
   $_SESSION["message"] = msgPrep("warning", "Sorry - You need Admin Privileges to view the '{$page}' page.");
   $page = "home";
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
