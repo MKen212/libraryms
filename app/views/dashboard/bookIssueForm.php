@@ -12,7 +12,6 @@
   </div>
 </div>
 
-<!-- Display Book Issue Form -->
 <form class="ml-3" action="" method="post" name="bookIssueForm">
   <!-- Select User -->
   <div class="form-group row">

@@ -1,37 +1,49 @@
 <?php  // DASHBOARD - Send Message
 include_once "../app/models/messageClass.php";
 $message = new Message();
+include_once "../app/models/userClass.php";
+$user = new User();
 
+// Get recipient details if passed from MyMessages
+if (isset($_GET["recID"])) {
+  $_POST["userIDSelected"] = $_GET["recID"];
+  $_POST["subject"] = $_GET["sub"]; 
+}
+$_GET = [];
 
-// TO HERE
-
-// Create New issued_books Record once Submit button selected
+// Create New messages record if Send POSTed
 if (isset($_POST["sendMessage"])) {
-  // Check that user not sending message to themselves!
   if ($_SESSION["userID"] == $_POST["userIDSelected"]) {
-    echo "<div class='alert alert-danger form-user'>
-      Error: Sorry, you cannot send a message to yourself.
-    </div>";
-    unset($_POST);
-    return;
-  }
-  $senderID = $_SESSION["userID"];
-  $receiverID = htmlspecialchars($_POST["userIDSelected"]);
-  $subject = htmlspecialchars($_POST["subject"]);
-  $body = htmlspecialchars($_POST["body"]);
-  $sendMessage = $message->addMessage($senderID, $receiverID, $subject, $body);
-  unset($_POST);
-  if ($sendMessage) {
-    // Add Message Success
-    echo "<div class='alert alert-success form-user'>
-        Issue of Message to User '$receiverID' was successful.
-      </div>";
+    // Check that user is not sending a message to themselves!
+    $_SESSION["message"] = msgPrep("danger", "Error - You cannot send a message to yourself!");
   } else {
-    // Add Message Failure
-    echo "<div class='alert alert-danger form-user'>
-      Sorry - Issue of Message to User '$receiverID' failed.
-    </div>";
+    $senderID = $_SESSION["userID"];
+    $receiverID = cleanInput($_POST["userIDSelected"], "int");
+    $subject = cleanInput($_POST["subject"], "string");
+    $body = cleanInput($_POST["body"], "string");
+    // Create messages Database Entry
+    $newMsgID = $message->add($senderID, $receiverID, $subject, $body);
+    if ($newMsgID) {  // Add Message Success
+      $_POST = [];
+      $_SESSION["message"] = msgPrep("success", "Issue of Message to User '{$receiverID}' was successful.");
+    }
   }
 }
-echo "</div>"; // Close-out results section
+
+// Initialise Message Record
+$messageRecord = [
+  "ReceiverID" => postValue("userIDSelected", 0),
+  "Subject" => postValue("subject"),
+  "Body" => postValue("body"),
+];
+
+// Get User Record for Selected Receiver ID
+$userRecord = [];
+if (isset($messageRecord["ReceiverID"])) {
+  $selectedUserID = cleanInput($messageRecord["ReceiverID"], "int");
+  $userRecord = $user->getRecord($selectedUserID);
+}
+
+// Show Message Form
+include "../app/views/dashboard/messageForm.php";
 ?>

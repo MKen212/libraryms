@@ -21,7 +21,7 @@
       </li>
       <!-- Send a Message -->
       <li class="nav-item">
-        <a class="nav-link" href="main-messagesSend.php"><span data-feather="send"></span>Send a Message</a>
+        <a class="nav-link<?= ($page == "messageSend") ? " active" : ""; ?>" href="dashboard.php?p=messageSend"><span data-feather="send"></span>Send a Message</a>
         <hr />
       </li>
       <!-- My Profile -->

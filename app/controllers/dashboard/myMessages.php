@@ -40,7 +40,7 @@ class ReceivedMessagesRow extends RecursiveIteratorIterator {
   }
   public function endChildren() {
     // Add Reply Column
-    echo "<td><a class='badge badge-primary' href='dashboard.php?p=messageSend.php?r=" . $_SESSION["curSenderID"] . "&s=" . $_SESSION["curSubject"] . "'>Reply</a></td>";
+    echo "<td><a class='badge badge-primary' href='dashboard.php?p=messageSend&recID=" . $_SESSION["curSenderID"] . "&sub=" . $_SESSION["curSubject"] . "'>Reply</a></td>";
     echo "</tr>";
     unset ($_SESSION["curMessageID"], $_SESSION["curSenderID"], $_SESSION["curSubject"]);
   }

@@ -11,7 +11,7 @@ function cleanInput($input, $type) {
   $output = htmlspecialchars($input);
   if ($type == "string") {
     $output = trim($output);
-    $output = str_replace("\n", "^~",$output);  // Keep CRLF as ^~
+    $output = str_replace("\n", " ",$output);  // For CRLF replace with space as messages shown as single lines
     $output = stripslashes($output);
     $output = filter_var($output, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_LOW);
   } elseif ($type == "int") {
