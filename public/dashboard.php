@@ -55,7 +55,7 @@ if ($_SESSION["userIsAdmin"] == 0 && in_array($page, VALID_PAGES["dashboard_admi
 
 <body>
   <!-- Top -->
-  <?php include "../app/views/dashboard/navbar.php"; ?>
+  <?php include "../app/controllers/dashboard/navbar.php"; ?>
   <div class=container-fluid>
     <div class="row">
       <!-- Side -->

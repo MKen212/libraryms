@@ -61,12 +61,11 @@ class BookDisplayCard extends RecursiveIteratorIterator {
   }
 }
 
-// Fix Book Title Search, if entered
+// Fix Book Title Search, if available in $_SESSION
 $title = null;
-if (isset($_POST["bookSearch"])) {
-  $title = fixSearch($_POST["schTitle"]);
+if (isset($_SESSION["navSchString"])) {
+  $title = fixSearch($_SESSION["navSchString"]);
 }
-$_POST = [];
 
 // Get Display List of ACTIVE books
 $bookDisplay = $book->getDisplay($title);
