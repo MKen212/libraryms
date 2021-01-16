@@ -5,9 +5,20 @@ include_once "../app/models/userClass.php";
 $user = new User();
 
 // Get recipient details if passed from MyMessages
-if (isset($_GET["recID"])) {
-  $_POST["userIDSelected"] = $_GET["recID"];
-  $_POST["subject"] = $_GET["sub"]; 
+if (isset($_GET["reply"])) {
+  $originalMsgID = cleanInput($_GET["id"], "int");
+  $_POST["userIDSelected"] = cleanInput($_GET["recID"], "int");
+  $_POST["subject"] = cleanInput($_GET["sub"], "string");
+  // Mark original message as Read
+  $updateStatus = $message->updateStatus("MessageStatus", $originalMsgID, 1);
+  // Update Unread Message Link
+  $unreadClass = "badge badge-info";
+  $unreadCount = $message->countUnreadByUserID($_SESSION["userID"]);
+  if ($unreadCount == 0) $unreadClass = "badge badge-light";  // Update Badge if no unread
+  $msgsUnreadLink = "<a class='{$unreadClass}' href='dashboard.php?p=myMessages'><span data-feather='mail'></span> {$unreadCount}</a>";?>
+  <script>
+    document.getElementById("msgsUnread").innerHTML = "<?= $msgsUnreadLink ?>";
+  </script><?php
 }
 $_GET = [];
 

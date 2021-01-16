@@ -13,7 +13,7 @@
 </div><?php
 
 // Display Testing Information if in Testing Mode
-if (DEFAULTS["testing"] == false) : ?>
+if (DEFAULTS["testing"] == true) : ?>
   <!-- PHP Global Variables -->
   <div>
     <pre><?php
