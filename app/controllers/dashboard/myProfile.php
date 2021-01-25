@@ -1,5 +1,9 @@
-<?php  // DASHBOARD - My Profile
-include_once "../app/models/userClass.php";
+<?php
+/**
+ * DASHBOARD/myProfile controller - Display My Profile
+ */
+
+require_once "../app/models/userClass.php";
 $user = new User();
 
 // Get UserID for current logged-in user
@@ -36,4 +40,3 @@ $formData = [
 
 // Show User Form
 include "../app/views/dashboard/userForm.php";
-?>

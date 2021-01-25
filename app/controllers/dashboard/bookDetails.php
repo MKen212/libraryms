@@ -1,7 +1,11 @@
-<?php  // DASHBOARD - Display/Edit Book Record
-include_once "../app/models/bookClass.php";
+<?php
+/**
+ * DASHBOARD/bookDetails controller - Display/Edit Book Record
+ */
+
+require_once "../app/models/bookClass.php";
 $book = new Book();
-include_once "../app/models/uploadImgClass.php";
+require_once "../app/models/uploadImgClass.php";
 $uploadImg = new UploadImg();
 
 // Get recordID if provided
@@ -63,4 +67,3 @@ $formData = [
 
 // Show Book Form
 include "../app/views/dashboard/bookForm.php";
-?>

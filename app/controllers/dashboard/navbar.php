@@ -1,4 +1,8 @@
-<?php  // DASHBOARD - Navbar
+<?php
+/**
+ * DASHBOARD/navbar controller - Update data for top Navbar
+ */
+
 // Update Book Title Search, if POSTed from navbar
 if (isset($_POST["navSearch"])) {
   if (empty($_POST["navSchString"])) {
@@ -13,4 +17,3 @@ if (isset($_POST["navSearch"])) {
 
 // Display Navbar
 include "../app/views/dashboard/navbar.php";
-?>

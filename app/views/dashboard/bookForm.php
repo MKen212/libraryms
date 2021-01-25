@@ -1,4 +1,10 @@
-<!-- DASHBOARD - Book Form -->
+<?php
+/**
+ * DASHBOARD - Book Form
+ */
+?>
+
+<!-- Book Form -->
 <div class="pt-3 pb-2 mb-3 border-bottom">
   <div class="row">
     <!-- Title -->
@@ -115,4 +121,4 @@ else :  // Display Book Form ?>
       </div>
     </div>
   </form><?php
-endif; ?>
+endif;

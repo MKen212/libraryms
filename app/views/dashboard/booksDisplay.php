@@ -1,4 +1,12 @@
-<!-- DASHBOARD - Books Display -->
+<?php
+/**
+ * DASHBOARD - Books Display
+ */
+
+include_once "../app/models/bookCardClass.php";
+?>
+
+<!-- Books Display -->
 <div class="pt-3 pb-2 mb-3 border-bottom">
   <div class="row">
     <!-- Title -->
@@ -12,13 +20,13 @@
   </div>
 </div>
 
-<!-- Books Table Display -->
+<!-- Books Display Table -->
 <div class="container-fluid mb-3"><?php
   if (empty($bookDisplay)) :  // No Book Records Found ?>
     <div>No Books found<?= (!empty($title)) ? " matching search criteria" : "" ?>.</div><?php
   else :
     // Loop through the Book Records and output the values
-    foreach (new BookDisplayCard(new RecursiveArrayIterator($bookDisplay)) as $value) :
+    foreach (new BookCard(new RecursiveArrayIterator($bookDisplay)) as $value) :
       echo $value;
     endforeach;
   endif; ?>

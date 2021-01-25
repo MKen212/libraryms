@@ -1,44 +1,10 @@
-<?php  // DASHBOARD - List all Users
-include_once "../app/models/userClass.php";
-$user = new User();
+<?php
+/**
+ * DASHBOARD/usersList controller - List all Users
+ */
 
-// Extend the RecursiveIteratorIterator with table tags
-class UserListRow extends RecursiveIteratorIterator {
-  public function __construct($result) {
-    parent::__construct($result, self::LEAVES_ONLY);
-  }
-  public function current() {
-    $parentKey = parent::key();
-    $parentValue = parent::current();
-    $returnValue = "";
-    if ($parentKey == "UserID") {
-      // For UserID save the current value to $_SESSION & skip output
-      $_SESSION["curUserID"] = $parentValue;
-      return;
-    } elseif ($parentKey == "Username") {
-      // For Username output edit hyperlink
-      $returnValue = "<a href='dashboard.php?p=userDetails&id={$_SESSION["curUserID"]}'>{$parentValue}</a>";
-    } elseif ($parentKey == "IsAdmin") {
-      // For Status Codes output texts with update hyperlinks
-      $returnValue = statusOutput("IsAdmin", $parentValue, "dashboard.php?p=usersList&id={$_SESSION["curUserID"]}&cur={$parentValue}&updIsAdmin");
-    } elseif ($parentKey == "UserStatus") {
-      $returnValue = statusOutput("UserStatus", $parentValue, "dashboard.php?p=usersList&id={$_SESSION["curUserID"]}&cur={$parentValue}&updUserStatus");
-    } elseif ($parentKey == "RecordStatus") {
-      $returnValue = statusOutput("RecordStatus", $parentValue, "dashboard.php?p=usersList&id={$_SESSION["curUserID"]}&cur={$parentValue}&updRecordStatus");
-    } else {
-      // For all others output original value
-      $returnValue = $parentValue;
-    }
-    return "<td>{$returnValue}</td>";
-  }
-  public function beginChildren() {
-    echo "<tr>";
-  }
-  public function endChildren() {
-    echo "</tr>";
-    unset ($_SESSION["curUserID"]);
-  }
-}
+require_once "../app/models/userClass.php";
+$user = new User();
 
 // Get recordID if provided and process Status changes if hyperlinks clicked
 $userID = 0;
@@ -73,4 +39,3 @@ $userList = $user->getList($username);
 
 // Display Users List View
 include "../app/views/dashboard/usersList.php";
-?>

@@ -1,4 +1,12 @@
-<!-- DASHBOARD - Users List -->
+<?php
+/**
+ * DASHBOARD - Users List
+ */
+
+include "../app/models/userRowClass.php";
+?>
+
+<!-- Users List -->
 <div class="pt-3 pb-2 mb-3 border-bottom">
   <div class="row">
     <!-- Title -->
@@ -27,7 +35,7 @@
   <div class="col-8"></div>
 </div>
 
-<!-- Table of Users -->
+<!-- Users Table List -->
 <div class="table-responsive">
   <table class="table table-striped table-sm">
     <thead>
@@ -49,7 +57,7 @@
         </tr><?php
       else : 
         // Loop through the Users and output the values
-        foreach (new UserListRow(new RecursiveArrayIterator($userList)) as $value) :
+        foreach (new UserRow(new RecursiveArrayIterator($userList)) as $value) :
           echo $value;
         endforeach;
       endif; ?>

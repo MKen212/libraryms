@@ -1,7 +1,11 @@
-<?php  // DASHBOARD - Send Message
-include_once "../app/models/messageClass.php";
+<?php
+/**
+ * DASHBOARD/messageSend controller - Send Message
+ */
+
+require_once "../app/models/messageClass.php";
 $message = new Message();
-include_once "../app/models/userClass.php";
+require_once "../app/models/userClass.php";
 $user = new User();
 
 // Get recipient details if passed from MyMessages
@@ -14,7 +18,9 @@ if (isset($_GET["reply"])) {
   // Update Unread Message Link
   $unreadClass = "badge badge-info";
   $unreadCount = $message->countUnreadByUserID($_SESSION["userID"]);
-  if ($unreadCount == 0) $unreadClass = "badge badge-light";  // Update Badge if no unread
+  if ($unreadCount == 0) {  // Update Badge if no unread
+    $unreadClass = "badge badge-light";
+  }
   $msgsUnreadLink = "<a class='{$unreadClass}' href='dashboard.php?p=myMessages'><span data-feather='mail'></span> {$unreadCount}</a>";?>
   <script>
     document.getElementById("msgsUnread").innerHTML = "<?= $msgsUnreadLink ?>";
@@ -57,4 +63,3 @@ if (isset($messageRecord["ReceiverID"])) {
 
 // Show Message Form
 include "../app/views/dashboard/messageForm.php";
-?>

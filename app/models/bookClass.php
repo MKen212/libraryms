@@ -1,4 +1,7 @@
-<?php  // Book Class
+<?php
+/**
+ * Book class - Used to access the book table and process SQL additions and changes
+ */
 class Book {
   private $conn;  // PDO database connection object
 
@@ -200,7 +203,7 @@ class Book {
    */
   public function updateRecordStatus($bookID, $recordStatus) {
     try {
-      $sql = "UPDATE `books` SET `RecordStatus` = '$recordStatus' WHERE `BookID` = '{$bookID}'";
+      $sql = "UPDATE `books` SET `RecordStatus` = '{$recordStatus}' WHERE `BookID` = '{$bookID}'";
       $result = $this->conn->exec($sql);
       return $result;
     } catch (PDOException $err) {

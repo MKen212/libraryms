@@ -1,4 +1,12 @@
-<!-- DASHBOARD - Books List -->
+<?php
+/**
+ * DASHBOARD - Books List
+ */
+
+include "../app/models/bookRowClass.php";
+?>
+
+<!-- Books List -->
 <div class="pt-3 pb-2 mb-3 border-bottom">
   <div class="row">
     <!-- Title -->
@@ -49,7 +57,7 @@
         </tr><?php
       else : 
         // Loop through the Books and output the values
-        foreach (new BookListRow(new RecursiveArrayIterator($bookList)) as $value) :
+        foreach (new BookRow(new RecursiveArrayIterator($bookList)) as $value) :
           echo $value;
         endforeach;
       endif; ?>

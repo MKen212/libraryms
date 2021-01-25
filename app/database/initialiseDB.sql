@@ -1,4 +1,4 @@
-/* Database and Table Initialisation SQL Statements for libraryms*/
+/* Database and Table Initialisation SQL Statements for libraryms */
 
 -- Create libraryms main database
 CREATE DATABASE IF NOT EXISTS libraryms;
@@ -23,8 +23,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Load initial test users using index.php?p=register to ensure Password Hashing
 
 -- Manually Update User and Admin Status for test users
--- UPDATE `users` SET `UserStatus` = '1' WHERE `UserID` = '1' OR `UserID` = '2';
--- UPDATE `users` SET `IsAdmin` = '1' WHERE `UserID` = '1';
+-- UPDATE `users` SET `UserStatus` = 1 WHERE `UserID` = 1 OR `UserID` = 2;
+-- UPDATE `users` SET `IsAdmin` = 1 WHERE `UserID` = 1;
 
 -- Create books table
 CREATE TABLE IF NOT EXISTS `books` (

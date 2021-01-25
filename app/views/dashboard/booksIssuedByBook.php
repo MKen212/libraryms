@@ -1,4 +1,12 @@
-<!-- DASHBOARD - Books Issued By Book -->
+<?php
+/**
+ * DASHBOARD - Books Issued By Book List
+ */
+
+include_once "../app/models/bookIssuedByBookRowClass.php";
+?>
+
+<!-- Books Issued By Book -->
 <div class="pt-3 pb-2 mb-3 border-bottom">
   <div class="row">
     <!-- Title -->
@@ -16,7 +24,7 @@ if (empty($bookRecord)) :  // Book Record not found ?>
   <div>Book ID not found.</div><?php
 else :  // Display Selected Book Record
   include "../app/views/dashboard/bookRecord.php";?>
-  <!-- Books Issued List -->
+  <!-- Books Issued By Book Table -->
   <div class="table-responsive">
     <table class="table table-striped table-sm">
       <thead>
@@ -33,12 +41,11 @@ else :  // Display Selected Book Record
           </tr><?php
         else :
           // Loop through the books_issued and output the values
-          foreach (new BooksIssuedByBookRow(new RecursiveArrayIterator($booksIssuedByBook)) as $value) :
+          foreach (new BookIssuedByBookRow(new RecursiveArrayIterator($booksIssuedByBook)) as $value) :
             echo $value;
           endforeach;
         endif; ?>
       </tbody>
     </table>
-  </div>
-<?php
-endif;?>
+  </div><?php
+endif;

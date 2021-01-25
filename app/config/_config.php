@@ -24,9 +24,29 @@ define("DEFAULTS", $defaultValues);
 
 /* Valid Pages */
 $validPages = [
-  "index" => ["login", "logout", "register",],
-  "dashboard" => ["home", "myMessages", "booksDisplay","booksIssuedByBook", "myIssuedBooks", "messageSend","myProfile",],
-  "dashboard_admin" => ["bookIssue", "booksIssuedList", "bookAdd", "booksList", "bookDetails", "usersList", "userDetails",],
+  "index" => [
+    "login",
+    "logout",
+    "register",
+  ],
+  "dashboard" => [
+    "home",
+    "myMessages",
+    "booksDisplay",
+    "booksIssuedByBook",
+    "myIssuedBooks",
+    "messageSend",
+    "myProfile",
+  ],
+  "dashboard_admin" => [
+    "bookIssue",
+    "booksIssuedList",
+    "bookAdd",
+    "booksList",
+    "bookDetails",
+    "usersList",
+    "userDetails",
+  ],
 ];
 
 define("VALID_PAGES", $validPages);
@@ -76,4 +96,3 @@ $statusCodes = [
 ];
 
 define("STATUS_CODES", $statusCodes);
-?>

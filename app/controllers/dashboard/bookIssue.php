@@ -1,9 +1,13 @@
-<?php  // DASHBOARD - Add Issued Book
-include_once "../app/models/bookIssuedClass.php";
+<?php
+/**
+ * DASHBOARD/bookIssue controller - Add Issued Book
+ */
+
+require_once "../app/models/bookIssuedClass.php";
 $bookIssued = new BookIssued();
-include_once "../app/models/userClass.php";
+require_once "../app/models/userClass.php";
 $user = new User();
-include_once "../app/models/bookClass.php";
+require_once "../app/models/bookClass.php";
 $book = new Book();
 
 // Add books_issued Record if issueBook POSTed
@@ -24,7 +28,7 @@ if (isset($_POST["issueBook"])) {
       // Update books database with reduced QtyAvail
       $updateBooks = $book->updateBookQtyAvail($bookID, -1);
     }
-  }  
+  }
 }
 
 // Initialise BooksIssued Record
@@ -53,4 +57,3 @@ if (isset($booksIssuedRecord["BookID"])) {
 
 // Show BookIssue Form
 include "../app/views/dashboard/bookIssueForm.php";
-?>

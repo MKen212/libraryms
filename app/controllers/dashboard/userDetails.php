@@ -1,5 +1,9 @@
-<?php  // DASHBOARD - Display/Edit User Record
-include_once "../app/models/userClass.php";
+<?php
+/**
+ * DASHBOARD/userDetails controller - Display/Edit User Record
+ */
+
+require_once "../app/models/userClass.php";
 $user = new User();
 
 // Get recordID if provided
@@ -40,4 +44,3 @@ $formData = [
 
 // Show User Form
 include "../app/views/dashboard/userForm.php";
-?>

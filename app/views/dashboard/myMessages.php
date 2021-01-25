@@ -1,4 +1,10 @@
-<!-- DASHBOARD - My Messages -->
+<?php
+/**
+ * DASHBOARD - My Messages
+ */
+?>
+
+<!-- My Messages List -->
 <div class="pt-3 pb-2 mb-3 border-bottom">
   <div class="row">
     <!-- Title -->
@@ -33,7 +39,7 @@
         </tr><?php
       else :
         // Loop through the Received Messages and output the values
-        foreach (new ReceivedMessagesRow(new RecursiveArrayIterator($receivedMessageList)) as $value) :
+        foreach (new MessageReceivedRow(new RecursiveArrayIterator($receivedMessageList)) as $value) :
           echo $value;
         endforeach;
       endif; ?>
@@ -63,7 +69,7 @@
         </tr><?php
       else :
         // Loop through the Sent Messages and output the values
-        foreach (new SentMessagesRow(new RecursiveArrayIterator($sentMessageList)) as $value) :
+        foreach (new MessageSentRow(new RecursiveArrayIterator($sentMessageList)) as $value) :
           echo $value;
         endforeach;
       endif; ?>

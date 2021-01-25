@@ -1,7 +1,11 @@
-<?php  // DASHBOARD - Add Book
-include_once "../app/models/bookClass.php";
+<?php
+/**
+ * DASHBOARD/bookAdd controller - Add Book
+ */
+
+require_once "../app/models/bookClass.php";
 $book = new Book();
-include_once "../app/models/uploadImgClass.php";
+require_once "../app/models/uploadImgClass.php";
 $uploadImg = new UploadImg();
 
 // Add Product Record if Add POSTed
@@ -60,4 +64,3 @@ $formData = [
 
 // Show Book Form
 include "../app/views/dashboard/bookForm.php";
-?>

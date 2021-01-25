@@ -1,4 +1,12 @@
-<!-- DASHBOARD - Books Issued List with Return Option -->
+<?php
+/**
+ * DASHBOARD - Books Issued List with Return Option
+ */
+
+include "../app/models/bookIssuedRowClass.php";
+?>
+
+<!-- Books Issued List -->
 <div class="pt-3 pb-2 mb-3 border-bottom">
   <div class="row">
     <!-- Title -->
@@ -47,7 +55,7 @@
         </tr><?php
       else :
         // Loop through the books_issued records and output the values
-        foreach (new BooksIssuedListRow(new RecursiveArrayIterator($booksIssuedList)) as $value) :
+        foreach (new BookIssuedRow(new RecursiveArrayIterator($booksIssuedList)) as $value) :
           echo $value;
         endforeach;
       endif; ?>
