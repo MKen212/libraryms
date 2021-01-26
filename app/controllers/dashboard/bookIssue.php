@@ -32,13 +32,14 @@ if (isset($_POST["issueBook"])) {
 }
 
 // Initialise BooksIssued Record
+$returnDuration = DEFAULTS["returnDuration"] . " days";
 $booksIssuedRecord = [
   "UserID" => postValue("userIDSelected", 0),
   "BookID" => postValue("bookIDSelected", 0),
-  "EarliestIssueDate" => date("Y-m-d", strtotime("-" . DEFAULTS["returnDuration"] . " days")),
+  "EarliestIssueDate" => date("Y-m-d", strtotime("-" . $returnDuration)),
   "IssuedDate" => postValue("issuedDate", date("Y-m-d")),
   "EarliestReturnDate" => date("Y-m-d"),
-  "ReturnDueDate" => postValue("returnDueDate", date("Y-m-d", strtotime("+" . DEFAULTS["returnDuration"] . " days"))),
+  "ReturnDueDate" => postValue("returnDueDate", date("Y-m-d", strtotime("+" . $returnDuration))),
 ];
 
 // Get User Record for Selected User

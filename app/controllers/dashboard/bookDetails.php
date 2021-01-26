@@ -47,7 +47,8 @@ if (isset($_POST["updateBook"])) {
       if ($_FILES["imgFilename"]["error"] == 0) {  // Image File included - Create dir & upload
         $newUpload = $uploadImg->addBookImg($bookID, $imgFilename);
       } else {  // No Image File Included
-        $_SESSION["message"] = msgPrep("success", ($_SESSION["message"] . " No Image to upload."));
+        $updatedMessage = $_SESSION["message"] . " No Image to upload.";
+        $_SESSION["message"] = msgPrep("success", $updatedMessage);
       }
       $_FILES = [];
     }

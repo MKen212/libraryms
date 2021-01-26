@@ -9,7 +9,10 @@ $message = new Message();
 // Get count of Unread Messages
 $unreadClass = "badge badge-info";
 $unreadCount = $message->countUnreadByUserID($_SESSION["userID"]);
-if ($unreadCount == 0) $unreadClass = "badge badge-light";  // Update Badge if no unread
+if ($unreadCount == 0) {  // Update Badge if no unread
+  $unreadClass = "badge badge-light";
+}
+
 // Create link
 $msgsUnreadLink = "<a class='{$unreadClass}' href='dashboard.php?p=myMessages'><span data-feather='mail'></span> {$unreadCount}</a>";
 

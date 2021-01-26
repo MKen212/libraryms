@@ -1,5 +1,9 @@
-<?php  // INDEX - Verify & Login User
-include_once "../app/models/userClass.php";
+<?php
+/**
+ * INDEX/login controller - Verify & Login User
+ */
+
+require_once "../app/models/userClass.php";
 $user = new User();
 
 // Verify & Login User if Login Form POSTed
@@ -18,4 +22,3 @@ if (isset($_POST["login"])){
 
 // Show Login View/Form
 include "../app/views/index/loginForm.php";
-?>

@@ -22,7 +22,9 @@ $_GET = [];
 
 // Fix Book Title Search, if entered
 $title = null;
-if (isset($_POST["bookSearch"])) $title = fixSearch($_POST["schTitle"]);
+if (isset($_POST["bookSearch"])) {
+  $title = fixSearch($_POST["schTitle"]);
+}
 $_POST = [];
 
 // Get List of books

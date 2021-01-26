@@ -25,7 +25,9 @@ if (isset($_GET["id"])) {
   // Update Unread Message Link
   $unreadClass = "badge badge-info";
   $unreadCount = $message->countUnreadByUserID($_SESSION["userID"]);
-  if ($unreadCount == 0) $unreadClass = "badge badge-light";  // Update Badge if no unread
+  if ($unreadCount == 0) {  // Update Badge if no unread
+    $unreadClass = "badge badge-light";
+  }
   $msgsUnreadLink = "<a class='{$unreadClass}' href='dashboard.php?p=myMessages'><span data-feather='mail'></span> {$unreadCount}</a>";?>
   <script>
     document.getElementById("msgsUnread").innerHTML = "<?= $msgsUnreadLink ?>";
