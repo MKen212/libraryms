@@ -1,0 +1,2 @@
+# All PHP files to have lf eol
+*.php text eol=lf
