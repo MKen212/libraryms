@@ -2,6 +2,9 @@
 /**
  * DASHBOARD - My Messages
  */
+
+include "../app/models/messageReceivedRowClass.php";
+include "../app/models/messageSentRowClass.php";
 ?>
 
 <!-- My Messages List -->

@@ -3,5 +3,5 @@
  * DASHBOARD/home controller - Home Page
  */
 
-// Display Home View
+// Show Home Page View
 include "../app/views/dashboard/home.php";

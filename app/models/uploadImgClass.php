@@ -1,8 +1,12 @@
-<?php  // Upload Image Class
+<?php
+/**
+ * UploadImg Class - Used to validate and upload image files to the server
+ */
+
 class UploadImg {
   /**
    * initialChecks function - Performs initial checks on temporary uploaded file
-   * @return bool  True if success or False
+   * @return bool|null  True if checks passed or null
    */
   public function initialChecks() {
     try {
@@ -12,7 +16,7 @@ class UploadImg {
         $finfo = new finfo(FILEINFO_MIME_TYPE);
         $fileType = $finfo->file($tmpFile);
         if (strpos($fileType, "image") === false) {  // Not an image file
-          throw new UploadException("11");     
+          throw new UploadException("11");
         } else {
           return true;
         }
@@ -21,7 +25,6 @@ class UploadImg {
       }
     } catch (UploadException $err) {
       $_SESSION["message"] = msgPrep("danger", "Error - UploadImg/initialChecks Failed: {$err->getMessage()}");
-      return false;
     }
   }
 
@@ -29,7 +32,7 @@ class UploadImg {
    * addBookImg function - Add Book Image File to Server
    * @param int    $bookID       Book ID for Image File
    * @param string $imgFilename  Filename for Image File
-   * @return bool                True if success or False
+   * @return bool|null           True/False if image uploaded or null
    */
   public function addBookImg($bookID, $imgFilename) {
     try {
@@ -38,28 +41,33 @@ class UploadImg {
       $targetFile = $targetDir . $imgFilename;
 
       // Create Path if not exists
-      if (!file_exists($targetDir)) mkdir($targetDir, 0750);
-
+      if (!file_exists($targetDir)) {
+        mkdir($targetDir, 0750);
+      }
       // Move Temp File to Upload Path
       if (move_uploaded_file($tmpFile, $targetFile)) {
         // File Upload Success
         $_SESSION["message"] = msgPrep("success", ($_SESSION["message"] . " Image successfully uploaded."));
+        return true;
       } else {
         // File Upload Failure
         $_SESSION["message"] = msgPrep("warning", ($_SESSION["message"] . " Warning: Image upload failed."));
+        return false;
       }
-      return true;
     } catch (Exception $err) {
       $_SESSION["message"] = msgPrep("danger", "Error - UploadImg/addBookImg Failed: {$err->getMessage()}");
-      return false;
     }
   }
 }
 
-// Upload Exception Class
+/**
+ * UploadException Class - Provides relevant Error Message based on provided error code
+ */
+
 class UploadException extends Exception {
   /**
    * Construct function - Create the Exception object
+   * @param int $code  Error Code from Exception
    */
   public function __construct($code) {
     $message = $this->codeToMessage($code);
@@ -104,4 +112,3 @@ class UploadException extends Exception {
     return $message;
   }
 }
-?>

@@ -21,5 +21,5 @@ $_GET = [];
 // Get List of ACTIVE & OUTSTANDING books_issued for BookID
 $booksIssuedByBook = $bookIssued->getListByBook($bookID, 1, true);
 
-// Display Books Issued By Book View
+// Show Books Issued By Book View
 include "../app/views/dashboard/booksIssuedByBook.php";

@@ -3,6 +3,7 @@
  * MessageReceivedRow Class - Used to extend the RecursiveIteratorIterator to display each
  * row of a Message/getListReceived query in table format
  */
+
 class MessageReceivedRow extends RecursiveIteratorIterator {
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);
@@ -29,7 +30,12 @@ class MessageReceivedRow extends RecursiveIteratorIterator {
       $returnValue = date("d/m/Y H:i T", strtotime($parentValue));
     } elseif ($parentKey == "MessageStatus") {
       // For MessageStatus Codes output texts with update hyperlinks
-      $returnValue = statusOutput("MessageStatus", $parentValue, "dashboard.php?p=myMessages&id={$_SESSION["curMessageID"]}&cur={$parentValue}&updMessageStatus");
+      $href = "dashboard.php?p=myMessages&id="
+            . $_SESSION["curMessageID"]
+            . "&cur="
+            . $parentValue
+            . "&updMessageStatus";
+      $returnValue = statusOutput("MessageStatus", $parentValue, $href);
     } else {
       // For all others output original value
       $returnValue = $parentValue;
@@ -43,7 +49,14 @@ class MessageReceivedRow extends RecursiveIteratorIterator {
 
   public function endChildren() {
     // Add Reply Column
-    echo "<td><a class='badge badge-primary' href='dashboard.php?p=messageSend&id=" . $_SESSION["curMessageID"] . "&recID=" . $_SESSION["curSenderID"] . "&sub=" . $_SESSION["curSubject"] . "&reply'>Reply</a></td>";
+    $href = "dashboard.php?p=messageSend&id="
+          . $_SESSION["curMessageID"]
+          . "&recID="
+          . $_SESSION["curSenderID"]
+          . "&sub="
+          . $_SESSION["curSubject"]
+          . "&reply";
+    echo "<td><a class='badge badge-primary' href='{$href}'>Reply</a></td>";
     echo "</tr>";
     unset ($_SESSION["curMessageID"], $_SESSION["curSenderID"], $_SESSION["curSubject"]);
   }

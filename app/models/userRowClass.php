@@ -3,6 +3,7 @@
  * UserRow Class - Used to extend the RecursiveIteratorIterator to display each row
  * of a User/getList query in table format
  */
+
 class UserRow extends RecursiveIteratorIterator {
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);
@@ -20,7 +21,7 @@ class UserRow extends RecursiveIteratorIterator {
       // For Username output value with edit hyperlink
       $href = "dashboard.php?p=userDetails&id="
             . $_SESSION["curUserID"];
-      $returnValue = "<a href={$href}>{$parentValue}</a>";
+      $returnValue = "<a href='{$href}'>{$parentValue}</a>";
     } elseif ($parentKey == "IsAdmin") {
       // For IsAdmin output with value update hyperlink
       $href = "dashboard.php?p=usersList&id="

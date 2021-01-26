@@ -3,6 +3,7 @@
  * BookCard Class - Used to extend the RecursiveIteratorIterator to display each row
  * of a Book/getDisplay query in a card format
  */
+
 class BookCard extends RecursiveIteratorIterator {
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);
@@ -17,18 +18,35 @@ class BookCard extends RecursiveIteratorIterator {
       $_SESSION["curBookID"] = $parentValue;
       return;
     } elseif ($parentKey == "ImgFilename") {
-      $returnValue = "<img class='img-thumbnail float-left mt-3 mb-3 mr-3' style='width:140px; height:220px;' src='" . getFilePath($_SESSION["curBookID"], $parentValue) . "' alt='{$parentValue}' /><div class='mt-3'>";
+      // For ImgFilename output image
+      $srcFile = getFilePath($_SESSION["curBookID"], $parentValue);
+      $returnValue = "<img class='img-thumbnail float-left mt-3 mb-3 mr-3' "
+                   . "style='width:140px; height:220px;' src='"
+                   . $srcFile
+                   . "' alt='"
+                   . $parentValue
+                   . "' /><div class='mt-3'>";
     } elseif ($parentKey == "Price") {
-      $returnValue = "<b>Price (" . DEFAULTS["currency"] . "): </b>{$parentValue}<br />";
+      // For Price output Price (Currency): & value
+      $returnValue = "<b>Price (" . DEFAULTS["currency"] . "): </b>"
+                   . $parentValue
+                   . "<br />";
     } elseif ($parentKey == "QtyTotal") {
+      // ForQtyTotal output Total Qty: & value
       $returnValue = "<b>Total Qty: </b>{$parentValue} - ";
     } elseif ($parentKey == "QtyAvail") {
+      // ForQtyAvail output Available: & value
       $parentValue <= 0 ? $returnClass = "text-danger" : $returnClass = "text-success";
-      $returnValue = "<b>Available: <span class='{$returnClass}'>{$parentValue}</span></b><br /></div>";
+      $returnValue = "<b>Available: <span class='"
+                   . $returnClass
+                   . "'>"
+                   . $parentValue
+                   . "</span></b><br /></div>";
     } elseif ($parentKey == "RecordStatus") {
       // For RecordStatus skip output
       return;
     } else {
+      // For all others output original key: value
       $returnValue = "<b>{$parentKey}: </b>{$parentValue}<br />";
     }
     return $returnValue;
@@ -49,16 +67,20 @@ class BookCard extends RecursiveIteratorIterator {
 
   public function endChildren() {
     // Add Hyperlink to Show Books Issued for book
-    echo "<a class='badge badge-info' href='dashboard.php?p=booksIssuedByBook&id={$_SESSION["curBookID"]}'>Show Currently Issued</a>";
+    $href = "dashboard.php?p=booksIssuedByBook&id="
+          . $_SESSION["curBookID"];
+    echo "<a class='badge badge-info' href='{$href}'>Show Currently Issued</a>";
     echo "</div>";  // Close Col div
     unset ($_SESSION["curBookID"]);
+    // If 3 Cols reached close row div & reset Column Count
     if ($_SESSION["curColumn"] == 3) {
-      echo "</div>";  // If 3 Cols reached close row div & reset count
+      echo "</div>";
       $_SESSION["curColumn"] = 0;
     }
   }
   public function endIteration() {
-    if ($_SESSION["curColumn"] > 0) {  // If in middle of a row then pad blank columns
+    // If in middle of a row then pad blank columns
+    if ($_SESSION["curColumn"] > 0) {
       for ($count = $_SESSION["curColumn"]; $count < 3; $count += 1) {
         echo "<div class='col-4'></div>"; // Add Blank Columns
       }

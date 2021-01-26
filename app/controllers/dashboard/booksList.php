@@ -30,5 +30,5 @@ $_POST = [];
 // Get List of books
 $bookList = $book->getList($title);
 
-// Display Books List View
+// Show Books List View
 include "../app/views/dashboard/booksList.php";

@@ -42,9 +42,11 @@ if (isset($_POST["updateBook"])) {
     // Update Database Entry
     $updateBook = $book->updateRecord($bookID, $title, $author, $publisher, $ISBN, $price, $qtyTotal, $qtyAvail, $imgFilename);
 
-    if ($updateBook == true) {  // Database Update Success
+    // Process File Upload if book record updated & new image included
+    if ($updateBook == true) {
       $_POST = [];
-      if ($_FILES["imgFilename"]["error"] == 0) {  // Image File included - Create dir & upload
+      if ($_FILES["imgFilename"]["error"] == 0) {  // Image File included
+        // Create dir & upload
         $newUpload = $uploadImg->addBookImg($bookID, $imgFilename);
       } else {  // No Image File Included
         $updatedMessage = $_SESSION["message"] . " No Image to upload.";

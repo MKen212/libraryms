@@ -1,4 +1,7 @@
-<?php  // Global Helper Functions
+<?php
+/**
+ * Global Helper Functions
+ */
 
 /**
  * cleanInput function - Used to clean all manual data entry
@@ -11,7 +14,7 @@ function cleanInput($input, $type) {
   $output = htmlspecialchars($input);
   if ($type == "string") {
     $output = trim($output);
-    $output = str_replace("\n", " ",$output);  // For CRLF replace with space as messages shown as single lines
+    $output = str_replace("\n", " ",$output);  // For LF replace with space as messages shown as single lines
     $output = stripslashes($output);
     $output = filter_var($output, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_LOW);
   } elseif ($type == "int") {
@@ -85,7 +88,7 @@ function postValue($key, $default = null) {
  * @param int $bookID          Book ID for image
  * @param string $imgFilename  Product Image Filename
  * @return string $filePath    Full filepath to specified image
- * 
+ *
  */
 function getFilePath($bookID, $imgFilename) {
   if (empty($imgFilename)) {
@@ -157,4 +160,3 @@ function bookOptions($selID = null) {
   }
   return true;
 }
-?>

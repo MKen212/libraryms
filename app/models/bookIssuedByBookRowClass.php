@@ -3,6 +3,7 @@
  * BookIssuedByBookRow Class - Used to extend the RecursiveIteratorIterator to display
  * each row of a BookIssued/getListByBook query in table format
  */
+
 class BookIssuedByBookRow extends RecursiveIteratorIterator {
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);
@@ -36,7 +37,10 @@ class BookIssuedByBookRow extends RecursiveIteratorIterator {
   }
 
   public function endIteration() {
-    echo "<tr class='table-info'><td colspan='3'><b>Total currently issued: {$_SESSION["countIssued"]}</b></td></tr>";
+    // Add final summary row of total currently issued
+    echo "<tr class='table-info'><td colspan='3'>"
+       . "<b>Total currently issued: {$_SESSION["countIssued"]}</b>"
+       . "</td></tr>";
     unset($_SESSION["countIssued"]);
   }
 }

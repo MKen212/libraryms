@@ -1,5 +1,9 @@
-<?php  // INDEX - Logout User
-include_once "../app/models/userClass.php";
+<?php
+/**
+ * INDEX/logout controller - Logout User
+ */
+
+require_once "../app/models/userClass.php";
 $user = new User();
 
 // Logout User if logout hyperlink clicked
@@ -14,4 +18,3 @@ include "../app/views/index/logout.php";
 // Clear Session
 session_unset();
 session_destroy();
-?>

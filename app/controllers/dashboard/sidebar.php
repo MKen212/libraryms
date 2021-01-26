@@ -9,7 +9,8 @@ $message = new Message();
 // Get count of Unread Messages
 $unreadClass = "badge badge-info";
 $unreadCount = $message->countUnreadByUserID($_SESSION["userID"]);
-if ($unreadCount == 0) {  // Update Badge if no unread
+// Update Badge if no unread
+if ($unreadCount == 0) {
   $unreadClass = "badge badge-light";
 }
 

@@ -1,7 +1,11 @@
-<?php  // INDEX - Register New User
-include_once "../app/models/userClass.php";
+<?php
+/**
+ * INDEX/register controller - Register New User
+ */
+
+require_once "../app/models/userClass.php";
 $user = new User();
-include_once "../app/models/messageClass.php";
+require_once "../app/models/messageClass.php";
 $message = new Message();
 
 // Register New User if ReigisterForm POSTed
@@ -17,11 +21,11 @@ if (isset($_POST["register"])) {
   $newUserID = $user->register($username, $password, $firstName, $lastName, $email, $contactNo);
   unset($password, $_POST["password"]);
 
-  if ($newUserID) {  // Database Entry Success
+  // Send AdminUser message if new user created
+  if ($newUserID) {
     $_POST = [];
-    // Send User Admin message
     $notify = $message->add($newUserID, DEFAULTS["userAdminUserID"], "New User", "Please process my New User registration.");
-  } 
+  }
 }
 
 // Initialise Registration Form
@@ -35,4 +39,3 @@ $newUserRecord = [
 
 // Show Register View/Form
 include "../app/views/index/registerForm.php";
-?>

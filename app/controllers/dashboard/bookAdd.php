@@ -32,9 +32,11 @@ if (isset($_POST["addBook"])) {
     // Create Database Entry
     $newBookID = $book->add($title, $author, $publisher, $ISBN, $price, $quantity, $imgFilename);
 
-    if ($newBookID) {  // Book Add Database Entry Success
+    // Process File Upload if new book record created & image included
+    if ($newBookID) {
       $_POST = [];
-      if ($_FILES["imgFilename"]["error"] == 0) {  // Image File included - Create dir & upload
+      if ($_FILES["imgFilename"]["error"] == 0) {  // Image File included
+        // Create dir & upload
         $newUpload = $uploadImg->addBookImg($newBookID, $imgFilename);
       } else {  // No Image File Included
         $updatedMessage = $_SESSION["message"] . " No Image to upload.";

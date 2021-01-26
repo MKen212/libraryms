@@ -10,5 +10,5 @@ $bookIssued = new BookIssued();
 $userID = $_SESSION["userID"];
 $booksIssuedToMe = $bookIssued->getListByUser($userID, 1, false);
 
-// Display My Issued Books View
+// Show My Issued Books View
 include "../app/views/dashboard/myIssuedBooks.php";

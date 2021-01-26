@@ -11,7 +11,7 @@ define("DBSERVER", $connDetails);
 
 /* Default Values */
 $defaultValues = [
-  "testing" => false,  // Flag to set whether to show test information
+  "testing" => true,  // Flag to set whether to show test information
   "maxUploadSize" => 200000,  // Maximum PHP upload file size in bytes - see phpInfo
   "booksImgPath" => "uploads/imgBooks/",  // Path to books images
   "noImgUploaded" => "images/noImage.jpg" ,  // Default Image if no image file uploaded

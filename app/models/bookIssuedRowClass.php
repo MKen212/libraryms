@@ -3,6 +3,7 @@
  * BookIssuedRow Class - Used to extend the RecursiveIteratorIterator to display each
  * row of a BookIssued/getList query in table format
  */
+
 class BookIssuedRow extends RecursiveIteratorIterator {
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);
@@ -27,15 +28,26 @@ class BookIssuedRow extends RecursiveIteratorIterator {
       // For Non-Empty Date Fields modify date format
       $returnValue = date("d/m/Y", strtotime($parentValue));
     } elseif ($parentKey == "ReturnActualDate") {
+      // For ReturnActualDate, if NULL provide Return hyperlink, or return ReturnDate
       if (empty($parentValue)){
-        // For ReturnActualDate (which is Null) provide return hyperlink
-        $returnValue = "<a class='badge badge-primary' href='dashboard.php?p=booksIssuedList&id=" . $_SESSION["curIssuedID"] . "&bookID=" . $_SESSION["curBookID"] . "&updReturn'>Return</a>";
+        $href = "dashboard.php?p=booksIssuedList&id="
+              . $_SESSION["curIssuedID"]
+              . "&bookID="
+              . $_SESSION["curBookID"]
+              . "&updReturn";
+        $returnValue = "<a class='badge badge-primary' href='{$href}'>Return</a>";
         $_SESSION["countOutstanding"] += 1;
       } else {
         $returnValue = date("d/m/Y", strtotime($parentValue));
       }
     } elseif ($parentKey == "RecordStatus") {
-      $returnValue = statusOutput("RecordStatus", $parentValue, "dashboard.php?p=booksIssuedList&id={$_SESSION["curIssuedID"]}&cur={$parentValue}&updRecordStatus");
+      // For RecordStatus output value with update hyperlink
+      $href = "dashboard.php?p=booksIssuedList&id="
+            . $_SESSION["curIssuedID"]
+            . "&cur="
+            . $parentValue
+            . "&updRecordStatus";
+      $returnValue = statusOutput("RecordStatus", $parentValue, $href);
     } else {
       // For all others output original value
       $returnValue = $parentValue;
@@ -59,7 +71,11 @@ class BookIssuedRow extends RecursiveIteratorIterator {
   }
 
   public function endIteration() {
-    echo "<tr class='table-info'><td colspan='6'><b>Total issued: {$_SESSION["countIssued"]} / Outstanding: {$_SESSION["countOutstanding"]}</b></td></tr>";
+    // Add final summary row of total currently issued & total outstanding
+    echo "<tr class='table-info'><td colspan='6'>"
+       . "<b>Total issued: {$_SESSION["countIssued"]} "
+       . "/ Outstanding: {$_SESSION["countOutstanding"]}</b>"
+       . "</td></tr>";
     unset($_SESSION["countIssued"], $_SESSION["countOutstanding"]);
   }
 }

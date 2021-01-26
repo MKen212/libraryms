@@ -3,6 +3,7 @@
  * MessageSentRow Class - Used to extend the RecursiveIteratorIterator to display each
  * row of a Message/getListSent query in table format
  */
+
 class MessageSentRow extends RecursiveIteratorIterator {
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);
@@ -24,7 +25,12 @@ class MessageSentRow extends RecursiveIteratorIterator {
       $returnValue = statusOutput("MessageStatus", $parentValue, null);
     } elseif ($parentKey == "RecordStatus") {
       // For RecordStatus Codes output texts with update hyperlinks
-      $returnValue = statusOutput("RecordStatus", $parentValue, "dashboard.php?p=myMessages&id={$_SESSION["curMessageID"]}&cur={$parentValue}&updRecordStatus");
+      $href = "dashboard.php?p=myMessages&id="
+            . $_SESSION["curMessageID"]
+            . "&cur="
+            . $parentValue
+            . "&updRecordStatus";
+      $returnValue = statusOutput("RecordStatus", $parentValue, $href);
     } else {
       // For all others output original value
       $returnValue = $parentValue;

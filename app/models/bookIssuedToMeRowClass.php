@@ -3,6 +3,7 @@
  * BookIssuedToMeRow Class - Used to extend the RecursiveIteratorIterator to display
  * each row of a BookIssued/getListByUser query in table format
  */
+
 class BookIssuedToMeRow extends RecursiveIteratorIterator {
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);
@@ -16,6 +17,7 @@ class BookIssuedToMeRow extends RecursiveIteratorIterator {
       // For Non-Empty Date Fields modify date format
       $returnValue = date("d/m/Y", strtotime($parentValue));
     } elseif ($parentKey == "ReturnActualDate") {
+      // For ReturnActualDate, if NULL return NULL, or return ReturnDate
       if (empty($parentValue)){
         $returnValue = $parentValue;
         $_SESSION["countOutstanding"] += 1;
@@ -23,7 +25,7 @@ class BookIssuedToMeRow extends RecursiveIteratorIterator {
         $returnValue = date("d/m/Y", strtotime($parentValue));
       }
     } elseif ($parentKey == "RecordStatus") {
-      //Skip RecordStatus
+      // For RecordStatus skip output
       return;
     } else {
       // For all others output original value
@@ -47,7 +49,11 @@ class BookIssuedToMeRow extends RecursiveIteratorIterator {
   }
 
   public function endIteration() {
-    echo "<tr class='table-info'><td colspan='5'><b>Total issued to me: {$_SESSION["countIssued"]} / Outstanding: {$_SESSION["countOutstanding"]}</b></td></tr>";
+    // Add final summary row of total currently issued & total outstanding
+    echo "<tr class='table-info'><td colspan='5'>"
+        . "<b>Total issued to me: {$_SESSION["countIssued"]} "
+        . "/ Outstanding: {$_SESSION["countOutstanding"]}</b>"
+        . "</td></tr>";
     unset($_SESSION["countIssued"], $_SESSION["countOutstanding"]);
   }
 }

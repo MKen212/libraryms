@@ -25,7 +25,8 @@ if (isset($_GET["id"])) {
   // Update Unread Message Link
   $unreadClass = "badge badge-info";
   $unreadCount = $message->countUnreadByUserID($_SESSION["userID"]);
-  if ($unreadCount == 0) {  // Update Badge if no unread
+  // Update Badge if no unread
+  if ($unreadCount == 0) {
     $unreadClass = "badge badge-light";
   }
   $msgsUnreadLink = "<a class='{$unreadClass}' href='dashboard.php?p=myMessages'><span data-feather='mail'></span> {$unreadCount}</a>";?>
@@ -42,5 +43,5 @@ $receivedMessageList = $message->getListReceived($userID, 1);
 // Get List of ALL SENT messages for current user
 $sentMessageList = $message->getListSent($userID, null);
 
-// Display My Messages View
+// Show My Messages View
 include "../app/views/dashboard/myMessages.php";

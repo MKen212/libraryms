@@ -3,6 +3,7 @@
  * BookRow Class - Used to extend the RecursiveIteratorIterator to display each row
  * of a Book/getList query in table format
  */
+
 class BookRow extends RecursiveIteratorIterator {
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);
@@ -18,13 +19,20 @@ class BookRow extends RecursiveIteratorIterator {
       return;
     } elseif ($parentKey == "Title") {
       // For Title output edit hyperlink
-      $returnValue = "<a href='dashboard.php?p=bookDetails&id={$_SESSION["curBookID"]}'>{$parentValue}</a>";
+      $href = "dashboard.php?p=bookDetails&id="
+            . $_SESSION["curBookID"];
+      $returnValue = "<a href='{$href}'>{$parentValue}</a>";
     } elseif ($parentKey == "AddedTimestamp") {
       // For Date/Time Fields modify date format
       $returnValue = date("d/m/Y", strtotime($parentValue));
     } elseif ($parentKey == "RecordStatus") {
-      // For Status Codes output texts with update hyperlinks
-      $returnValue = statusOutput("RecordStatus", $parentValue,"dashboard.php?p=booksList&id={$_SESSION["curBookID"]}&cur={$parentValue}&updRecordStatus");
+      // For RecordStatus output value with update hyperlink
+      $href = "dashboard.php?p=booksList&id="
+            . $_SESSION["curBookID"]
+            . "&cur="
+            . $parentValue
+            . "&updRecordStatus";
+      $returnValue = statusOutput("RecordStatus", $parentValue, $href);
     } else {
       // For all others output original value
       $returnValue = $parentValue;
