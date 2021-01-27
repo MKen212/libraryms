@@ -1,4 +1,10 @@
-<!-- INDEX - Login Form -->
+<?php
+/**
+ * INDEX/loginForm view - User login form
+ */
+
+?>
+<!-- Login Form -->
 <div class="row">
   <form class="form-user" action="" method="post" name="loginForm">
     <h3 class="mb-3">Please sign in</h3>
@@ -23,6 +29,7 @@
     <a href="index.php?p=register">Create new account</a>
   </form>
 </div>
+
 <!-- System Messages -->
 <div class="row justify-content-center"><?php
   msgShow(); ?>

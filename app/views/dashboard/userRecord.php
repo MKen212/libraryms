@@ -1,4 +1,10 @@
-<!-- DASHBOARD - Selected User Record Details -->
+<?php
+/**
+ * DASHBOARD/userRecord view - Table to display selected users record
+ */
+
+?>
+<!-- Selected users record details -->
 <div class="table-responsive">
   <table class="table table-striped table-sm">
     <thead>

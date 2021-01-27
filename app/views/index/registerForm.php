@@ -1,4 +1,10 @@
-<!-- INDEX - Register Form -->
+<?php
+/**
+ * INDEX/registerForm view - User registration form
+ */
+
+?>
+<!-- Registration Form -->
 <div class="row justify-content-center">
   <form class="form-user" action="" method="post" name="registerForm" autocomplete="off">
     <h3 class="mb-3">User Registration Form</h3>
@@ -30,7 +36,7 @@
       </div>
       <input class="form-control" type="text" name="lastName" maxlength="40" placeholder="Enter Last Name" value="<?= $newUserRecord["LastName"] ?>" />
     </div>
-    <!-- Email -->
+    <!-- Email Address -->
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text form-labels">Email:</span>
@@ -52,7 +58,8 @@
     <br />
   </form>
 </div>
+
 <!-- System Messages -->
-<div class="row justify-content-center"><?php 
+<div class="row justify-content-center"><?php
   msgShow(); ?>
 </div>

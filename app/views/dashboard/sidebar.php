@@ -1,8 +1,14 @@
-<!-- DASHBOARD - Sidebar Menu -->
+<?php
+/**
+ * DASHBOARD/sidebar view - Sidebar Menu
+ */
+
+?>
+<!-- Sidebar Menu -->
 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
   <div class="sidebar-sticky">
     <ul class="nav flex-column">
-      <!-- Welcome -->
+      <!-- Welcome, Unread Message count & Link to My Messages -->
       <li class="nav-brand">
         <h6 class="ml-2">Welcome, <?= $_SESSION["username"] ?><span style="margin-left:10px" id="msgsUnread"><?= $msgsUnreadLink ?></span></h6>
         <hr>
@@ -30,7 +36,7 @@
         <hr />
       </li>
     </ul><?php
-    // Only Display Admin Section if userIsAdmin
+    // Only display Admin section if user is Admin
     if ($_SESSION["userIsAdmin"] == 1) : ?>
       <!-- Admin Section -->
       <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">Admin Section</h6>
@@ -40,10 +46,10 @@
           <a class="nav-link<?= ($page == "bookIssue") ? " active" : ""; ?>" href="dashboard.php?p=bookIssue"><span data-feather="arrow-up-circle"></span>
           Issue Book</a>
         </li>
-        <!-- Return Book -->
+        <!-- List/Return Issued Books -->
         <li class="nav-item">
           <a class="nav-link<?= ($page == "booksIssuedList") ? " active" : ""; ?>" href="dashboard.php?p=booksIssuedList"><span data-feather="arrow-down-circle"></span>
-          List/Return Issued Books</a>  
+          List/Return Issued Books</a>
         </li>
         <!-- Add Book -->
         <li class="nav-item">

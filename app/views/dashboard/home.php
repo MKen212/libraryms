@@ -1,4 +1,10 @@
-<!-- DASHBOARD - Home -->
+<?php
+/**
+ * DASHBOARD/home view - Home page
+ */
+
+?>
+<!-- Home - Header -->
 <div class="pt-3 pb-2 mb-3 border-bottom">
   <div class="row">
     <!-- Title -->
@@ -56,4 +62,4 @@ if ($_SESSION["userIsAdmin"] == "1") :   ?>
       <li>List and Edit all Users currently registered in the Library</li>
     </ul>
   </div><?php
-endif; ?>
+endif;

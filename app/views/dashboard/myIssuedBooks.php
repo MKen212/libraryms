@@ -1,12 +1,13 @@
 <?php
 /**
- * DASHBOARD - My Issued Books
+ * DASHBOARD/myIssuedBooks view - List of books_issued records for specific
+ * user
  */
 
-include "../app/models/bookIssuedToMeRowClass.php";
-?>
+include_once "../app/models/bookIssuedToMeRowClass.php";
 
-<!-- My Issued Books List -->
+?>
+<!-- My Issued Books - Header -->
 <div class="pt-3 pb-2 mb-3 border-bottom">
   <div class="row">
     <!-- Title -->
@@ -20,7 +21,7 @@ include "../app/models/bookIssuedToMeRowClass.php";
   </div>
 </div>
 
-<!-- Books Issued To Me Table-->
+<!-- My Issued Books - Table-->
 <div class="table-responsive">
   <table class="table table-striped table-sm">
     <thead>
@@ -32,12 +33,12 @@ include "../app/models/bookIssuedToMeRowClass.php";
       </tr>
     </thead>
     <tbody><?php
-      if (empty($booksIssuedToMe)) :  // No books_issued to me records Found ?>
+      if (empty($booksIssuedToMe)) :  // No books_issued records found ?>
         <tr>
           <td colspan="5">No Issued Books to Display</td>
         </tr><?php
       else :
-        // Loop through the books_issued to me and output the values
+        // Loop through the books_issued records and output the values
         foreach (new BookIssuedToMeRow(new RecursiveArrayIterator($booksIssuedToMe)) as $value) :
           echo $value;
         endforeach;

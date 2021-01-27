@@ -1,4 +1,10 @@
-<!-- DASHBOARD - Book Issue Form -->
+<?php
+/**
+ * DASHBOARD/bookIssueForm view - Form for adding a books_issued record
+ */
+
+?>
+<!-- Book Issue Form - Header -->
 <div class="pt-3 pb-2 mb-3 border-bottom">
   <div class="row">
     <!-- Title -->
@@ -12,11 +18,12 @@
   </div>
 </div>
 
+<!-- Book Issue Form -->
 <form class="ml-3" action="" method="post" name="bookIssueForm">
   <!-- Select User -->
   <div class="form-group row">
-    <label class="col-form-label labFixed" for="userSelect">Select User:</label>
-    <div class="input-group inpFixed">
+    <label class="col-form-label lab-fixed" for="userSelect">Select User:</label>
+    <div class="input-group inp-fixed">
       <select class="form-control" id="userSelect" name="userIDSelected">
         <!-- List all UserID: UserNames --><?php
         userOptions($booksIssuedRecord["UserID"]); ?>
@@ -33,10 +40,10 @@
     </div>
     <!-- Select Book -->
     <div class="form-group row">
-      <label class="col-form-label labFixed" for="bookSelect">Select Book:</label>
-      <div class="input-group inpFixed">
+      <label class="col-form-label lab-fixed" for="bookSelect">Select Book:</label>
+      <div class="input-group inp-fixed">
         <select class="form-control" id="bookSelect" name="bookIDSelected">
-          <!-- List all UserID: UserNames --><?php
+          <!-- List all BookID: Titles --><?php
           bookOptions($booksIssuedRecord["BookID"]); ?>
         </select>
         <div class="input-group-append">
@@ -50,14 +57,17 @@
     <div class="form-group row pr-3"><?php
       include "../app/views/dashboard/bookRecord.php"; ?>
     </div>
-    <!-- Issued Date / Returned Due Date / Submit -->
+    <!-- Update Dates and Submit -->
     <div class="form-group row">
       <div class="input-group">
+        <!-- Issued Date -->
         <label class="col-form-label mr-3" for="issuedDate">Issued Date:</label>
         <input class="form-control mr-5" type="date" name="issuedDate" id="issuedDate" min="<?= $booksIssuedRecord["EarliestIssueDate"] ?>" value="<?= $booksIssuedRecord["IssuedDate"] ?>" required />
+        <!-- Return Due Date -->
         <label class="col-form-label mr-3" for="returnDate">Return Due Date:</label>
         <input class="form-control mr-5" type="date" name="returnDueDate" id="returnDate" min="<?= $booksIssuedRecord["EarliestReturnDate"] ?>" value="<?= $booksIssuedRecord["ReturnDueDate"] ?>" required />
-        <button class="btn btn-primary mr-3" type="submit" name="issueBook" id = "issueBook">Issue Book</button>
+        <!-- Submit Button -->
+        <button class="btn btn-primary mr-3" type="submit" name="issueBook" id="issueBook">Issue Book</button>
       </div>
     </div><?php
   endif; ?>

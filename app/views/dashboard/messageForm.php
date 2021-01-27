@@ -1,4 +1,10 @@
-<!-- DASHBOARD - Message Form -->
+<?php
+/**
+ * DASHBOARD/messageForm view - Form for sending a message
+ */
+
+?>
+<!-- Message Form - Header -->
 <div class="pt-3 pb-2 mb-3 border-bottom">
   <div class="row">
     <!-- Title -->
@@ -11,13 +17,13 @@
     </div>
   </div>
 </div>
-<div>
 
+<!-- Message Form -->
 <form class="ml-3" action="" method="post" name="messageForm" autocomplete="off">
   <!-- Select Recipient -->
   <div class="form-group row">
-    <label class="col-form-label labFixed" for="recipientSelect">Select Recipient:</label>
-    <div class="input-group inpFixed">
+    <label class="col-form-label lab-fixed" for="recipientSelect">Select Recipient:</label>
+    <div class="input-group inp-fixed">
       <select class="form-control" id="recipientSelect" name="userIDSelected">
         <!-- List all UserID: UserNames --><?php
         userOptions($messageRecord["ReceiverID"]); ?>
@@ -34,24 +40,24 @@
     </div>
     <!-- Subject -->
     <div class="form-group row pr-3">
-      <label class="col-form-label labFixed" for="subject">Subject:</label>
-      <div class="inpFixed">
+      <label class="col-form-label lab-fixed" for="subject">Subject:</label>
+      <div class="inp-fixed">
         <input class="form-control" type="text" name="subject" id="subject" maxlength="40" placeholder="Enter Subject" value="<?= $messageRecord["Subject"] ?>" required />
       </div>
     </div>
     <!-- Body -->
     <div class="form-group row pr-3">
-      <label class="col-form-label labFixed" for="body">Message:</label>
-      <div class="inpFixed">
+      <label class="col-form-label lab-fixed" for="body">Message:</label>
+      <div class="inp-fixed">
         <textarea class="form-control" name="body" id="body" rows="5" placeholder="Enter Message" maxlength="500" required><?= $messageRecord["Body"] ?></textarea>
       </div>
     </div>
     <!-- Submit Button -->
     <div class="form-group row pt-3 mr-2 border-top">
-      <div class="col-form-label labFixed">
-        <button class="btn btn-primary" type="submit" name="sendMessage" id = "sendMessage">Send Message</button>
+      <div class="col-form-label lab-fixed">
+        <button class="btn btn-primary" type="submit" name="sendMessage" id="sendMessage">Send Message</button>
       </div>
-      <div class="inpFixed"></div>
+      <div class="inp-fixed"></div>
     </div><?php
   endif; ?>
 </form>

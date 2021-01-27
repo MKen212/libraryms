@@ -1,12 +1,12 @@
 <?php
 /**
- * DASHBOARD - Books List
+ * DASHBOARD/booksList view - List of books records
  */
 
-include "../app/models/bookRowClass.php";
-?>
+include_once "../app/models/bookRowClass.php";
 
-<!-- Books List -->
+?>
+<!-- Books List - Header -->
 <div class="pt-3 pb-2 mb-3 border-bottom">
   <div class="row">
     <!-- Title -->
@@ -21,7 +21,7 @@ include "../app/models/bookRowClass.php";
 </div>
 
 <div class="row">
-  <!-- Books Table Search -->
+  <!-- Books - Search -->
   <div class="col-4 mb-3">
     <form action="" method="post" name="schBooks" autocomplete="off">
       <div class="input-group">
@@ -35,7 +35,7 @@ include "../app/models/bookRowClass.php";
   <div class="col-8"></div>
 </div>
 
-<!-- Books Table List -->
+<!-- Books List -->
 <div class="table-responsive">
   <table class="table table-striped table-sm">
     <thead>
@@ -51,12 +51,12 @@ include "../app/models/bookRowClass.php";
       </tr>
     </thead>
     <tbody><?php
-      if (empty($bookList)) :  // No Book Records Found ?>
+      if (empty($bookList)) :  // No books records found ?>
         <tr>
           <td colspan="10">No Books to Display</td>
         </tr><?php
-      else : 
-        // Loop through the Books and output the values
+      else :
+        // Loop through the books records and output the values
         foreach (new BookRow(new RecursiveArrayIterator($bookList)) as $value) :
           echo $value;
         endforeach;

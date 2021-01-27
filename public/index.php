@@ -1,7 +1,12 @@
 <?php
+/**
+ * INDEX - Main HTML frame facilitating user registration, login and logout
+ */
+
 session_start();
-require "../app/helpers/helperFunctions.php";
-require "../app/config/_config.php";
+
+require_once "../app/helpers/helperFunctions.php";
+require_once "../app/config/_config.php";
 
 // Get Page Details
 $page = "login";
@@ -37,8 +42,11 @@ if (!in_array($page, VALID_PAGES["index"])) {
     <!-- Header -->
     <div class="row justify-content-center">
       <h1>Library Management System</h1>
-    </div>
-    <?php include "../app/controllers/index/{$page}.php"; ?>
+    </div><?php
+
+    // Display selected page
+    include "../app/controllers/index/{$page}.php"; ?>
+
   </div>
 </body>
 </html>

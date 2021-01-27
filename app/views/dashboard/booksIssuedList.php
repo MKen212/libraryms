@@ -1,12 +1,13 @@
 <?php
 /**
- * DASHBOARD - Books Issued List with Return Option
+ * DASHBOARD/booksIssuedList view - List of books_issued records with Return
+ * option
  */
 
-include "../app/models/bookIssuedRowClass.php";
-?>
+include_once "../app/models/bookIssuedRowClass.php";
 
-<!-- Books Issued List -->
+?>
+<!-- Books Issued List - Header -->
 <div class="pt-3 pb-2 mb-3 border-bottom">
   <div class="row">
     <!-- Title -->
@@ -21,7 +22,7 @@ include "../app/models/bookIssuedRowClass.php";
 </div>
 
 <div class="row">
-  <!-- Books Issued Search -->
+  <!-- Books Issued - Search -->
   <div class="col-4 mb-3">
     <form action="" method="post" name="schBooksIssued" autocomplete="off">
       <div class="input-group">
@@ -35,7 +36,7 @@ include "../app/models/bookIssuedRowClass.php";
   <div class="col-8"></div>
 </div>
 
-<!-- Issued Books Table -->
+<!-- Books Issued List -->
 <div class="table-responsive">
   <table class="table table-striped table-sm">
     <thead>
@@ -49,7 +50,7 @@ include "../app/models/bookIssuedRowClass.php";
       </tr>
     </thead>
     <tbody><?php
-      if (empty($booksIssuedList)) :  // No books_issued records Found ?>
+      if (empty($booksIssuedList)) :  // No books_issued records found ?>
         <tr>
           <td colspan="6">No Issued Books to Display</td>
         </tr><?php

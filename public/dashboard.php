@@ -1,6 +1,11 @@
 <?php
+/**
+ * DASHBOARD - Main HTML frame facilitating all dashboard functionality
+ */
+
 session_start();
-require "../app/helpers/helperFunctions.php";
+
+require_once "../app/helpers/helperFunctions.php";
 
 // Reject User that is not logged in
 if (!isset($_SESSION["userLogin"])) {
@@ -11,7 +16,7 @@ if (!isset($_SESSION["userLogin"])) {
   exit();
 }
 
-require "../app/config/_config.php";
+require_once "../app/config/_config.php";
 
 // Get Page Details
 $page = "home";
@@ -30,6 +35,7 @@ if ($_SESSION["userIsAdmin"] == 0 && in_array($page, VALID_PAGES["dashboard_admi
   $_SESSION["message"] = msgPrep("warning", "Sorry - You need Admin Privileges to view the '{$page}' page.");
   $page = "home";
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,20 +59,27 @@ if ($_SESSION["userIsAdmin"] == 0 && in_array($page, VALID_PAGES["dashboard_admi
   <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input@1.3.4/dist/bs-custom-file-input.min.js" integrity="sha256-e0DUqNhsFAzOlhrWXnMOQwRoqrCRlofpWgyhnrIIaPo=" crossorigin="anonymous"></script>
 </head>
 
-<body>
-  <!-- Top -->
-  <?php include "../app/controllers/dashboard/navbar.php"; ?>
+<body><?php
+  // Navbar
+  include "../app/controllers/dashboard/navbar.php"; ?>
+
+  <!-- Dashboard -->
   <div class=container-fluid>
-    <div class="row">
-      <!-- Side -->
-      <?php include "../app/controllers/dashboard/sidebar.php"; ?>
-      <!-- Main -->
-      <main class="col-md-9 ml-sm-auto col-lg-10 px-4">
-        <?php include "../app/controllers/dashboard/{$page}.php"; ?>
+    <div class="row"><?php
+
+      // Sidebar
+      include "../app/controllers/dashboard/sidebar.php"; ?>
+      
+      <!-- Selected page -->
+      <main class="col-md-9 ml-sm-auto col-lg-10 px-4"><?php
+
+        // Display selected page
+        include "../app/controllers/dashboard/{$page}.php"; ?>
+
       </main>
     </div>
   </div>
-  
+
   <!--Update Feather Icons & Initialise Bootstrap CustomFileInput -->
   <script>
     feather.replace();

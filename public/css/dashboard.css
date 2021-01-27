@@ -106,18 +106,18 @@
 }
 
 /*
- * Input form
+ * Input forms fixed widths for alignment
  */
 
- .labFixed {
-   width: 170px;
- }
+.lab-fixed {
+  width: 170px;
+}
 
- .inpFixed {
-   width: 350px;
- }
+.inp-fixed {
+  width: 350px;
+}
 
- /* Fix Bootstrap Alert Bottom Margin */
- .alert {
-   margin-bottom: 0;
- }
+/* Fix Bootstrap Alert Bottom Margin */
+.alert {
+  margin-bottom: 0;
+}

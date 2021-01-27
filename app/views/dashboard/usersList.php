@@ -1,12 +1,12 @@
 <?php
 /**
- * DASHBOARD - Users List
+ * DASHBOARD/usersList view - List of users records
  */
 
-include "../app/models/userRowClass.php";
-?>
+include_once "../app/models/userRowClass.php";
 
-<!-- Users List -->
+?>
+<!-- Users List - Header -->
 <div class="pt-3 pb-2 mb-3 border-bottom">
   <div class="row">
     <!-- Title -->
@@ -21,7 +21,7 @@ include "../app/models/userRowClass.php";
 </div>
 
 <div class="row">
-  <!-- Users Table Search -->
+  <!-- Users - Search -->
   <div class="col-4 mb-3">
     <form action="" method="post" name="schUsers" autocomplete="off">
       <div class="input-group">
@@ -35,7 +35,7 @@ include "../app/models/userRowClass.php";
   <div class="col-8"></div>
 </div>
 
-<!-- Users Table List -->
+<!-- Users List -->
 <div class="table-responsive">
   <table class="table table-striped table-sm">
     <thead>
@@ -51,12 +51,12 @@ include "../app/models/userRowClass.php";
       </tr>
     </thead>
     <tbody><?php
-      if (empty($userList)) :  // No User Records Found ?>
+      if (empty($userList)) :  // No users records found ?>
         <tr>
           <td colspan="8">No Users to Display</td>
         </tr><?php
-      else : 
-        // Loop through the Users and output the values
+      else :
+        // Loop through the users records and output the values
         foreach (new UserRow(new RecursiveArrayIterator($userList)) as $value) :
           echo $value;
         endforeach;

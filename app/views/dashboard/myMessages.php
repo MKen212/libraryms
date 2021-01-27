@@ -1,12 +1,12 @@
 <?php
 /**
- * DASHBOARD - My Messages
+ * DASHBOARD/myMessages view - List of messages records for specific user
  */
 
-include "../app/models/messageReceivedRowClass.php";
-include "../app/models/messageSentRowClass.php";
-?>
+include_once "../app/models/messageReceivedRowClass.php";
+include_once "../app/models/messageSentRowClass.php";
 
+?>
 <!-- My Messages List -->
 <div class="pt-3 pb-2 mb-3 border-bottom">
   <div class="row">
@@ -21,7 +21,7 @@ include "../app/models/messageSentRowClass.php";
   </div>
 </div>
 
-<!-- Received Messages -->
+<!-- Received Messages - Table -->
 <div class="table-responsive">
   <h3>Received:</h3>
   <table class="table table-striped table-sm">
@@ -36,12 +36,12 @@ include "../app/models/messageSentRowClass.php";
       </tr>
     </thead>
     <tbody><?php
-      if (empty($receivedMessageList)) :  // No messages received records found ?>
+      if (empty($receivedMessageList)) :  // No received messages records found ?>
         <tr>
           <td colspan="6">No Received Messages to Display</td>
         </tr><?php
       else :
-        // Loop through the Received Messages and output the values
+        // Loop through the received messages records and output the values
         foreach (new MessageReceivedRow(new RecursiveArrayIterator($receivedMessageList)) as $value) :
           echo $value;
         endforeach;
@@ -51,7 +51,7 @@ include "../app/models/messageSentRowClass.php";
 </div>
 <hr />
 
-<!-- Sent Messages -->
+<!-- Sent Messages - Table -->
 <div class="table-responsive">
   <h3>Sent:</h3>
   <table class="table table-striped table-sm">
@@ -66,12 +66,12 @@ include "../app/models/messageSentRowClass.php";
       </tr>
     </thead>
     <tbody><?php
-      if (empty($sentMessageList)) :  // No messages sent records found ?>
+      if (empty($sentMessageList)) :  // No sent messages records found ?>
         <tr>
           <td colspan="6">No Sent Messages to Display</td>
         </tr><?php
       else :
-        // Loop through the Sent Messages and output the values
+        // Loop through the sent messages records and output the values
         foreach (new MessageSentRow(new RecursiveArrayIterator($sentMessageList)) as $value) :
           echo $value;
         endforeach;

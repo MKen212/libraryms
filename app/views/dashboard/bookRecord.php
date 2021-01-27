@@ -1,4 +1,10 @@
-<!-- DASHBOARD - Selected Book Record Details -->
+<?php
+/**
+ * DASHBOARD/bookRecord view - Table to display selected books record
+ */
+
+?>
+<!-- Selected books record details -->
 <div class="table-responsive">
   <table class="table table-striped table-sm">
     <thead>
@@ -19,7 +25,7 @@
         <td><?= $bookRecord["Author"] ?></td>
         <td><?= $bookRecord["Publisher"] ?></td>
         <td><?= $bookRecord["ISBN"] ?></td>
-        <td><?= $bookRecord["QtyTotal"] ?></td>        
+        <td><?= $bookRecord["QtyTotal"] ?></td>
         <td><?= $bookRecord["QtyAvail"] ?></td>
       </tr>
     </tbody>
