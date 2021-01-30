@@ -1,10 +1,10 @@
 <?php
 /**
- * MessageReceivedRow Class - Used to extend the RecursiveIteratorIterator to display each
- * row of a Message/getListReceived query in table format
+ * MessageReceived Class - Used to extend the RecursiveIteratorIterator to
+ * display each row of a Message/getListReceived query in table format
  */
 
-class MessageReceivedRow extends RecursiveIteratorIterator {
+class MessageReceived extends RecursiveIteratorIterator {
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);
   }
@@ -49,7 +49,7 @@ class MessageReceivedRow extends RecursiveIteratorIterator {
 
   public function endChildren() {
     // Add Reply Column
-    $href = "dashboard.php?p=messageSend&id="
+    $href = "dashboard.php?p=sendMessage&id="
           . $_SESSION["curMessageID"]
           . "&recID="
           . $_SESSION["curSenderID"]

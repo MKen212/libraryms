@@ -1,7 +1,7 @@
 <?php
 /**
- * BookCard Class - Used to extend the RecursiveIteratorIterator to display each row
- * of a Book/getDisplay query in a card format
+ * BookCard Class - Used to extend the RecursiveIteratorIterator to display
+ * each row of a Book/getDisplay query in a card format
  */
 
 class BookCard extends RecursiveIteratorIterator {
@@ -60,7 +60,7 @@ class BookCard extends RecursiveIteratorIterator {
   public function beginChildren() {
     $_SESSION["curColumn"] += 1;
     if ($_SESSION["curColumn"] == 1) {
-      echo "<div class='row'>";  // Create New Row div
+      echo "<div class='row'>";  // Create New row div
     }
     echo "<div class='col-4 border rounded'>"; // Create Col div
   }

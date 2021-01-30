@@ -1,6 +1,6 @@
 <?php
 /**
- * DASHBOARD/navbar view - Top navigation bar
+ * DASHBOARD/navbarHeader view - Top navigation bar
  */
 
 ?>
@@ -9,7 +9,7 @@
   <!-- Brand/Logo -->
   <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="dashboard.php?p=home"><span data-feather="book"></span> Library MS</a>
   <!-- Search Bar -->
-  <form class="input-group w-100" action="dashboard.php?p=booksDisplay" method="post" name="schNavbar" autocomplete="off">
+  <form class="input-group w-100" action="dashboard.php?p=displayBooks" method="post" name="schNavbar" autocomplete="off">
     <!-- Search Text -->
     <input class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search" name="navSchString" value="<?= isset($_SESSION["navSchString"]) ? $_SESSION["navSchString"] : null ?>" />
     <!-- Search Button -->

@@ -1,10 +1,10 @@
 <?php
 /**
- * DASHBOARD/booksIssuedByBook view - List of books_issued records for specific
- * book
+ * DASHBOARD/booksIssuedByBookList view - List of books_issued records for
+ * specific book
  */
 
-include_once "../app/models/bookIssuedByBookRowClass.php";
+include_once "../app/models/bookIssuedByBookClass.php";
 
 ?>
 <!-- Books Issued By Book - Header -->
@@ -42,7 +42,7 @@ else :  // Display Selected Book Record
           </tr><?php
         else :
           // Loop through the books_issued records and output the values
-          foreach (new BookIssuedByBookRow(new RecursiveArrayIterator($booksIssuedByBook)) as $value) :
+          foreach (new BookIssuedByBook(new RecursiveArrayIterator($booksIssuedByBook)) as $value) :
             echo $value;
           endforeach;
         endif; ?>

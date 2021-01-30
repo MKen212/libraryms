@@ -1,10 +1,10 @@
 <?php
 /**
- * DASHBOARD/myMessages view - List of messages records for specific user
+ * DASHBOARD/messagesList view - List of messages records
  */
 
-include_once "../app/models/messageReceivedRowClass.php";
-include_once "../app/models/messageSentRowClass.php";
+include_once "../app/models/messageReceivedClass.php";
+include_once "../app/models/messageSentClass.php";
 
 ?>
 <!-- My Messages List -->
@@ -42,7 +42,7 @@ include_once "../app/models/messageSentRowClass.php";
         </tr><?php
       else :
         // Loop through the received messages records and output the values
-        foreach (new MessageReceivedRow(new RecursiveArrayIterator($receivedMessageList)) as $value) :
+        foreach (new MessageReceived(new RecursiveArrayIterator($receivedMessageList)) as $value) :
           echo $value;
         endforeach;
       endif; ?>
@@ -72,7 +72,7 @@ include_once "../app/models/messageSentRowClass.php";
         </tr><?php
       else :
         // Loop through the sent messages records and output the values
-        foreach (new MessageSentRow(new RecursiveArrayIterator($sentMessageList)) as $value) :
+        foreach (new MessageSent(new RecursiveArrayIterator($sentMessageList)) as $value) :
           echo $value;
         endforeach;
       endif; ?>

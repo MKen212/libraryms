@@ -17,5 +17,5 @@ if ($unreadCount == 0) {
 // Create link
 $msgsUnreadLink = "<a class='{$unreadClass}' href='dashboard.php?p=myMessages'><span data-feather='mail'></span> {$unreadCount}</a>";
 
-// Display Sidebar Menu
-include "../app/views/dashboard/sidebar.php";
+// Display Sidebar Menu View
+include "../app/views/dashboard/sidebarMenu.php";

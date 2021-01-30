@@ -1,6 +1,6 @@
 <?php
 /**
- * DASHBOARD/messageSend controller - Send Message
+ * DASHBOARD/sendMessage controller - Send a Message
  */
 
 require_once "../app/models/messageClass.php";

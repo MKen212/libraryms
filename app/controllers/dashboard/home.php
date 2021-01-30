@@ -1,7 +1,7 @@
 <?php
 /**
- * DASHBOARD/home controller - Home Page
+ * DASHBOARD/home controller - Prepare Home Page
  */
 
 // Show Home Page View
-include "../app/views/dashboard/home.php";
+include "../app/views/dashboard/homePage.php";

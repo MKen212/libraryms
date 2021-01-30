@@ -1,10 +1,10 @@
 <?php
 /**
- * DASHBOARD/booksIssuedList view - List of books_issued records with Return
- * option
+ * DASHBOARD/booksIssuedList view - List of books_issued records with
+ * Return option
  */
 
-include_once "../app/models/bookIssuedRowClass.php";
+include_once "../app/models/bookIssuedListClass.php";
 
 ?>
 <!-- Books Issued List - Header -->
@@ -56,7 +56,7 @@ include_once "../app/models/bookIssuedRowClass.php";
         </tr><?php
       else :
         // Loop through the books_issued records and output the values
-        foreach (new BookIssuedRow(new RecursiveArrayIterator($booksIssuedList)) as $value) :
+        foreach (new BookIssuedList(new RecursiveArrayIterator($booksIssuedList)) as $value) :
           echo $value;
         endforeach;
       endif; ?>

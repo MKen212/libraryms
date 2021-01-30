@@ -1,6 +1,6 @@
 <?php
 /**
- * INDEX/logout view - Logout page
+ * INDEX/logoutPage view - Logout page
  */
 
 ?>

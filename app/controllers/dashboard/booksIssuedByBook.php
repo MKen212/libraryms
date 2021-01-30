@@ -1,7 +1,7 @@
 <?php
 /**
- * DASHBOARD/booksIssuedByBook controller - List all Outstanding Issued Books for a
- * Particular Book
+ * DASHBOARD/booksIssuedByBook controller - List all books_issued records
+ * currently outstanding for a Particular Book
  */
 
 require_once "../app/models/bookIssuedClass.php";
@@ -21,5 +21,5 @@ $_GET = [];
 // Get List of ACTIVE & OUTSTANDING books_issued for BookID
 $booksIssuedByBook = $bookIssued->getListByBook($bookID, 1, true);
 
-// Show Books Issued By Book View
-include "../app/views/dashboard/booksIssuedByBook.php";
+// Show Books Issued By Book List View
+include "../app/views/dashboard/booksIssuedByBookList.php";

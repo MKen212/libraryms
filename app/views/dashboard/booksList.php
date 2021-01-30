@@ -3,7 +3,7 @@
  * DASHBOARD/booksList view - List of books records
  */
 
-include_once "../app/models/bookRowClass.php";
+include_once "../app/models/bookListClass.php";
 
 ?>
 <!-- Books List - Header -->
@@ -57,7 +57,7 @@ include_once "../app/models/bookRowClass.php";
         </tr><?php
       else :
         // Loop through the books records and output the values
-        foreach (new BookRow(new RecursiveArrayIterator($bookList)) as $value) :
+        foreach (new BookList(new RecursiveArrayIterator($bookList)) as $value) :
           echo $value;
         endforeach;
       endif; ?>

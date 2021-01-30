@@ -1,10 +1,10 @@
 <?php
 /**
- * BookRow Class - Used to extend the RecursiveIteratorIterator to display each row
- * of a Book/getList query in table format
+ * BookList Class - Used to extend the RecursiveIteratorIterator to display
+ * each row of a Book/getList query in table format
  */
 
-class BookRow extends RecursiveIteratorIterator {
+class BookList extends RecursiveIteratorIterator {
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);
   }
@@ -27,7 +27,7 @@ class BookRow extends RecursiveIteratorIterator {
       $returnValue = date("d/m/Y", strtotime($parentValue));
     } elseif ($parentKey == "RecordStatus") {
       // For RecordStatus output value with update hyperlink
-      $href = "dashboard.php?p=booksList&id="
+      $href = "dashboard.php?p=listEditBooks&id="
             . $_SESSION["curBookID"]
             . "&cur="
             . $parentValue

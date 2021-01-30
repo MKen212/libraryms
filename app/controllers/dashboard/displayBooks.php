@@ -1,6 +1,6 @@
 <?php
 /**
- * DASHBOARD/booksDisplay controller - Display all Books in card format
+ * DASHBOARD/displayBooks controller - Display all Books in card format
  */
 
 require_once "../app/models/bookClass.php";
@@ -15,5 +15,5 @@ if (isset($_SESSION["navSchString"])) {
 // Get Display List of ACTIVE books
 $bookDisplay = $book->getDisplay($title);
 
-// Show Books Display View
-include "../app/views/dashboard/booksDisplay.php";
+// Show Book Cards View
+include "../app/views/dashboard/bookCards.php";

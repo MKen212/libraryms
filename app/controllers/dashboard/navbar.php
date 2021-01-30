@@ -15,5 +15,5 @@ if (isset($_POST["navSearch"])) {
   unset($_POST["navClear"], $_SESSION["navSchString"]);
 }
 
-// Display Navbar
-include "../app/views/dashboard/navbar.php";
+// Display Navbar Header View
+include "../app/views/dashboard/navbarHeader.php";

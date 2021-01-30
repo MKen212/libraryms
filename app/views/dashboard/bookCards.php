@@ -1,6 +1,6 @@
 <?php
 /**
- * DASHBOARD/booksDisplay view - Display books records in card format
+ * DASHBOARD/bookCards view - Display books records in card format
  */
 
 include_once "../app/models/bookCardClass.php";

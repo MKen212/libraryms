@@ -12,8 +12,8 @@ if (isset($_GET["q"])) {
 }
 $_GET = [];
 
-// Show Logout View
-include "../app/views/index/logout.php";
+// Show Logout Page View
+include "../app/views/index/logoutPage.php";
 
 // Clear Session
 session_unset();

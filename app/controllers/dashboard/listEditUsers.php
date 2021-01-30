@@ -1,6 +1,7 @@
 <?php
 /**
- * DASHBOARD/usersList controller - List all Users
+ * DASHBOARD/listEditUsers controller - List all Users with link to
+ * Display/Edit
  */
 
 require_once "../app/models/userClass.php";

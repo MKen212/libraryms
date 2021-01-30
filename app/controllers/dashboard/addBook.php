@@ -1,6 +1,6 @@
 <?php
 /**
- * DASHBOARD/bookAdd controller - Add Book
+ * DASHBOARD/addBook controller - Add Book
  */
 
 require_once "../app/models/bookClass.php";

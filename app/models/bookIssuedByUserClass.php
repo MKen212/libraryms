@@ -1,10 +1,10 @@
 <?php
 /**
- * BookIssuedToMeRow Class - Used to extend the RecursiveIteratorIterator to display
- * each row of a BookIssued/getListByUser query in table format
+ * BookIssuedByUser Class - Used to extend the RecursiveIteratorIterator
+ * to display each row of a BookIssued/getListByUser query in table format
  */
 
-class BookIssuedToMeRow extends RecursiveIteratorIterator {
+class BookIssuedByUser extends RecursiveIteratorIterator {
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);
   }

@@ -1,6 +1,7 @@
 <?php
 /**
- * DASHBOARD/myMessages controller - List all messages RECEIVED & SENT for Logged-in User
+ * DASHBOARD/myMessages controller - List all messages RECEIVED & SENT for
+ * Logged-in User
  */
 
 require_once "../app/models/messageClass.php";
@@ -44,4 +45,4 @@ $receivedMessageList = $message->getListReceived($userID, 1);
 $sentMessageList = $message->getListSent($userID, null);
 
 // Show My Messages View
-include "../app/views/dashboard/myMessages.php";
+include "../app/views/dashboard/messagesList.php";

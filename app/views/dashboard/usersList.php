@@ -3,7 +3,7 @@
  * DASHBOARD/usersList view - List of users records
  */
 
-include_once "../app/models/userRowClass.php";
+include_once "../app/models/userListClass.php";
 
 ?>
 <!-- Users List - Header -->
@@ -57,7 +57,7 @@ include_once "../app/models/userRowClass.php";
         </tr><?php
       else :
         // Loop through the users records and output the values
-        foreach (new UserRow(new RecursiveArrayIterator($userList)) as $value) :
+        foreach (new UserList(new RecursiveArrayIterator($userList)) as $value) :
           echo $value;
         endforeach;
       endif; ?>

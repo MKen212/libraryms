@@ -1,10 +1,10 @@
 <?php
 /**
- * UserRow Class - Used to extend the RecursiveIteratorIterator to display each row
- * of a User/getList query in table format
+ * UserList Class - Used to extend the RecursiveIteratorIterator to display
+ * each row of a User/getList query in table format
  */
 
-class UserRow extends RecursiveIteratorIterator {
+class UserList extends RecursiveIteratorIterator {
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);
   }
@@ -24,7 +24,7 @@ class UserRow extends RecursiveIteratorIterator {
       $returnValue = "<a href='{$href}'>{$parentValue}</a>";
     } elseif ($parentKey == "IsAdmin") {
       // For IsAdmin output with value update hyperlink
-      $href = "dashboard.php?p=usersList&id="
+      $href = "dashboard.php?p=listEditUsers&id="
             . $_SESSION["curUserID"]
             . "&cur="
             . $parentValue
@@ -32,7 +32,7 @@ class UserRow extends RecursiveIteratorIterator {
       $returnValue = statusOutput("IsAdmin", $parentValue, $href);
     } elseif ($parentKey == "UserStatus") {
       // For UserStatus output value with update hyperlink
-      $href = "dashboard.php?p=usersList&id="
+      $href = "dashboard.php?p=listEditUsers&id="
             . $_SESSION["curUserID"]
             . "&cur="
             . $parentValue
@@ -40,7 +40,7 @@ class UserRow extends RecursiveIteratorIterator {
       $returnValue = statusOutput("UserStatus", $parentValue, $href);
     } elseif ($parentKey == "RecordStatus") {
       // For RecordStatus output value with update hyperlink
-      $href = "dashboard.php?p=usersList&id="
+      $href = "dashboard.php?p=listEditUsers&id="
             . $_SESSION["curUserID"]
             . "&cur="
             . $parentValue

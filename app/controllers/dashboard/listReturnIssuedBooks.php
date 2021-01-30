@@ -1,6 +1,6 @@
 <?php
 /**
- * DASHBOARD/booksIssuedList controller - List/Return Issued Books
+ * DASHBOARD/listReturnIssuedBooks controller - List/Return Issued Books
  */
 
 require_once "../app/models/bookIssuedClass.php";

@@ -1,6 +1,7 @@
 <?php
 /**
- * DASHBOARD/myIssuedBooks controller - List all Issued Books for Logged-in User
+ * DASHBOARD/myIssuedBooks controller - List all Issued Books for Logged-in
+ * User
  */
 
 require_once "../app/models/bookIssuedClass.php";
@@ -10,5 +11,5 @@ $bookIssued = new BookIssued();
 $userID = $_SESSION["userID"];
 $booksIssuedToMe = $bookIssued->getListByUser($userID, 1, false);
 
-// Show My Issued Books View
-include "../app/views/dashboard/myIssuedBooks.php";
+// Show Books Issued By User List View
+include "../app/views/dashboard/booksIssuedByUserList.php";

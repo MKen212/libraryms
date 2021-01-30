@@ -1,6 +1,7 @@
 <?php
 /**
- * BookIssued Class - Used to access the books_issued table and process SQL queries
+ * BookIssued Class - Used to access the books_issued table and process SQL
+ * queries
  */
 
 class BookIssued {

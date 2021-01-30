@@ -1,10 +1,10 @@
 <?php
 /**
- * DASHBOARD/myIssuedBooks view - List of books_issued records for specific
- * user
+ * DASHBOARD/booksIssuedByUserList view - List of books_issued records for
+ * specific user
  */
 
-include_once "../app/models/bookIssuedToMeRowClass.php";
+include_once "../app/models/bookIssuedByUserClass.php";
 
 ?>
 <!-- My Issued Books - Header -->
@@ -39,7 +39,7 @@ include_once "../app/models/bookIssuedToMeRowClass.php";
         </tr><?php
       else :
         // Loop through the books_issued records and output the values
-        foreach (new BookIssuedToMeRow(new RecursiveArrayIterator($booksIssuedToMe)) as $value) :
+        foreach (new BookIssuedByUser(new RecursiveArrayIterator($booksIssuedToMe)) as $value) :
           echo $value;
         endforeach;
       endif; ?>

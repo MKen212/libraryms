@@ -1,6 +1,6 @@
 <?php
 /**
- * DASHBOARD/sidebar view - Sidebar Menu
+ * DASHBOARD/sidebarMenu view - Sidebar Menu
  */
 
 ?>
@@ -19,7 +19,7 @@
       </li>
       <!-- Display Books -->
       <li class="nav-item">
-        <a class="nav-link<?= (($page == "booksDisplay") || ($page == "booksIssuedByBook")) ? " active" : ""; ?>" href="dashboard.php?p=booksDisplay"><span data-feather="book"></span>Display Books</a>
+        <a class="nav-link<?= (($page == "displayBooks") || ($page == "booksIssuedByBook")) ? " active" : ""; ?>" href="dashboard.php?p=displayBooks"><span data-feather="book"></span>Display Books</a>
       </li>
       <!-- My Issued Books -->
       <li class="nav-item">
@@ -27,7 +27,7 @@
       </li>
       <!-- Send a Message -->
       <li class="nav-item">
-        <a class="nav-link<?= ($page == "messageSend") ? " active" : ""; ?>" href="dashboard.php?p=messageSend"><span data-feather="send"></span>Send a Message</a>
+        <a class="nav-link<?= ($page == "sendMessage") ? " active" : ""; ?>" href="dashboard.php?p=sendMessage"><span data-feather="send"></span>Send a Message</a>
         <hr />
       </li>
       <!-- My Profile -->
@@ -43,27 +43,27 @@
       <ul class="nav flex-column">
         <!-- Issue Book-->
         <li class="nav-item">
-          <a class="nav-link<?= ($page == "bookIssue") ? " active" : ""; ?>" href="dashboard.php?p=bookIssue"><span data-feather="arrow-up-circle"></span>
+          <a class="nav-link<?= ($page == "issueBook") ? " active" : ""; ?>" href="dashboard.php?p=issueBook"><span data-feather="arrow-up-circle"></span>
           Issue Book</a>
         </li>
         <!-- List/Return Issued Books -->
         <li class="nav-item">
-          <a class="nav-link<?= ($page == "booksIssuedList") ? " active" : ""; ?>" href="dashboard.php?p=booksIssuedList"><span data-feather="arrow-down-circle"></span>
+          <a class="nav-link<?= ($page == "listReturnIssuedBooks") ? " active" : ""; ?>" href="dashboard.php?p=listReturnIssuedBooks"><span data-feather="arrow-down-circle"></span>
           List/Return Issued Books</a>
         </li>
         <!-- Add Book -->
         <li class="nav-item">
-          <a class="nav-link<?= ($page == "bookAdd") ? " active" : ""; ?>" href="dashboard.php?p=bookAdd"><span data-feather="plus-circle"></span>
+          <a class="nav-link<?= ($page == "addBook") ? " active" : ""; ?>" href="dashboard.php?p=addBook"><span data-feather="plus-circle"></span>
           Add Book</a>
         </li>
         <!-- List/Edit Books -->
         <li class="nav-item">
-          <a class="nav-link<?= ($page == "booksList" || $page == "bookDetails") ? " active" : ""; ?>" href="dashboard.php?p=booksList"><span data-feather="layers"></span>
+          <a class="nav-link<?= ($page == "listEditBooks" || $page == "bookDetails") ? " active" : ""; ?>" href="dashboard.php?p=listEditBooks"><span data-feather="layers"></span>
           List/Edit Books</a>
         </li>
         <!-- List/Edit Users-->
         <li class="nav-item">
-          <a class="nav-link<?= ($page == "usersList" || $page == "userDetails") ? " active" : ""; ?>" href="dashboard.php?p=usersList"><span data-feather="users"></span>
+          <a class="nav-link<?= ($page == "listEditUsers" || $page == "userDetails") ? " active" : ""; ?>" href="dashboard.php?p=listEditUsers"><span data-feather="users"></span>
           List/Edit Users</a>
         </li>
       </ul><?php

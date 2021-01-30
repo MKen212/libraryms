@@ -1,6 +1,7 @@
 <?php
 /**
- * DASHBOARD/booksList controller - List all Books (No Image)
+ * DASHBOARD/listEditBooks controller - List all Books (No Image) with link
+ * to Display/Edit
  */
 
 require_once "../app/models/bookClass.php";

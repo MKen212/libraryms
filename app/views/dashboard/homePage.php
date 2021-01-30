@@ -1,6 +1,6 @@
 <?php
 /**
- * DASHBOARD/home view - Home page
+ * DASHBOARD/homePage view - Home page
  */
 
 ?>

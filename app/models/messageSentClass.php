@@ -1,10 +1,10 @@
 <?php
 /**
- * MessageSentRow Class - Used to extend the RecursiveIteratorIterator to display each
- * row of a Message/getListSent query in table format
+ * MessageSent Class - Used to extend the RecursiveIteratorIterator to
+ * display each row of a Message/getListSent query in table format
  */
 
-class MessageSentRow extends RecursiveIteratorIterator {
+class MessageSent extends RecursiveIteratorIterator {
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);
   }
