@@ -3,6 +3,10 @@
  * DASHBOARD/usersList view - List of users records
  */
 
+namespace LibraryMS;
+
+use RecursiveArrayIterator;
+
 include_once "../app/models/userListClass.php";
 
 ?>

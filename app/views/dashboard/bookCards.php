@@ -3,6 +3,10 @@
  * DASHBOARD/bookCards view - Display books records in card format
  */
 
+namespace LibraryMS;
+
+use RecursiveArrayIterator;
+
 include_once "../app/models/bookCardClass.php";
 
 ?>

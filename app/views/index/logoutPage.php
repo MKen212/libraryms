@@ -3,6 +3,8 @@
  * INDEX/logoutPage view - Logout page
  */
 
+namespace LibraryMS;
+
 ?>
 <!-- Logout Page -->
 <div class="row justify-content-center mb-3">

@@ -3,6 +3,8 @@
  * DASHBOARD/myProfile controller - Display My Profile
  */
 
+namespace LibraryMS;
+
 require_once "../app/models/userClass.php";
 $user = new User();
 

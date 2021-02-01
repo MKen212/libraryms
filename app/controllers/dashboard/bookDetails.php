@@ -3,6 +3,8 @@
  * DASHBOARD/bookDetails controller - Display/Edit Book Record
  */
 
+namespace LibraryMS;
+
 require_once "../app/models/bookClass.php";
 $book = new Book();
 require_once "../app/models/uploadImgClass.php";

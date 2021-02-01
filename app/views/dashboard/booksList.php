@@ -3,6 +3,10 @@
  * DASHBOARD/booksList view - List of books records
  */
 
+namespace LibraryMS;
+
+use RecursiveArrayIterator;
+
 include_once "../app/models/bookListClass.php";
 
 ?>

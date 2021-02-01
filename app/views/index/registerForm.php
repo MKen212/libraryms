@@ -3,6 +3,8 @@
  * INDEX/registerForm view - User registration form
  */
 
+namespace LibraryMS;
+
 ?>
 <!-- Registration Form -->
 <div class="row justify-content-center">

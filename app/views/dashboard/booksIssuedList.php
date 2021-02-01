@@ -4,6 +4,10 @@
  * Return option
  */
 
+namespace LibraryMS;
+
+use RecursiveArrayIterator;
+
 include_once "../app/models/bookIssuedListClass.php";
 
 ?>

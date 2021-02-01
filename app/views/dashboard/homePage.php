@@ -3,6 +3,8 @@
  * DASHBOARD/homePage view - Home page
  */
 
+namespace LibraryMS;
+
 ?>
 <!-- Home - Header -->
 <div class="pt-3 pb-2 mb-3 border-bottom">
@@ -33,7 +35,8 @@ if (DEFAULTS["testing"] == true) : ?>
       print_r($_FILES);
       // echo "<br />SERVER: ";
       // print_r($_SERVER);
-      echo "<br />"; ?>
+      echo "<br />";
+      ?>
     </pre>
   </div><?php
 endif; ?>

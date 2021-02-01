@@ -3,6 +3,8 @@
  * DASHBOARD - Main HTML frame facilitating all dashboard functionality
  */
 
+namespace LibraryMS;
+
 session_start();
 
 require_once "../app/helpers/helperFunctions.php";

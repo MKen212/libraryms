@@ -3,6 +3,8 @@
  * DASHBOARD/bookIssueForm view - Form for adding a books_issued record
  */
 
+namespace LibraryMS;
+
 ?>
 <!-- Book Issue Form - Header -->
 <div class="pt-3 pb-2 mb-3 border-bottom">

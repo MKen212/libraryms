@@ -4,6 +4,10 @@
  * display each row of a Message/getListReceived query in table format
  */
 
+namespace LibraryMS;
+
+use RecursiveIteratorIterator;
+
 class MessageReceived extends RecursiveIteratorIterator {
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);

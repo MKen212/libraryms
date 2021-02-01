@@ -3,6 +3,10 @@
  * Message Class - Used to access the messages table and process SQL queries
  */
 
+namespace LibraryMS;
+
+use PDO, PDOException;
+
 class Message {
   private $conn;  // PDO database connection object
 

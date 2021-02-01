@@ -3,6 +3,10 @@
  * Book class - Used to access the books table and process SQL queries
  */
 
+namespace LibraryMS;
+
+use PDO, PDOException;
+
 class Book {
   private $conn;  // PDO database connection object
 

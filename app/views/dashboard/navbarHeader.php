@@ -3,6 +3,8 @@
  * DASHBOARD/navbarHeader view - Top navigation bar
  */
 
+namespace LibraryMS;
+
 ?>
 <!-- Top Navbar -->
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">

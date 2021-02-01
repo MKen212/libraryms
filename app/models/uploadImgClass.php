@@ -3,6 +3,10 @@
  * UploadImg Class - Used to validate and upload image files to the server
  */
 
+namespace LibraryMS;
+
+use finfo, Exception;
+
 class UploadImg {
   /**
    * initialChecks function - Performs initial checks on temporary uploaded file

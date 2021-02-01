@@ -3,6 +3,8 @@
  * DASHBOARD/displayBooks controller - Display all Books in card format
  */
 
+namespace LibraryMS;
+
 require_once "../app/models/bookClass.php";
 $book = new Book();
 

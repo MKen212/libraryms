@@ -3,6 +3,8 @@
  * DASHBOARD/userRecord view - Table to display selected users record
  */
 
+namespace LibraryMS;
+
 ?>
 <!-- Selected users record details -->
 <div class="table-responsive">

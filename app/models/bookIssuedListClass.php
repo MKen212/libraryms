@@ -4,6 +4,10 @@
  * display each row of a BookIssued/getList query in table format
  */
 
+namespace LibraryMS;
+
+use RecursiveIteratorIterator;
+
 class BookIssuedList extends RecursiveIteratorIterator {
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);

@@ -4,6 +4,10 @@
  * each row of a Book/getList query in table format
  */
 
+namespace LibraryMS;
+
+use RecursiveIteratorIterator;
+
 class BookList extends RecursiveIteratorIterator {
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);

@@ -3,6 +3,8 @@
  * Global Configuration Details
  */
 
+namespace LibraryMS;
+
 /* Database Connection */
 $connDetails = parse_ini_file("../inifiles/mariaDBCon.ini");
 $connDetails["database"] = "libraryms";

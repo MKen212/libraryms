@@ -3,6 +3,8 @@
  * DASHBOARD/userDetails controller - Display/Edit User Record
  */
 
+namespace LibraryMS;
+
 require_once "../app/models/userClass.php";
 $user = new User();
 

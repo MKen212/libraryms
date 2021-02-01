@@ -4,6 +4,8 @@
  * currently outstanding for a Particular Book
  */
 
+namespace LibraryMS;
+
 require_once "../app/models/bookIssuedClass.php";
 $bookIssued = new BookIssued();
 require_once "../app/models/bookClass.php";

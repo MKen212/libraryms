@@ -4,6 +4,10 @@
  * each row of a Book/getDisplay query in a card format
  */
 
+namespace LibraryMS;
+
+use RecursiveIteratorIterator;
+
 class BookCard extends RecursiveIteratorIterator {
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);

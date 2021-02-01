@@ -3,6 +3,10 @@
  * DASHBOARD/messagesList view - List of messages records
  */
 
+namespace LibraryMS;
+
+use RecursiveArrayIterator;
+
 include_once "../app/models/messageReceivedClass.php";
 include_once "../app/models/messageSentClass.php";
 

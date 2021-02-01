@@ -3,6 +3,8 @@
  * DASHBOARD/bookRecord view - Table to display selected books record
  */
 
+namespace LibraryMS;
+
 ?>
 <!-- Selected books record details -->
 <div class="table-responsive">

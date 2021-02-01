@@ -3,6 +3,8 @@
  * INDEX/register controller - Register New User
  */
 
+namespace LibraryMS;
+
 require_once "../app/models/userClass.php";
 $user = new User();
 require_once "../app/models/messageClass.php";

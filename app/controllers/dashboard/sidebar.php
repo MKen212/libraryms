@@ -3,6 +3,8 @@
  * DASHBOARD/sidebar controller - Update data for Sidebar
  */
 
+namespace LibraryMS;
+
 require_once "../app/models/messageClass.php";
 $message = new Message();
 

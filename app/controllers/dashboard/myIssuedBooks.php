@@ -4,6 +4,8 @@
  * User
  */
 
+namespace LibraryMS;
+
 require_once "../app/models/bookIssuedClass.php";
 $bookIssued = new BookIssued();
 

@@ -3,6 +3,8 @@
  * DASHBOARD/listReturnIssuedBooks controller - List/Return Issued Books
  */
 
+namespace LibraryMS;
+
 require_once "../app/models/bookIssuedClass.php";
 $bookIssued = new BookIssued();
 require_once "../app/models/bookClass.php";

@@ -4,6 +4,8 @@
  * Logged-in User
  */
 
+namespace LibraryMS;
+
 require_once "../app/models/messageClass.php";
 $message = new Message();
 

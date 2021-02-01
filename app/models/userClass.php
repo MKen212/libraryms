@@ -3,6 +3,10 @@
  * User Class - Used to access the users table and process SQL queries
  */
 
+namespace LibraryMS;
+
+use PDO, PDOException;
+
 class User {
   private $conn;  // PDO database connection object
 

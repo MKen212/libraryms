@@ -3,6 +3,8 @@
  * INDEX/loginForm view - User login form
  */
 
+namespace LibraryMS;
+
 ?>
 <!-- Login Form -->
 <div class="row">

@@ -4,6 +4,8 @@
  * to Display/Edit
  */
 
+namespace LibraryMS;
+
 require_once "../app/models/bookClass.php";
 $book = new Book();
 

@@ -3,6 +3,10 @@
  * Global Helper Functions
  */
 
+namespace LibraryMS;
+
+use RecursiveArrayIterator;
+
 /**
  * cleanInput function - Used to clean all manual data entry
  * @param string $input    Original Input

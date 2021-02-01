@@ -4,6 +4,10 @@
  * queries
  */
 
+namespace LibraryMS;
+
+use PDO, PDOException;
+
 class BookIssued {
   private $conn;  // PDO database connection object
 

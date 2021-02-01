@@ -4,6 +4,10 @@
  * each row of a User/getList query in table format
  */
 
+namespace LibraryMS;
+
+use RecursiveIteratorIterator;
+
 class UserList extends RecursiveIteratorIterator {
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);

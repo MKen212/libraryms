@@ -3,6 +3,8 @@
  * DASHBOARD/issueBook controller - Add Issued Book
  */
 
+namespace LibraryMS;
+
 require_once "../app/models/bookIssuedClass.php";
 $bookIssued = new BookIssued();
 require_once "../app/models/userClass.php";

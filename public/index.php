@@ -3,6 +3,8 @@
  * INDEX - Main HTML frame facilitating user registration, login and logout
  */
 
+namespace LibraryMS;
+
 session_start();
 
 require_once "../app/helpers/helperFunctions.php";

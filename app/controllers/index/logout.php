@@ -3,6 +3,8 @@
  * INDEX/logout controller - Logout User
  */
 
+namespace LibraryMS;
+
 require_once "../app/models/userClass.php";
 $user = new User();
 
