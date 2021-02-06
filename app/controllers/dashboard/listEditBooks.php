@@ -1,7 +1,15 @@
 <?php
+declare(strict_types=1);
 /**
- * DASHBOARD/listEditBooks controller - List all Books (No Image) with link
- * to Display/Edit
+ * DASHBOARD/listEditBooks controller
+ *
+ * Retrieve all the books records, filtered by Title if search criteria are
+ * entered, and display them using the 'booksList' view. Process any status
+ * updates that are selected.
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

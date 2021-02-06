@@ -1,18 +1,36 @@
 <?php
+declare(strict_types=1);
 /**
- * MessageSent Class - Used to extend the RecursiveIteratorIterator to
- * display each row of a Message/getListSent query in table format
+ * MessageSent Class
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;
 
 use RecursiveIteratorIterator;
 
+/**
+ * Displays messages records SENT for a particular user in table format
+ *
+ * Extends the RecursiveIteratorIterator class to display each record of a
+ * Message/getListSent query in table format using HTML
+ */
 class MessageSent extends RecursiveIteratorIterator {
+  /**
+   * Get just the LEAVES data from the query result
+   * @param \Traversable $result  Result from Message/getListSent query
+   */
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);
   }
 
+  /**
+   * Imbed the current key=>value data into relevant HTML code
+   * @return string|null  HTML element containing key=>value data or null
+   */
   public function current() {
     $parentKey = parent::key();
     $parentValue = parent::current();
@@ -42,10 +60,16 @@ class MessageSent extends RecursiveIteratorIterator {
     return "<td>{$returnValue}</td>";
   }
 
+  /**
+   * Start the current row
+   */
   public function beginChildren() {
     echo "<tr>";
   }
 
+  /**
+   * Close the current row
+   */
   public function endChildren() {
     echo "</tr>";
     unset ($_SESSION["curMessageID"]);

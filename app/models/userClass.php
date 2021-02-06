@@ -1,17 +1,29 @@
 <?php
+declare(strict_types=1);
 /**
- * User Class - Used to access the users table and process SQL queries
+ * User Class
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;
 
-use PDO, PDOException;
+use PDO;
+use PDOException;
 
+/**
+ * Access the users table and process SQL queries
+ */
 class User {
-  private $conn;  // PDO database connection object
+  /**
+   * PDO database connection object
+   */
+  private $conn;
 
   /**
-   * Construct function - Create the database connection object
+   * Create the database connection object
    */
   public function __construct() {
     try {
@@ -24,7 +36,7 @@ class User {
   }
 
   /**
-   * exists function - Check if Username already exists in DB
+   * Check if a Username already exists in the table
    * @param string $username  Username
    * @return int|null         User ID of record with selected Name or null
    */
@@ -42,7 +54,7 @@ class User {
   }
 
   /**
-   * register function - Register a new user
+   * Register (Add) a new user
    * @param string $username   Username
    * @param string $password   User Password
    * @param string $firstName  User First Name
@@ -52,7 +64,7 @@ class User {
    * @param int $isAdmin       User is Admin (Optional)
    * @param int $userStatus    User Status (Optional)
    * @param int $recordStatus  Record Status (Optional)
-   * @return int|null          User ID of new user or null
+   * @return int|null          User ID of added record or null
    */
   public function register($username, $password, $firstName, $lastName, $email, $contactNo, $isAdmin = 0, $userStatus = 0, $recordStatus = 1) {
     try {
@@ -79,10 +91,10 @@ class User {
   }
 
   /**
-   * login function - Check username & password & set Session variables
+   * Check username & password match table & if OK set Session variables
    * @param string $username  Username
    * @param string $password  User Password
-   * @return bool|null        True or False if user validated or null
+   * @return bool|null        True or False if user details validated or null
    */
   public function login($username, $password) {
     try {
@@ -131,7 +143,7 @@ class User {
   }
 
   /**
-   * logout function - Logout user
+   * Logout user
    * @return bool|null  True if function success or null
    */
   public function logout() {
@@ -145,9 +157,10 @@ class User {
   }
 
   /**
-   * getList function - Retrieve list of ALL user records (optionally based on username)
+   * Retrieve list of ALL user records (optionally based on Username)
    * @param string $username  Username (Optional)
-   * @return array|null       Returns all/selected user records (Username order) or null
+   * @return array|null       Returns all/selected user records (Username order)
+   *                          or null
    */
   public function getList($username = null) {
     try {
@@ -171,8 +184,9 @@ class User {
   }
 
   /**
-   * getUserIDs function - Retrieve all Approved & Active User IDs with Username
-   * @return array|null  Returns UserID and Username of all Approved & Active records or null
+   * Retrieve all Approved & Active User IDs with Username
+   * @return array|null  Returns UserID and Username of all Approved & Active
+   * records or null
    */
   public function getUserIDs() {
     try {
@@ -189,7 +203,7 @@ class User {
   }
 
   /**
-   * getRecord function - Retrieve user record based on ID
+   * Retrieve user record based on ID
    * @param int $userID  User ID of required record
    * @return array|null  Returns user record for $userID or null
    */
@@ -207,7 +221,7 @@ class User {
   }
 
   /**
-   * updateRecord function - Updates an existing User record
+   * Update an existing user record
    * @param int $userID        User ID of record to update
    * @param int $username      Username
    * @param string $firstName  User First Name
@@ -250,7 +264,7 @@ class User {
   }
 
   /**
-   * updatePassword function - Updates the password of a user record
+   * Update the Password of a user record
    * @param int $userID               User ID of record to update
    * @param string $existingPassword  Users Existing Password
    * @param string $newPassword       Users New Password
@@ -290,7 +304,7 @@ class User {
   }
 
   /**
-   * updateStatus function - Updates the relevant Status Code of a user record
+   * Update the relevant Status Code of a users record
    * @param string $field   Field in users table to be updated
    * @param int $userID     User ID of record to update
    * @param int $newStatus  New Status code for field

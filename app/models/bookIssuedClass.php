@@ -1,18 +1,29 @@
 <?php
+declare(strict_types=1);
 /**
- * BookIssued Class - Used to access the books_issued table and process SQL
- * queries
+ * BookIssued Class
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;
 
-use PDO, PDOException;
+use PDO;
+use PDOException;
 
+/**
+ * Access the books_issued table and process SQL queries
+ */
 class BookIssued {
-  private $conn;  // PDO database connection object
+  /**
+   * PDO database connection object
+   */
+  private $conn;
 
   /**
-   * Construct function - Create the database connection object
+   * Create the database connection object
    */
   public function __construct() {
     try {
@@ -25,12 +36,12 @@ class BookIssued {
   }
 
   /**
-   * add function - Add record showing Book Issued to User
-   * @param int $bookID          Book ID
-   * @param int $userID          User ID
-   * @param date $issuedDate     Date Book Issued to User
-   * @param date $returnDueDate  Date Book Due to be returned
-   * @return int|null            Issued ID of added record or null
+   * Add books_issued record showing Book issued to User
+   * @param int $bookID           Book ID
+   * @param int $userID           User ID
+   * @param \date $issuedDate     Date Book Issued to User
+   * @param \date $returnDueDate  Date Book Due to be returned
+   * @return int|null             Issued ID of added record or null
    */
   public function add($bookID, $userID, $issuedDate, $returnDueDate) {
     try {
@@ -47,8 +58,8 @@ class BookIssued {
   }
 
   /**
-   * getList function - Retrieve list of ALL books_issued records (optionally based on
-   *                    specific username or title) from books_issued_view
+   * Retrieve list of ALL books_issued records (optionally based on specific
+   * username or title) from books_issued_view
    * @param string $schString  Book Title or Username (Optional)
    * @return array|null        Returns all/selected books_issued records (ReturnDueDate
    *                           Descending Order) or null
@@ -75,8 +86,8 @@ class BookIssued {
   }
 
   /**
-   * getListByUser function - Retrieve list of books_issued records for UserID
-   * (optionally by RecordStatus and/or if Outstanding) from books_issued_view
+   * Retrieve list of books_issued records for UserID (optionally by RecordStatus
+   * and/or if Outstanding) from books_issued_view
    * @param int $userID        User ID
    * @param int $recordStatus  Record Status (Optional)
    * @param bool $outstanding  True/False to only include outstanding records (Optional)
@@ -107,11 +118,11 @@ class BookIssued {
   }
 
   /**
-   * getListByBook function - Retrieve list of books_issued records for BookID
-   * (optionally by RecordStatus and/or if Outstanding) from books_issued_view
+   * Retrieve list of books_issued records for BookID (optionally by RecordStatus
+   * and/or if Outstanding) from books_issued_view
    * @param int $bookID        Book ID
    * @param int $recordStatus  Record Status (Optional)
-   * @param bool $outstanding  True/False if only include outstanding records (Optional)
+   * @param bool $outstanding  True/False to only include outstanding records (Optional)
    * @return array|null        Returns all/selected books_issued records (ReturnDueDate
    *                           Descending Order) or null
    */
@@ -139,10 +150,10 @@ class BookIssued {
   }
 
   /**
-   * returnBook function - Return issued book
-   * @param int $issuedID       Issued ID of record to return
-   * @param date $returnedDate  Date Book Returned
-   * @return int|null           Number of records updated (=1) or null
+   * Return issued book
+   * @param int $issuedID        Issued ID of record to return
+   * @param \date $returnedDate  Date Book Returned
+   * @return int|null            Number of records updated (=1) or null
    */
   public function returnBook($issuedID, $returnedDate) {
     try {
@@ -157,7 +168,7 @@ class BookIssued {
   }
 
   /**
-   * updateRecordStatus function - Update the RecordStatus of a books_issued record
+   * Update the RecordStatus of a books_issued record
    * @param int $issuedID      Issued ID of record to update
    * @param int $recordStatus  New RecordStatus for Book
    * @return int|null          Number of records updated (=1) or null

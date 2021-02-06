@@ -1,14 +1,20 @@
 <?php
+declare(strict_types=1);
 /**
  * Global Configuration Details
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
-
-namespace LibraryMS;
 
 /* Database Connection */
 $connDetails = parse_ini_file("../inifiles/mariaDBCon.ini");
 $connDetails["database"] = "libraryms";
 
+/**
+ * Database connection details
+ */
 define("DBSERVER", $connDetails);
 
 /* Default Values */
@@ -22,6 +28,9 @@ $defaultValues = [
   "userAdminUserID" => 1,  // UserID for User Management Administrator
 ];
 
+/**
+ * Application default values
+ */
 define("DEFAULTS", $defaultValues);
 
 /* Valid Pages */
@@ -51,6 +60,9 @@ $validPages = [
   ],
 ];
 
+/**
+ * Valid pages used within INDEX and DASHBOARD frames
+ */
 define("VALID_PAGES", $validPages);
 
 /* Status Codes */
@@ -97,4 +109,7 @@ $statusCodes = [
   ],
 ];
 
+/**
+ * Output Text and Badge Class for each valid Status Field / Status Code
+ */
 define("STATUS_CODES", $statusCodes);

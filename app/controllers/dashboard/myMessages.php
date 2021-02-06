@@ -1,7 +1,15 @@
 <?php
+declare(strict_types=1);
 /**
- * DASHBOARD/myMessages controller - List all messages RECEIVED & SENT for
- * Logged-in User
+ * DASHBOARD/myMessages controller
+ *
+ * Retrieve all the active RECEIVED messages and all the SENT messages for the
+ * current logged-in user, and display them using the 'messagesList' view.
+ * Process any status updates that are selected.
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

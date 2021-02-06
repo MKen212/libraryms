@@ -1,17 +1,28 @@
 <?php
+declare(strict_types=1);
 /**
- * Message Class - Used to access the messages table and process SQL queries
+ * Message Class
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;
 
 use PDO, PDOException;
 
+/**
+ * Access the messages table and process SQL queries
+ */
 class Message {
-  private $conn;  // PDO database connection object
+  /**
+   * PDO database connection object
+   */
+  private $conn;
 
   /**
-   * Construct function - Create the database connection object
+   * Create the database connection object
    */
   public function __construct() {
     try {
@@ -24,7 +35,7 @@ class Message {
   }
 
   /**
-   * add function - Add message Record
+   * Add message Record
    * @param int $senderID    Sender User ID
    * @param int $receiverID  Receiver User ID
    * @param string $subject  Message Subject
@@ -45,7 +56,7 @@ class Message {
   }
 
   /**
-   * countUnreadByUserID function - Count ACTIVE Unread Messages for User ID
+   * Count ACTIVE Unread Messages for User ID
    * @param int $userID  User ID
    * @return int|null    Count of ACTIVE Unread Messages for $userID or null
    */
@@ -64,8 +75,8 @@ class Message {
   }
 
   /**
-   * getListReceived function - Retrieve list of messages RECEIVED BY Receiver ID
-   * (optionally by RecordStatus) from messages_view
+   * Retrieve list of messages RECEIVED BY Receiver ID (optionally by RecordStatus)
+   * from messages_view
    * @param int $receiverID    Receiver User ID
    * @param int $recordStatus  Record Status (Optional)
    * @return array|null        Returns all messages received by Receiver ID
@@ -93,7 +104,8 @@ class Message {
   }
 
   /**
-   * getListSent function - Retrieve list of messages SENT BY Sender ID (optionally by RecordStatus) from messages_view
+   * Retrieve list of messages SENT BY Sender ID (optionally by RecordStatus)
+   * from messages_view
    * @param int $senderID      Sender User ID
    * @param int $recordStatus  Record Status (Optional)
    * @return array|null        Returns all messages sent by Sender ID (AddedTimeStamp
@@ -121,7 +133,7 @@ class Message {
   }
 
   /**
-   * updateStatus function - Updates the relevant Status Code of a message record
+   * Update the relevant Status Code of a messages record
    * @param string $field   Field in messages table to be updated
    * @param int $messageID  Message ID of record to update
    * @param int $newStatus  New Status code for field

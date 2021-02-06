@@ -1,6 +1,11 @@
 <?php
+declare(strict_types=1);
 /**
  * Global Helper Functions
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;
@@ -8,34 +13,35 @@ namespace LibraryMS;
 use RecursiveArrayIterator;
 
 /**
- * cleanInput function - Used to clean all manual data entry
- * @param string $input    Original Input
- * @param string $type     Input Type (string, int, float, email, password)
- * @return string $output  Cleaned Input
+ * Clean all manual data entry
+ * @param mixed $input  Original Input
+ * @param string $type  Input Type (string, int, float, email, password)
+ * @return mixed        Cleaned Input
  */
 function cleanInput($input, $type) {
-  // Clean all with htmlspecialchars
-  $output = htmlspecialchars($input);
   if ($type == "string") {
+    $output = htmlspecialchars($input);
     $output = trim($output);
     $output = str_replace("\n", " ",$output);  // For LF replace with space as messages shown as single lines
     $output = stripslashes($output);
     $output = filter_var($output, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_LOW);
   } elseif ($type == "int") {
-    $output = filter_var($output, FILTER_SANITIZE_NUMBER_INT);
+    $output = filter_var($input, FILTER_SANITIZE_NUMBER_INT);
   } elseif ($type == "float") {
-    $output = filter_var($output, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+    $output = filter_var($input, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
   } elseif ($type = "email") {
+    $output = htmlspecialchars($input);
+    $output = trim($output);
     $output = filter_var($output, FILTER_SANITIZE_EMAIL);
   }
   return $output;
 }
 
 /**
- * msgPrep function - Used to prepare system messages for display
- * @param string $type       Type of message (success / warning / danger)
- * @param string $msg        Message Content
- * @return string $prepdMsg  Prepared Message
+ * Prepare system messages for display
+ * @param string $type  Type of message (success / warning / danger)
+ * @param string $msg   Message Content
+ * @return string       Prepared Message
  */
 function msgPrep($type, $msg) {
   if ($type == "success") {
@@ -49,7 +55,7 @@ function msgPrep($type, $msg) {
 }
 
 /**
- * msgShow function - Used to display Session["Message"] & then clear it
+ * Display Session["Message"] and then clear it
  * @return bool  Returns true on completion
  */
 function msgShow() {
@@ -61,9 +67,9 @@ function msgShow() {
 }
 
 /**
- * fixSearch function - Used to clean and fix Search String to be MariaDB compliant
- * @param string $searcgString  Original Input Search String
- * @return string $fixed        Cleaned and fixed MariaDB-Compliant Search String
+ * Clean and fix a Search String to be MariaDB compliant
+ * @param string $searchString  Original Input Search String
+ * @return string               Cleaned and fixed MariaDB-Compliant Search String
  */
 function fixSearch($searchString) {
   $fixed = htmlspecialchars($searchString);
@@ -74,10 +80,10 @@ function fixSearch($searchString) {
 }
 
 /**
- * postValue function - Returns the value in a $_POST key field IF it's set
- * @param string $key            Name of $_POST["key"] to return
- * @param string $default        Default value to return if "key" NOT set (optional)
- * @return string $_POST["key"]  Returns $_POST["key"] value or default/NULL
+ * Returns the value in a $_POST key field IF it is set
+ * @param string $key     Name of $_POST["key"] to return
+ * @param mixed $default  Default value to return if "key" NOT set (optional)
+ * @return mixed          Returns $_POST["key"] value or default/null
  */
 function postValue($key, $default = null) {
   if (isset($_POST["$key"])) {
@@ -88,10 +94,10 @@ function postValue($key, $default = null) {
 }
 
 /**
- * getFilePath function - Used to return full path for image or default No Image
+ * Returns the full file path for specified image or default path if no image found
  * @param int $bookID          Book ID for image
  * @param string $imgFilename  Product Image Filename
- * @return string $filePath    Full filepath to specified image
+ * @return string              Full filepath to specified image or default
  *
  */
 function getFilePath($bookID, $imgFilename) {
@@ -104,11 +110,11 @@ function getFilePath($bookID, $imgFilename) {
 }
 
 /**
- * statusOutput function - Returns the HTML output relevant to the given status code
- * @param string $type           Status Type (from Config/StatusCodes)
- * @param int $status            Status Code
- * @param string $link           HREF Link (Optional)
- * @return string $statusOutput  Returns the HTML output for the Status Code
+ * Returns the HTML output relevant to the given status code
+ * @param string $type  Status Type (from STATUS_CODES)
+ * @param int $status   Status Code (from STATUS_CODES)
+ * @param string $link  HREF Link (optional)
+ * @return string       Returns the HTML output for the relevant status code
  */
 function statusOutput($type, $status, $link = null) {
   $text = STATUS_CODES[$type][$status]["text"];
@@ -118,10 +124,10 @@ function statusOutput($type, $status, $link = null) {
 }
 
 /**
- * statusCycle function - Returns next status code or reverts to zero
- * @param string $type  Status Type (from Config/StatusCodes)
+ * Returns the next status code or reverts to zero
+ * @param string $type  Status Type (from STATUS_CODES)
  * @param int $current  Current Status Code
- * @return int $new     Next Status Code or 0
+ * @return int          Next Status Code or 0
  */
 function statusCycle($type, $current) {
   $max = count(STATUS_CODES[$type]) - 1;
@@ -130,9 +136,9 @@ function statusCycle($type, $current) {
 }
 
 /**
- * userOptions function - Outputs all Approved/Active Users as HTML options
- * @param string $selID  UserID that is marked as 'selected'
- * @return bool          Returns true on completion
+ * Outputs all Approved/Active Users as HTML options
+ * @param int $selID  UserID that is marked as 'selected' (optional)
+ * @return bool       Returns true on completion
  */
 function userOptions($selID = null) {
   include_once "../app/models/userClass.php";
@@ -148,9 +154,9 @@ function userOptions($selID = null) {
 }
 
 /**
- * bookOptions function - Outputs all Active Books as HTML options
- * @param string $selID  BookID that is marked as 'selected'
- * @return bool          Returns true on completion
+ * Outputs all Active Books as HTML options
+ * @param int $selID  BookID that is marked as 'selected' (optional)
+ * @return bool       Returns true on completion
  */
 function bookOptions($selID = null) {
   include_once "../app/models/bookClass.php";

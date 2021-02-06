@@ -1,6 +1,14 @@
 <?php
+declare(strict_types=1);
 /**
- * DASHBOARD/addBook controller - Add Book
+ * DASHBOARD/addBook controller
+ *
+ * Prepare and show a blank book form for user entry. If the form is submitted,
+ * validate the data, add a new books record and upload the optional image file.
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;
@@ -10,7 +18,7 @@ $book = new Book();
 require_once "../app/models/uploadImgClass.php";
 $uploadImg = new UploadImg();
 
-// Add Product Record if Add POSTed
+// Add Book Record if Add POSTed
 if (isset($_POST["addBook"])) {
   // If Image File included - Perform initial checks on file
   $initialChecks = false;

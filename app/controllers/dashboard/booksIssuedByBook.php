@@ -1,7 +1,15 @@
 <?php
+declare(strict_types=1);
 /**
- * DASHBOARD/booksIssuedByBook controller - List all books_issued records
- * currently outstanding for a Particular Book
+ * DASHBOARD/booksIssuedByBook controller
+ *
+ * Retrieve all the active and outstanding books_issued records for a specific
+ * book, plus the relevant books record, and display them using the
+ * 'booksIssuedByBookList' view.
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

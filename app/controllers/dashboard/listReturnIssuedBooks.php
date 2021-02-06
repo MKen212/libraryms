@@ -1,6 +1,15 @@
 <?php
+declare(strict_types=1);
 /**
- * DASHBOARD/listReturnIssuedBooks controller - List/Return Issued Books
+ * DASHBOARD/listReturnIssuedBooks controller
+ *
+ * Retrieve all the books_issued records, filtered by Title or Username if search
+ * criteria are entered, and display them using the 'booksIssuedList' view.
+ * Process any returns or status updates that are selected.
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

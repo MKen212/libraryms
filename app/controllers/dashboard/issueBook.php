@@ -1,6 +1,15 @@
 <?php
+declare(strict_types=1);
 /**
- * DASHBOARD/issueBook controller - Add Issued Book
+ * DASHBOARD/issueBook controller
+ * 
+ * Prepare and show a bookIssue form for user entry. Display the relevant user
+ * record and book record as each is selected. If the form is submitted,
+ * validate the data and add a new books_issued record.
+ * 
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

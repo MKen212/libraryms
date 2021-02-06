@@ -1,7 +1,15 @@
 <?php
+declare(strict_types=1);
 /**
- * DASHBOARD/listEditUsers controller - List all Users with link to
- * Display/Edit
+ * DASHBOARD/listEditUsers controller
+ *
+ * Retrieve all the users records, filtered by Username if search criteria are
+ * entered, and display them using the 'usersList' view. Process any status
+ * updates that are selected.
+ * 
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

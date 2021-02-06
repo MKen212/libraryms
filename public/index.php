@@ -1,6 +1,11 @@
 <?php
+declare(strict_types=1);
 /**
  * INDEX - Main HTML frame facilitating user registration, login and logout
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;
@@ -8,7 +13,7 @@ namespace LibraryMS;
 session_start();
 
 require_once "../app/helpers/helperFunctions.php";
-require_once "../app/config/_config.php";
+require_once "../app/config/config.php";
 
 // Get Page Details
 $page = "login";

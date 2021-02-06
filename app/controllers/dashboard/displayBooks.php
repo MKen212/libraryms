@@ -1,6 +1,14 @@
 <?php
+declare(strict_types=1);
 /**
- * DASHBOARD/displayBooks controller - Display all Books in card format
+ * DASHBOARD/displayBooks controller
+ *
+ * Retrieve all the active books records, filtered by Title if search criteria
+ * are entered, and display them using the 'bookCards' view.
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

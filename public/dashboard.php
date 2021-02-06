@@ -1,6 +1,11 @@
 <?php
+declare(strict_types=1);
 /**
  * DASHBOARD - Main HTML frame facilitating all dashboard functionality
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;
@@ -18,7 +23,7 @@ if (!isset($_SESSION["userLogin"])) {
   exit();
 }
 
-require_once "../app/config/_config.php";
+require_once "../app/config/config.php";
 
 // Get Page Details
 $page = "home";
@@ -71,7 +76,7 @@ if ($_SESSION["userIsAdmin"] == 0 && in_array($page, VALID_PAGES["dashboard_admi
 
       // Sidebar
       include "../app/controllers/dashboard/sidebar.php"; ?>
-      
+
       <!-- Selected page -->
       <main class="col-md-9 ml-sm-auto col-lg-10 px-4"><?php
 

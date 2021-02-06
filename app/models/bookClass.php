@@ -1,17 +1,29 @@
 <?php
+declare(strict_types=1);
 /**
- * Book class - Used to access the books table and process SQL queries
+ * Book Class
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;
 
-use PDO, PDOException;
+use PDO;
+use PDOException;
 
+/**
+ * Access the books table and process SQL queries
+ */
 class Book {
-  private $conn;  // PDO database connection object
+  /**
+   * PDO database connection object
+   */
+  private $conn;
 
   /**
-   * Construct function - Create the database connection object
+   * Create the database connection object
    */
   public function __construct() {
     try {
@@ -24,7 +36,7 @@ class Book {
   }
 
   /**
-   * exists function - Check if Book Title already exists in DB
+   * Check if a Book Title already exists in the table
    * @param string $title  Book Title
    * @return int|null      Book ID of record with selected Title or null
    */
@@ -42,12 +54,12 @@ class Book {
   }
 
   /**
-   * add function - Add book record
+   * Add book record
    * @param string $title        Book Title
    * @param string $author       Book Author
    * @param string $publisher    Book Publisher
    * @param string $ISBN         Book ISBN Code
-   * @param string $price        Book Price
+   * @param float $price         Book Price
    * @param int $quantity        Quantity of the Book Added
    * @param string $imgFilename  Filename for Book Image
    * @return int|null            Book ID of added record or null
@@ -76,9 +88,10 @@ class Book {
   }
 
   /**
-   * getDisplay function - Retrieve list of ACTIVE book records (optionally based on title)
+   * Retrieve list of ACTIVE book records (optionally based on title)
    * @param string $title  Book Title (Optional)
-   * @return array|null    Returns all/selected ACTIVE book records (Title order) or null
+   * @return array|null    Returns all/selected ACTIVE book records (Title order)
+   * or null
    */
   public function getDisplay($title = null) {
     try {
@@ -102,7 +115,7 @@ class Book {
   }
 
   /**
-   * getList function - Retrieve list of ALL book records (optionally based on title)
+   * Retrieve list of ALL book records (optionally based on Title)
    * @param string $title  Book Title (Optional)
    * @return array|null    Returns all/selected book records (Title order) or null
    */
@@ -128,7 +141,7 @@ class Book {
   }
 
   /**
-   * getBookIDs function - Retrieve all Active Book IDs with Title
+   * Retrieve all Active Book IDs with Title
    * @return array|null  Returns BookID and Title of all Active records or null
    */
   public function getBookIDs() {
@@ -146,7 +159,7 @@ class Book {
   }
 
   /**
-   * getRecord function - Retrieve book record based on ID
+   * Retrieve book record based on Book ID
    * @param int $bookID  Book ID of required record
    * @return array|null  Returns book record for $bookID or null
    */
@@ -164,13 +177,13 @@ class Book {
   }
 
   /**
-   * updateRecord function - Updates an existing Book record
+   * Update an existing book record
    * @param int $bookID          Book ID of record to update
    * @param string $title        Book Title
    * @param string $author       Book Author
    * @param string $publisher    Book Publisher
    * @param string $ISBN         Book ISBN Code
-   * @param string $price        Book Price
+   * @param float $price         Book Price
    * @param int $qtyTotal        Total Quantity
    * @param int $qtyAvail        Available Quantity
    * @param string $imgFilename  Filename for Book Image
@@ -210,7 +223,7 @@ class Book {
   }
 
   /**
-   * updateBookQtyAvail function - Update QtyAvail for an existing book
+   * Update the QtyAvail for an existing book record
    * @param int $bookID       Book ID of record to update
    * @param int $qtyAvailChg  (+/-)Quantity to change
    * @return int|null         Number of records updated (=1) or null
@@ -233,7 +246,7 @@ class Book {
   }
 
   /**
-   * updateRecordStatus function - Update the RecordStatus for an existing book
+   * Update the RecordStatus for an existing book
    * @param int $bookID        Book ID of record to update
    * @param int $recordStatus  New RecordStatus for Book
    * @return int|null          Number of records updated (=1) or null

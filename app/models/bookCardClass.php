@@ -1,18 +1,36 @@
 <?php
+declare(strict_types=1);
 /**
- * BookCard Class - Used to extend the RecursiveIteratorIterator to display
- * each row of a Book/getDisplay query in a card format
+ * BookCard Class
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;
 
 use RecursiveIteratorIterator;
 
+/**
+ * Displays books records in card format
+ *
+ * Extends the RecursiveIteratorIterator class to display each record of a
+ * Book/getDisplay query in card format using HTML
+ */
 class BookCard extends RecursiveIteratorIterator {
+  /**
+   * Get just the LEAVES data from the query result
+   * @param \Traversable $result  Result from Book/getDisplay query
+   */
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);
   }
 
+  /**
+   * Imbed the current key=>value data into relevant HTML code
+   * @return string|null  HTML element containing key=>value data or null
+   */
   public function current() {
     $parentKey = parent::key();
     $parentValue = parent::current();
@@ -56,32 +74,47 @@ class BookCard extends RecursiveIteratorIterator {
     return $returnValue;
   }
 
+  /**
+   * Initialise the column count
+   */
   public function beginIteration() {
-    // Start Column Count
     $_SESSION["curColumn"] = 0;
   }
 
+  /**
+   * Start the current column div (and row div if required)
+   */
   public function beginChildren() {
     $_SESSION["curColumn"] += 1;
+    // Create new row div if this is the first column
     if ($_SESSION["curColumn"] == 1) {
-      echo "<div class='row'>";  // Create New row div
+      echo "<div class='row'>";
     }
-    echo "<div class='col-4 border rounded'>"; // Create Col div
+    // Create column div
+    echo "<div class='col-4 border rounded'>";
   }
 
+  /**
+   * Include record hyperlinks and close the column div (and row div if required)
+   */
   public function endChildren() {
     // Add Hyperlink to Show Books Issued for book
     $href = "dashboard.php?p=booksIssuedByBook&id="
           . $_SESSION["curBookID"];
     echo "<a class='badge badge-info' href='{$href}'>Show Currently Issued</a>";
-    echo "</div>";  // Close Col div
+    // Close column div
+    echo "</div>";
     unset ($_SESSION["curBookID"]);
-    // If 3 Cols reached close row div & reset Column Count
+    // If 3 columns reached close row div & reset column count
     if ($_SESSION["curColumn"] == 3) {
       echo "</div>";
       $_SESSION["curColumn"] = 0;
     }
   }
+
+  /**
+   * Close final column/row divs and unset column count
+   */
   public function endIteration() {
     // If in middle of a row then pad blank columns
     if ($_SESSION["curColumn"] > 0) {

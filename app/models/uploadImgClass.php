@@ -1,16 +1,26 @@
 <?php
+declare(strict_types=1);
 /**
- * UploadImg Class - Used to validate and upload image files to the server
+ * UploadImg Class
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;
 
-use finfo, Exception;
+use finfo;
+use Exception;
 
+/**
+ * Validate and upload image files to the server
+ */
 class UploadImg {
   /**
-   * initialChecks function - Performs initial checks on temporary uploaded file
-   * @return bool|null  True if checks passed or null
+   * Perform initial checks on temporary uploaded file
+   * @throws UploadException  Error loading or validating the file as an image
+   * @return bool|null        True if checks passed or null
    */
   public function initialChecks() {
     try {
@@ -33,9 +43,10 @@ class UploadImg {
   }
 
   /**
-   * addBookImg function - Add Book Image File to Server
+   * Add Book Image File to Server
    * @param int    $bookID       Book ID for Image File
    * @param string $imgFilename  Filename for Image File
+   * @throws UploadException     Error loading the file
    * @return bool|null           True/False if image uploaded or null
    */
   public function addBookImg($bookID, $imgFilename) {
@@ -65,12 +76,11 @@ class UploadImg {
 }
 
 /**
- * UploadException Class - Provides relevant Error Message based on provided error code
+ * Provides the relevant Upload Error Message based on the Error Code provided
  */
-
 class UploadException extends Exception {
   /**
-   * Construct function - Create the Exception object
+   * Create the Exception object
    * @param int $code  Error Code from Exception
    */
   public function __construct($code) {
@@ -79,7 +89,7 @@ class UploadException extends Exception {
   }
 
   /**
-   * codeToMessage function - Creates the Error Message from the Code
+   * Retrieves the Error Message based on the Code
    * @param int $code         Upload Error Code
    * @return string $message  Error Message for the specific error code
    */

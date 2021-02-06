@@ -1,18 +1,36 @@
 <?php
+declare(strict_types=1);
 /**
- * MessageReceived Class - Used to extend the RecursiveIteratorIterator to
- * display each row of a Message/getListReceived query in table format
+ * MessageReceived Class
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;
 
 use RecursiveIteratorIterator;
 
+/**
+ * Displays messages records RECEIVED for a particular user in table format
+ *
+ * Extends the RecursiveIteratorIterator class to display each record of a
+ * Message/getListReceived query in table format using HTML
+ */
 class MessageReceived extends RecursiveIteratorIterator {
+  /**
+   * Get just the LEAVES data from the query result
+   * @param \Traversable $result  Result from Message/getListReceived query
+   */
   public function __construct($result) {
     parent::__construct($result, self::LEAVES_ONLY);
   }
 
+  /**
+   * Imbed the current key=>value data into relevant HTML code
+   * @return string|null  HTML element containing key=>value data or null
+   */
   public function current() {
     $parentKey = parent::key();
     $parentValue = parent::current();
@@ -47,12 +65,18 @@ class MessageReceived extends RecursiveIteratorIterator {
     return "<td>{$returnValue}</td>";
   }
 
+  /**
+   * Start the current row
+   */
   public function beginChildren() {
     echo "<tr>";
   }
 
+  /**
+   * Add a Reply column and close the current row
+   */
   public function endChildren() {
-    // Add Reply Column
+    // Reply Column
     $href = "dashboard.php?p=sendMessage&id="
           . $_SESSION["curMessageID"]
           . "&recID="
