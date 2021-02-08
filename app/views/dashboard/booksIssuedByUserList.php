@@ -1,7 +1,14 @@
 <?php
+declare(strict_types=1);
 /**
- * DASHBOARD/booksIssuedByUserList view - List of books_issued records for
- * specific user
+ * DASHBOARD/booksIssuedByUserList view
+ *
+ * Table layout to display a list of books_issued records for a specific user
+ * using the {@see \LibraryMS\BookIssuedByUser} class.
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

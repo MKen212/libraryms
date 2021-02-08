@@ -1,6 +1,13 @@
 <?php
+declare(strict_types=1);
 /**
- * DASHBOARD/userRecord view - Table to display selected users record
+ * DASHBOARD/userRecord view
+ *
+ * Table layout to display a single selected users record.
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

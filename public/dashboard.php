@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 /**
- * DASHBOARD - Main HTML frame facilitating all dashboard functionality
+ * DASHBOARD
+ * 
+ * Main HTML frame facilitating all dashboard functionality
  *
  * For the full copyright and license information, please view the
  * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}

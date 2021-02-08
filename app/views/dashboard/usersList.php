@@ -1,6 +1,14 @@
 <?php
+declare(strict_types=1);
 /**
- * DASHBOARD/usersList view - List of users records
+ * DASHBOARD/usersList view
+ *
+ * Table layout, with search option, to display a list of users records,
+ * using the {@see \LibraryMS\UserList} class.
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

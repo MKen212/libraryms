@@ -1,6 +1,15 @@
 <?php
-/**   TO HERE
- * DASHBOARD/myProfile controller - Display My Profile
+declare(strict_types=1);
+/**
+ * DASHBOARD/myProfile controller
+ *
+ * Retreive the user record of the current logged-in user and display it in a
+ * user form. If either the user data or user password is updated and
+ * submitted, validate the data and update the existing user record.
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 /**
- * INDEX - Main HTML frame facilitating user registration, login and logout
+ * INDEX
+ * 
+ * Main HTML frame facilitating user registration, login and logout
  *
  * For the full copyright and license information, please view the
  * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}

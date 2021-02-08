@@ -1,6 +1,15 @@
 <?php
+declare(strict_types=1);
 /**
- * DASHBOARD/sidebarMenu view - Sidebar Menu
+ * DASHBOARD/sidebarMenu view
+ *
+ * Sidebar menu with welcome message for current logged-in user, a count of
+ * their unread messages, and links to each page. An Admin section with
+ * additional links is provided for admin users.
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

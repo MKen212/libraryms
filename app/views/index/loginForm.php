@@ -1,6 +1,13 @@
 <?php
+declare(strict_types=1);
 /**
- * INDEX/loginForm view - User login form
+ * INDEX/loginForm view
+ *
+ * Form for entering a users login information.
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

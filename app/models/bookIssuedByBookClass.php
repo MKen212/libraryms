@@ -13,7 +13,7 @@ namespace LibraryMS;
 use RecursiveIteratorIterator;
 
 /**
- * Displays books_issued records for a particular BOOK in table format
+ * Displays books_issued records for a particular book in table format
  *
  * Extends the RecursiveIteratorIterator class to display each record of a
  * BookIssued/getListByBook query in table format using HTML

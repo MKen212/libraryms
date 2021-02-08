@@ -1,6 +1,14 @@
 <?php
+declare(strict_types=1);
 /**
- * INDEX/register controller - Register New User
+ * INDEX/register controller
+ *
+ * Prepare and show a blank register form for entry. If the form is submitted,
+ * validate the data and add a new users record.
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

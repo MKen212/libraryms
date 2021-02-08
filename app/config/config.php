@@ -8,6 +8,8 @@ declare(strict_types=1);
  * file that was included with this source code.
  */
 
+namespace LibraryMS;
+
 /* Database Connection */
 $connDetails = parse_ini_file("../inifiles/mariaDBCon.ini");
 $connDetails["database"] = "libraryms";
@@ -15,7 +17,7 @@ $connDetails["database"] = "libraryms";
 /**
  * Database connection details
  */
-define("DBSERVER", $connDetails);
+define("\LibraryMS\DBSERVER", $connDetails);
 
 /* Default Values */
 $defaultValues = [
@@ -31,7 +33,7 @@ $defaultValues = [
 /**
  * Application default values
  */
-define("DEFAULTS", $defaultValues);
+define("\LibraryMS\DEFAULTS", $defaultValues);
 
 /* Valid Pages */
 $validPages = [
@@ -63,7 +65,7 @@ $validPages = [
 /**
  * Valid pages used within INDEX and DASHBOARD frames
  */
-define("VALID_PAGES", $validPages);
+define("\LibraryMS\VALID_PAGES", $validPages);
 
 /* Status Codes */
 $statusCodes = [
@@ -112,4 +114,4 @@ $statusCodes = [
 /**
  * Output Text and Badge Class for each valid Status Field / Status Code
  */
-define("STATUS_CODES", $statusCodes);
+define("\LibraryMS\STATUS_CODES", $statusCodes);

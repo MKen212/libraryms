@@ -1,6 +1,14 @@
 <?php
+declare(strict_types=1);
 /**
- * DASHBOARD/navbar controller - Update data for top Navbar
+ * DASHBOARD/navbar controller
+ *
+ * If the navbar search box is updated, validate and save or clear the search
+ * parameters, and display the main navbar at the top of the page
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

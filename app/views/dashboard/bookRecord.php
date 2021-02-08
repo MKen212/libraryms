@@ -1,6 +1,13 @@
 <?php
+declare(strict_types=1);
 /**
- * DASHBOARD/bookRecord view - Table to display selected books record
+ * DASHBOARD/bookRecord view
+ *
+ * Table layout to display a single selected books record.
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

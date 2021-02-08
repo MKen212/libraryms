@@ -3,7 +3,7 @@ declare(strict_types=1);
 /**
  * DASHBOARD/addBook controller
  *
- * Prepare and show a blank book form for user entry. If the form is submitted,
+ * Prepare and show a blank book form for entry. If the form is submitted,
  * validate the data, add a new books record and upload the optional image file.
  *
  * For the full copyright and license information, please view the

@@ -1,6 +1,16 @@
 <?php
+declare(strict_types=1);
 /**
- * DASHBOARD/sendMessage controller - Send a Message
+ * DASHBOARD/sendMessage controller
+ *
+ * Prepare and show a blank message form for user entry, or pre-populate it if
+ * this is a reply from a received message. Display the relevant user
+ * record when selected. If the form is submitted, validate the data and add a
+ * new messages record.
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

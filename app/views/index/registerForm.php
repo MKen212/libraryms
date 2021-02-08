@@ -1,6 +1,13 @@
 <?php
+declare(strict_types=1);
 /**
- * INDEX/registerForm view - User registration form
+ * INDEX/registerForm view
+ *
+ * Form for registering a new users login and contact information.
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

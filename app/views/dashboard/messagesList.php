@@ -1,6 +1,15 @@
 <?php
+declare(strict_types=1);
 /**
- * DASHBOARD/messagesList view - List of messages records
+ * DASHBOARD/messagesList view
+ *
+ * Table layout to display a list of Received messages records using the
+ * {@see \LibraryMS\MessageReceived} class, followed by a list of Sent
+ * messages records, using the {@see \LibraryMS\MessageSent} class.
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

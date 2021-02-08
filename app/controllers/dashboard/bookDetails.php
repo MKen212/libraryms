@@ -3,9 +3,9 @@ declare(strict_types=1);
 /**
  * DASHBOARD/bookDetails controller
  * 
- * Retreive the record of a specific book and display it in a book form for
- * user edit. If the form is submitted, validate the data, update the existing
- * books record and upload the optional image file.
+ * Retreive the record of a specific book and display it in a book form. If the
+ * form is updated and submitted, validate the data, update the existing books
+ * record and upload the optional image file.
  * 
  * For the full copyright and license information, please view the
  * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}

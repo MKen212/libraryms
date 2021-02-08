@@ -1,6 +1,14 @@
 <?php
+declare(strict_types=1);
 /**
- * DASHBOARD/homePage view - Home page
+ * DASHBOARD/homePage view
+ *
+ * Home page information and instructions. Additional administration
+ * instructions provided for admin users.
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

@@ -1,6 +1,14 @@
 <?php
+declare(strict_types=1);
 /**
- * INDEX/login controller - Verify & Login User
+ * INDEX/login controller
+ *
+ * Prepare and show a blank login form for user entry. If the form is submitted,
+ * validate the data and if passed open the dashboard home page.
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

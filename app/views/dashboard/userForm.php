@@ -1,6 +1,14 @@
 <?php
+declare(strict_types=1);
 /**
- * DASHBOARD/userForm view - Form for adding/editing a users record
+ * DASHBOARD/userForm view
+ *
+ * Form for editing a users record, with a separate form to change their
+ * password.
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

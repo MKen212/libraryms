@@ -13,7 +13,7 @@ namespace LibraryMS;
 use RecursiveIteratorIterator;
 
 /**
- * Displays messages records RECEIVED for a particular user in table format
+ * Displays messages records received for a particular user in table format
  *
  * Extends the RecursiveIteratorIterator class to display each record of a
  * Message/getListReceived query in table format using HTML

@@ -1,6 +1,14 @@
 <?php
+declare(strict_types=1);
 /**
- * DASHBOARD/bookCards view - Display books records in card format
+ * DASHBOARD/bookCards view
+ *
+ * Card format layout for displaying selected books records using the
+ * {@see \LibraryMS\BookCard} class.
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

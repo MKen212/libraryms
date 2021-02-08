@@ -1,6 +1,15 @@
 <?php
+declare(strict_types=1);
 /**
- * DASHBOARD/userDetails controller - Display/Edit User Record
+ * DASHBOARD/userDetails controller
+ *
+ * Retreive the record of a specific user and display it in a user form. If the
+ * form is updated and submitted, validate the data and update the existing
+ * users record.
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;

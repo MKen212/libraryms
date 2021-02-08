@@ -1,7 +1,14 @@
 <?php
+declare(strict_types=1);
 /**
- * DASHBOARD/booksIssuedList view - List of books_issued records with
- * Return option
+ * DASHBOARD/booksIssuedList view
+ *
+ * Table layout, with search option, to display a list of books_issued records,
+ * including Return option, using the {@see \LibraryMS\BookIssuedList} class.
+ *
+ * For the full copyright and license information, please view the
+ * {@link https://github.com/MKen212/libraryms/blob/master/LICENSE LICENSE}
+ * file that was included with this source code.
  */
 
 namespace LibraryMS;
