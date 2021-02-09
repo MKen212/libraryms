@@ -52,7 +52,7 @@ class UploadImg {
   public function addBookImg($bookID, $imgFilename) {
     try {
       $tmpFile = $_FILES["imgFilename"]["tmp_name"];
-      $targetDir = DEFAULTS["booksImgPath"] . $bookID . "/";
+      $targetDir = Constants::getDefaultValues()["booksImgPath"] . $bookID . "/";
       $targetFile = $targetDir . $imgFilename;
 
       // Create Path if not exists
@@ -99,7 +99,7 @@ class UploadException extends Exception {
         $message = "Uploaded File Size exceeds maximum set in php.ini.";
         break;
       case UPLOAD_ERR_FORM_SIZE :  // 2
-        $message = "Uploaded File Size exceeds " . (DEFAULTS["maxUploadSize"] / 1000000) . " Mbyte(s).";
+        $message = "Uploaded File Size exceeds " . (Constants::getDefaultValues()["maxUploadSize"] / 1000000) . " Mbyte(s).";
         break;
       case UPLOAD_ERR_PARTIAL :  // 3
         $message = "Uploaded File was only partially uploaded.";

@@ -24,7 +24,7 @@ if (isset($_GET["p"])) {
 }
 
 // Check Valid Page is entered
-if (!in_array($page, VALID_PAGES["index"])) {
+if (!in_array($page, Constants::getValidPages()["index"])) {
   $_SESSION["message"] = msgPrep("danger", "Error - Page Not Found.");
   $page = "login";
 }
@@ -46,8 +46,8 @@ if (!in_array($page, VALID_PAGES["index"])) {
   <link rel="shortcut icon" href="images/favicon-96x96.png" type="image/x-icon" />
 </head>
 
-<body class="text-center">
-  <div class="container-fluid">
+<body>
+  <div class="text-center container-fluid">
     <!-- Header -->
     <div class="row justify-content-center">
       <h1>Library Management System</h1>

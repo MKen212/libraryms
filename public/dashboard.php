@@ -34,13 +34,13 @@ if (isset($_GET["p"])) {
 }
 
 // Check Valid Page is entered
-if (!in_array($page, VALID_PAGES["dashboard"]) && !in_array($page, VALID_PAGES["dashboard_admin"])) {
+if (!in_array($page, Constants::getValidPages()["dashboard"]) && !in_array($page, Constants::getValidPages()["dashboard_admin"])) {
   $_SESSION["message"] = msgPrep("danger", "Error - Page Not Found.");
   $page = "home";
 }
 
 // Check User IsAdmin to view admin pages
-if ($_SESSION["userIsAdmin"] == 0 && in_array($page, VALID_PAGES["dashboard_admin"])) {
+if ($_SESSION["userIsAdmin"] == 0 && in_array($page, Constants::getValidPages()["dashboard_admin"])) {
   $_SESSION["message"] = msgPrep("warning", "Sorry - You need Admin Privileges to view the '{$page}' page.");
   $page = "home";
 }

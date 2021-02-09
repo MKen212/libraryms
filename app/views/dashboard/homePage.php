@@ -29,7 +29,7 @@ namespace LibraryMS;
 </div><?php
 
 // Display Testing Information if in Testing Mode
-if (DEFAULTS["testing"] == true) : ?>
+if (Constants::getDefaultValues()["testing"] == true) : ?>
   <!-- PHP Global Variables -->
   <div>
     <pre><?php

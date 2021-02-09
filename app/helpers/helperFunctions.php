@@ -102,35 +102,35 @@ function postValue($key, $default = null) {
  */
 function getFilePath($bookID, $imgFilename) {
   if (empty($imgFilename)) {
-    $filePath = DEFAULTS["noImgUploaded"];
+    $filePath = Constants::getDefaultValues()["noImgUploaded"];
   } else {
-    $filePath = DEFAULTS["booksImgPath"] . $bookID . "/" . $imgFilename;
+    $filePath = Constants::getDefaultValues()["booksImgPath"] . $bookID . "/" . $imgFilename;
   }
   return $filePath;
 }
 
 /**
  * Returns the HTML output relevant to the given status code
- * @param string $type  Status Type (from STATUS_CODES)
- * @param int $status   Status Code (from STATUS_CODES)
+ * @param string $type  Status Type (from Constants Class)
+ * @param int $status   Status Code (from Constants Class)
  * @param string $link  HREF Link (optional)
  * @return string       Returns the HTML output for the relevant status code
  */
 function statusOutput($type, $status, $link = null) {
-  $text = STATUS_CODES[$type][$status]["text"];
-  $badge = STATUS_CODES[$type][$status]["badge"];
+  $text = Constants::getStatusCodes()[$type][$status]["text"];
+  $badge = Constants::getStatusCodes()[$type][$status]["badge"];
   $statusOutput = "<a class='badge badge-{$badge}' href='{$link}'>{$text}</a>";
   return $statusOutput;
 }
 
 /**
  * Returns the next status code or reverts to zero
- * @param string $type  Status Type (from STATUS_CODES)
+ * @param string $type  Status Type (from Constants Class)
  * @param int $current  Current Status Code
  * @return int          Next Status Code or 0
  */
 function statusCycle($type, $current) {
-  $max = count(STATUS_CODES[$type]) - 1;
+  $max = count(Constants::getStatusCodes()[$type]) - 1;
   $new = ($current == $max) ? 0 : $current + 1;
   return $new;
 }

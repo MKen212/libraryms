@@ -50,7 +50,7 @@ class BookCard extends RecursiveIteratorIterator {
                    . "' /><div class='mt-3'>";
     } elseif ($parentKey == "Price") {
       // For Price output Price (Currency): & value
-      $returnValue = "<b>Price (" . DEFAULTS["currency"] . "): </b>"
+      $returnValue = "<b>Price (" . Constants::getDefaultValues()["currency"] . "): </b>"
                    . $parentValue
                    . "<br />";
     } elseif ($parentKey == "QtyTotal") {

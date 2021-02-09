@@ -65,9 +65,9 @@ else :  // Display Book Form ?>
         </div>
         <!-- Price -->
         <div class="form-group row">
-          <label class="col-form-label lab-fixed" for="price">Price (<?= DEFAULTS["currency"] ?>):</label>
+          <label class="col-form-label lab-fixed" for="price">Price (<?= Constants::getDefaultValues()["currency"] ?>):</label>
           <div class="inp-fixed">
-            <input class="form-control" type="number" name="price" id="price" placeholder="Enter Price in <?= DEFAULTS["currency"] ?>" min="0" max="99999999.99" step="0.01" value="<?= $bookRecord["Price"] ?>" required />
+            <input class="form-control" type="number" name="price" id="price" placeholder="Enter Price in <?= Constants::getDefaultValues()["currency"] ?>" min="0" max="99999999.99" step="0.01" value="<?= $bookRecord["Price"] ?>" required />
           </div>
         </div><?php
         if ($formData["formUsage"] == "Add") :  // Display Just Quantity ?>
@@ -110,7 +110,7 @@ else :  // Display Book Form ?>
         <div class="form-group row">
           <label class="col-form-label lab-fixed">Book Image:</label>
           <div class="custom-file inp-fixed">
-            <input type="hidden" name="MAX_FILE_SIZE" value="<?= DEFAULTS['maxUploadSize']?>" />
+            <input type="hidden" name="MAX_FILE_SIZE" value="<?= Constants::getDefaultValues()['maxUploadSize']?>" />
             <label class="custom-file-label" for="imgFilename">Choose file</label>
             <input class="custom-file-input" type="file" name="imgFilename" id="imgFilename" />
           </div>

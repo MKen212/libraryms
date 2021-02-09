@@ -27,8 +27,10 @@ class Book {
    */
   public function __construct() {
     try {
-      $connString = "mysql:host=" . DBSERVER["servername"] . ";dbname=" . DBSERVER["database"];
-      $this->conn = new PDO($connString, DBSERVER["username"], DBSERVER["password"]);
+      $connDetails = parse_ini_file("../inifiles/mariaDBCon.ini");
+      $connDetails["database"] = Constants::getDefaultValues()["database"];
+      $connString = "mysql:host=" . $connDetails["servername"] . ";dbname=" . $connDetails["database"];
+      $this->conn = new PDO($connString, $connDetails["username"], $connDetails["password"]);
       $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $err) {
       $_SESSION["message"] = msgPrep("danger", "Error - Book/DB Connection Failed: {$err->getMessage()}");

@@ -56,7 +56,7 @@ include_once "../app/models/bookListClass.php";
         <th>Author</th>
         <th>Publisher</th>
         <th>ISBN</th>
-        <th>Price<br />(<?= DEFAULTS["currency"] ?>)</th>
+        <th>Price<br />(<?= Constants::getDefaultValues()["currency"] ?>)</th>
         <th>Qty<br />Total</th>
         <th>Qty<br />Available</th>
         <th>Record</th>

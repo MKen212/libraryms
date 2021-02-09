@@ -43,7 +43,7 @@ if (isset($_POST["issueBook"])) {
 }
 
 // Initialise BooksIssued Record
-$returnDuration = DEFAULTS["returnDuration"] . " days";
+$returnDuration = Constants::getDefaultValues()["returnDuration"] . " days";
 $booksIssuedRecord = [
   "UserID" => postValue("userIDSelected", 0),
   "BookID" => postValue("bookIDSelected", 0),

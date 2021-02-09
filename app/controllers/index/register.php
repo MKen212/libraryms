@@ -34,7 +34,7 @@ if (isset($_POST["register"])) {
   // Send AdminUser message if new user created
   if ($newUserID) {
     $_POST = [];
-    $notify = $message->add($newUserID, DEFAULTS["userAdminUserID"], "New User", "Please process my New User registration.");
+    $notify = $message->add($newUserID, Constants::getDefaultValues()["userAdminUserID"], "New User", "Please process my New User registration.");
   }
 }
 
