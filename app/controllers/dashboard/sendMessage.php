@@ -38,7 +38,7 @@ $_GET = [];
 // Create New messages record if Send POSTed
 if (isset($_POST["sendMessage"])) {
   if ($_SESSION["userID"] == $_POST["userIDSelected"]) {
-    // Check that user is not sending a message to themselves!
+    // Check that user is not sending a message to themselves > not now possible!
     $_SESSION["message"] = msgPrep("danger", "Error - You cannot send a message to yourself!");
   } else {
     $senderID = $_SESSION["userID"];

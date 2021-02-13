@@ -34,11 +34,10 @@ if (isset($_POST["updateUser"])) {
   // Update Database Entry for User Record
   $updateUser = $user->updateRecord($userID, $username, $firstName, $lastName, $email, $contactNo);
 } elseif (isset($_POST["updatePassword"])) {  // Update Password if UpdatePassword POSTed
-  $existingPassword = cleanInput($_POST["existingPassword"], "password");
   $newPassword = cleanInput($_POST["newPassword"], "password");
   // Update Database Entry for User Password
-  $updatePassword = $user->updatePassword($userID, $existingPassword, $newPassword);
-  unset($existingPassword, $newPassword, $repeatPassword);
+  $updatePassword = $user->updatePassword($userID, $newPassword, null, true);
+  unset($existingPassword, $newPassword);
 }
 $_POST = [];
 
@@ -47,7 +46,7 @@ $userRecord = $user->getRecord($userID);
 
 // Prep User Form Data
 $formData = [
-  "formUsage" => "Update",
+  "formUsage" => "adminUpdate",
   "formTitle" => "User Details - ID: {$userID}",
   "submitName" => "updateUser",
   "submitText" => "Update User",

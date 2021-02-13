@@ -29,12 +29,17 @@ if (isset($_POST["updateUser"])) {
   $contactNo = cleanInput($_POST["contactNo"], "string");
   // Update Database Entry for User Record
   $updateUser = $user->updateRecord($userID, $username, $firstName, $lastName, $email, $contactNo);
+  if ($updateUser == 1) {  // If update successful, update welcome message?>
+    <script>
+      document.getElementById("welcomeUser").innerHTML = "<?= $_SESSION["username"] ?>";
+    </script><?php
+  }
 } elseif (isset($_POST["updatePassword"])) {  // Update Password if UpdatePassword POSTed
   $existingPassword = cleanInput($_POST["existingPassword"], "password");
   $newPassword = cleanInput($_POST["newPassword"], "password");
   // Update Database Entry for User Password
-  $updatePassword = $user->updatePassword($userID, $existingPassword, $newPassword);
-  unset($existingPassword, $newPassword, $repeatPassword);
+  $updatePassword = $user->updatePassword($userID, $newPassword, $existingPassword, false);
+  unset($existingPassword, $newPassword);
 }
 $_POST = [];
 
@@ -43,7 +48,7 @@ $userRecord = $user->getRecord($userID);
 
 // Prep User Form Data
 $formData = [
-  "formUsage" => "Update",
+  "formUsage" => "profileUpdate",
   "formTitle" => "My Profile",
   "submitName" => "updateUser",
   "submitText" => "Update User",

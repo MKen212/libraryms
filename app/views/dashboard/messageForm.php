@@ -35,8 +35,8 @@ namespace LibraryMS;
     <label class="col-form-label lab-fixed" for="recipientSelect">Select Recipient:</label>
     <div class="input-group inp-fixed">
       <select class="form-control" id="recipientSelect" name="userIDSelected">
-        <!-- List all UserID: UserNames --><?php
-        userOptions($messageRecord["ReceiverID"]); ?>
+        <!-- List all UserID: UserNames (except Current User) --><?php
+        userOptions($messageRecord["ReceiverID"], true); ?>
       </select>
       <div class="input-group-append">
         <button class="btn btn-primary" type="submit" name="selectUser">Select</button>

@@ -18,7 +18,7 @@ class Constants {
    * Default values for application
    */
   private static $defaultValues = [
-    "testing" => true,  // Flag to set whether to show test information
+    "environment" => "production",  // Set to "development" or "production"
     "database" => "libraryms",  // Database containing application tables
     "maxUploadSize" => 200000,  // Maximum PHP upload file size in bytes - see phpInfo
     "booksImgPath" => "uploads/imgBooks/",  // Path to books images

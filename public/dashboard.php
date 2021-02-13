@@ -40,7 +40,7 @@ if (!in_array($page, Constants::getValidPages()["dashboard"]) && !in_array($page
 }
 
 // Check User IsAdmin to view admin pages
-if ($_SESSION["userIsAdmin"] == 0 && in_array($page, Constants::getValidPages()["dashboard_admin"])) {
+if ($_SESSION["userIsAdmin"] != 1 && in_array($page, Constants::getValidPages()["dashboard_admin"])) {
   $_SESSION["message"] = msgPrep("warning", "Sorry - You need Admin Privileges to view the '{$page}' page.");
   $page = "home";
 }
@@ -84,6 +84,20 @@ if ($_SESSION["userIsAdmin"] == 0 && in_array($page, Constants::getValidPages()[
 
         // Display selected page
         include "../app/controllers/dashboard/{$page}.php"; ?>
+
+        <!-- Code snippet to see state of SuperGlobals before/after button press -->
+        <div>
+          <?php
+            echo "<pre>SESSION: ";
+            print_r($_SESSION);
+            echo "<br />POST: ";
+            print_r($_POST);
+            echo "<br />GET: ";
+            print_r($_GET);
+            echo "<br />FILES: ";
+            print_r($_FILES);
+          ?>
+        </div>
 
       </main>
     </div>

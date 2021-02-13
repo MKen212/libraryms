@@ -79,14 +79,16 @@ else :  // Display User & Password Forms ?>
   <hr />
 
   <!-- Password Form -->
-  <form class="ml-3" action="" method="post" name="passwordForm" autocomplete="off">
-    <!-- Existing Password -->
-    <div class="form-group row">
-      <label class ="col-form-label lab-fixed" for="existingPW">Existing Password:</label>
-      <div class="inp-fixed">
-        <input class="form-control" type="password" name="existingPassword" id="existingPW" placeholder="Enter Existing Password" required />
-      </div>
-    </div>
+  <form class="ml-3" action="" method="post" name="passwordForm" autocomplete="off"><?php
+    if ($formData["formUsage"] == "profileUpdate") :  // Require entry of Existing Password when updating MyProfile ?>
+      <!-- Existing Password -->
+      <div class="form-group row">
+        <label class ="col-form-label lab-fixed" for="existingPW">Existing Password:</label>
+        <div class="inp-fixed">
+          <input class="form-control" type="password" name="existingPassword" id="existingPW" placeholder="Enter Existing Password" required />
+        </div>
+      </div><?php
+    endif;?>
     <!-- New Password -->
     <div class="form-group row">
       <label class ="col-form-label lab-fixed" for="newPW">New Password:</label>

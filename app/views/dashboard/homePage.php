@@ -28,8 +28,8 @@ namespace LibraryMS;
   </div>
 </div><?php
 
-// Display Testing Information if in Testing Mode
-if (Constants::getDefaultValues()["testing"] == true) : ?>
+// Display SuperGlobals on Home Page if in Development Mode
+if (Constants::getDefaultValues()["environment"] == "development") : ?>
   <!-- PHP Global Variables -->
   <div>
     <pre><?php

@@ -20,9 +20,10 @@ if (isset($_POST["navSearch"])) {
   } else {
     $_SESSION["navSchString"] = cleaninput($_POST["navSchString"], "string");
   }
-  unset($_POST["navSearch"], $_POST["navSchString"]);
+  $_POST = [];
 } elseif (isset($_POST["navClear"])) {
-  unset($_POST["navClear"], $_SESSION["navSchString"]);
+  unset($_SESSION["navSchString"]);
+  $_POST = [];
 }
 
 // Display Navbar Header View

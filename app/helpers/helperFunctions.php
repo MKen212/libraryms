@@ -20,7 +20,7 @@ use RecursiveArrayIterator;
  */
 function cleanInput($input, $type) {
   if ($type == "string") {
-    $output = htmlspecialchars($input);
+    $output = htmlspecialchars($input, ENT_QUOTES);
     $output = trim($output);
     $output = str_replace("\n", " ",$output);  // For LF replace with space as messages shown as single lines
     $output = stripslashes($output);
@@ -72,7 +72,7 @@ function msgShow() {
  * @return string               Cleaned and fixed MariaDB-Compliant Search String
  */
 function fixSearch($searchString) {
-  $fixed = htmlspecialchars($searchString);
+  $fixed = htmlspecialchars($searchString, ENT_QUOTES);
   $fixed = trim($fixed);
   $fixed = str_replace("?", "_", $fixed);  // Fix MariaDB one char wildcard
   $fixed = str_replace("*", "%", $fixed);  // Fix MariaDB multi char wildcard

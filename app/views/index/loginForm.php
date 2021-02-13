@@ -22,7 +22,7 @@ namespace LibraryMS;
       <div class="input-group-prepend">
         <span class="input-group-text form-labels">Username:</span>
       </div>
-      <input class="form-control" type="text" name="lmsUsername" maxlength="50" placeholder="Enter Username" required autofocus />
+      <input class="form-control" type="text" name="lmsUsername" maxlength="40" placeholder="Enter Username" required autofocus />
     </div>
     <!-- Password -->
     <div class="input-group">

@@ -21,7 +21,7 @@ namespace LibraryMS;
     <ul class="nav flex-column">
       <!-- Welcome, Unread Message count & Link to My Messages -->
       <li class="nav-brand">
-        <h6 class="ml-2">Welcome, <?= $_SESSION["username"] ?><span style="margin-left:10px" id="msgsUnread"><?= $msgsUnreadLink ?></span></h6>
+        <h6 class="ml-2">Welcome, <span id="welcomeUser"><?= $_SESSION["username"] ?></span><span style="margin-left:10px" id="msgsUnread"><?= $msgsUnreadLink ?></span></h6>
         <hr>
       </li>
       <!-- Home -->

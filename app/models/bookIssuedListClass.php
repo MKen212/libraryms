@@ -52,17 +52,30 @@ class BookIssuedList extends RecursiveIteratorIterator {
     } elseif ($parentKey == "ReturnActualDate") {
       // For ReturnActualDate, if NULL provide Return hyperlink, or return ReturnDate
       if (empty($parentValue)){
+        $_SESSION["curOutstanding"] = true;
         $href = "dashboard.php?p=listReturnIssuedBooks&id="
               . $_SESSION["curIssuedID"]
               . "&bookID="
               . $_SESSION["curBookID"]
               . "&updReturn";
         $returnValue = "<a class='badge badge-primary' href='{$href}'>Return</a>";
-        $_SESSION["countOutstanding"] += 1;
       } else {
+        $_SESSION["curOutstanding"] = false;
         $returnValue = date("d/m/Y", strtotime($parentValue));
       }
     } elseif ($parentKey == "RecordStatus") {
+      // Update the counts based on the Record Status
+      if ($parentValue == 0) {
+        // Current record is Inactive
+        $_SESSION["countInactive"] += 1;
+      } else {
+        // Current record is Active
+        $_SESSION["countIssued"] += 1;
+        if ($_SESSION["curOutstanding"] == true) {
+          // Current record is also outstanding
+          $_SESSION["countOutstanding"] += 1;
+        }
+      }
       // For RecordStatus output value with update hyperlink
       $href = "dashboard.php?p=listReturnIssuedBooks&id="
             . $_SESSION["curIssuedID"]
@@ -70,6 +83,7 @@ class BookIssuedList extends RecursiveIteratorIterator {
             . $parentValue
             . "&updRecordStatus";
       $returnValue = statusOutput("RecordStatus", $parentValue, $href);
+      
     } else {
       // For all others output original value
       $returnValue = $parentValue;
@@ -78,18 +92,18 @@ class BookIssuedList extends RecursiveIteratorIterator {
   }
 
   /**
-   * Initialise the count of issued & outstanding books
+   * Initialise the count of issued, outstanding & inactive books
    */
   public function beginIteration() {
     $_SESSION["countIssued"] = 0;
     $_SESSION["countOutstanding"] = 0;
+    $_SESSION["countInactive"] = 0;
   }
 
   /**
    * Start the current row
    */
   public function beginChildren() {
-    $_SESSION["countIssued"] += 1;
     echo "<tr>";
   }
 
@@ -98,17 +112,19 @@ class BookIssuedList extends RecursiveIteratorIterator {
    */
   public function endChildren() {
     echo "</tr>";
-    unset ($_SESSION["curIssuedID"], $_SESSION["curBookID"]);
+    unset($_SESSION["curIssuedID"], $_SESSION["curBookID"], $_SESSION["curOutstanding"]);
   }
 
   /**
-   * Add final summary row of total issued & oustanding and unset the counts
+   * Add final summary row of total issued, oustanding and inactive and
+   * unset the counts
    */
   public function endIteration() {
     echo "<tr class='table-info'><td colspan='6'>"
        . "<b>Total issued: {$_SESSION["countIssued"]} "
-       . "/ Outstanding: {$_SESSION["countOutstanding"]}</b>"
+       . "(Outstanding: {$_SESSION["countOutstanding"]}) "
+       . "+ Inactive: {$_SESSION["countInactive"]}</b>"
        . "</td></tr>";
-    unset($_SESSION["countIssued"], $_SESSION["countOutstanding"]);
+    unset($_SESSION["countIssued"], $_SESSION["countOutstanding"], $_SESSION["countInactive"]);
   }
 }

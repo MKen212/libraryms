@@ -85,7 +85,7 @@ class BookIssuedByUser extends RecursiveIteratorIterator {
   public function endIteration() {
     echo "<tr class='table-info'><td colspan='5'>"
         . "<b>Total issued to me: {$_SESSION["countIssued"]} "
-        . "/ Outstanding: {$_SESSION["countOutstanding"]}</b>"
+        . "(Outstanding: {$_SESSION["countOutstanding"]})</b>"
         . "</td></tr>";
     unset($_SESSION["countIssued"], $_SESSION["countOutstanding"]);
   }
