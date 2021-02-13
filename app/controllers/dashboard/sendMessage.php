@@ -28,13 +28,7 @@ if (isset($_GET["reply"])) {
   // Mark original message as Read
   $updateStatus = $message->updateStatus("MessageStatus", $originalMsgID, 1);
   // Update Unread Message Link
-  $unreadClass = "badge badge-info";
-  $unreadCount = $message->countUnreadByUserID($_SESSION["userID"]);
-  // Update Badge if no unread
-  if ($unreadCount == 0) {
-    $unreadClass = "badge badge-light";
-  }
-  $msgsUnreadLink = "<a class='{$unreadClass}' href='dashboard.php?p=myMessages'><span data-feather='mail'></span> {$unreadCount}</a>";?>
+  $msgsUnreadLink = getMsgsUnreadLink();?>
   <script>
     document.getElementById("msgsUnread").innerHTML = "<?= $msgsUnreadLink ?>";
   </script><?php

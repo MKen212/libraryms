@@ -88,9 +88,11 @@ CREATE TABLE IF NOT EXISTS `messages` (
 CREATE VIEW IF NOT EXISTS `messages_view` AS SELECT
   `messages`.`MessageID` AS `MessageID`,
   `messages`.`SenderID` AS `SenderID`,
-  `users_s`.`username` AS `SenderName`,
+  `users_s`.`Username` AS `SenderName`,
+  `users_s`.`RecordStatus` AS `SenderStatus`,
   `messages`.`ReceiverID` AS `ReceiverID`,
-  `users_r`.`username` AS `ReceiverName`,
+  `users_r`.`Username` AS `ReceiverName`,
+  `users_r`.`RecordStatus` AS `ReceiverStatus`,
   `messages`.`Subject` AS `Subject`,
   `messages`.`Body` AS `Body`,
   `messages`.`AddedTimestamp` AS `AddedTimestamp`,

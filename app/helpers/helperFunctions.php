@@ -170,3 +170,21 @@ function bookOptions($selID = null) {
   }
   return true;
 }
+
+/**
+ * Get count of unread received messages for current user, returned in an HTML link
+ * @return string  HTML link containing count of unread messages
+ */
+function getMsgsUnreadLink() {
+  include_once "../app/models/messageClass.php";
+  $message = new Message();
+  $unreadClass = "badge badge-info";
+  $unreadCount = $message->countUnreadByUserID($_SESSION["userID"]);
+  // Update Badge if no unread
+  if ($unreadCount == 0) {
+    $unreadClass = "badge badge-light";
+  }
+  // Create link
+  $msgsUnreadLink = "<a class='{$unreadClass}' href='dashboard.php?p=myMessages'><span data-feather='mail'></span> {$unreadCount}</a>";
+  return $msgsUnreadLink;
+}

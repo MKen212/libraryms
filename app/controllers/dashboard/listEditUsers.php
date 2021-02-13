@@ -37,6 +37,11 @@ if (isset($_GET["id"])) {
     $newStatus = statusCycle("RecordStatus", $curStatus);
     // Update User RecordStatus
     $updateStatus = $user->updateStatus("RecordStatus", $userID, $newStatus);
+    // Update Unread Message Link as user may have outstanding messages
+    $msgsUnreadLink = getMsgsUnreadLink();?>
+    <script>
+      document.getElementById("msgsUnread").innerHTML = "<?= $msgsUnreadLink ?>";
+    </script><?php
   }
 }
 $_GET = [];

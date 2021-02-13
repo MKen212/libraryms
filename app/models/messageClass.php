@@ -58,16 +58,18 @@ class Message {
   }
 
   /**
-   * Count ACTIVE Unread Messages for User ID
+   * Count ACTIVE Unread Messages from ACTIVE senders for User ID using
+   * messages_view
    * @param int $userID  User ID
-   * @return int|null    Count of ACTIVE Unread Messages for $userID or null
+   * @return int|null    Count of ACTIVE Unread Messages from ACTIVE senders
+   *                     for $userID or null
    */
   public function countUnreadByUserID($userID) {
     try {
       $sql = "SELECT COUNT(*)
-              FROM `messages`
+              FROM `messages_view`
               WHERE `ReceiverID` = {$userID} AND `MessageStatus` = 0 AND
-                    `RecordStatus` = 1";
+                    `RecordStatus` = 1 AND `SenderStatus` = 1";
       $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
       $result = $stmt->fetchColumn();
       return $result;
@@ -77,19 +79,23 @@ class Message {
   }
 
   /**
-   * Retrieve list of messages RECEIVED BY Receiver ID (optionally by RecordStatus)
-   * from messages_view
+   * Retrieve list of messages RECEIVED BY Receiver ID (optionally by RecordStatus
+   * and/or SenderStatus) from messages_view
    * @param int $receiverID    Receiver User ID
    * @param int $recordStatus  Record Status (Optional)
+   * @param int $senderStatus  Sender User Status (Optional)
    * @return array|null        Returns all messages received by Receiver ID
    *                           (AddedTimeStamp Descending order) or null
    */
-  public function getListReceived($receiverID, $recordStatus = null) {
+  public function getListReceived($receiverID, $recordStatus = null, $senderStatus = null) {
     try {
       // Build WHERE clause
       $whereClause = "WHERE `ReceiverID` = {$receiverID} ";
       if (!empty($recordStatus)) {
         $whereClause .= "AND `RecordStatus` = {$recordStatus} ";
+      }
+      if (!empty($senderStatus)) {
+        $whereClause .= "AND `SenderStatus` = {$senderStatus} ";
       }
       // Build SQL & Execute
       $sql = "SELECT `MessageID`, `AddedTimestamp`, `SenderID`, `SenderName`,
@@ -106,19 +112,23 @@ class Message {
   }
 
   /**
-   * Retrieve list of messages SENT BY Sender ID (optionally by RecordStatus)
-   * from messages_view
-   * @param int $senderID      Sender User ID
-   * @param int $recordStatus  Record Status (Optional)
-   * @return array|null        Returns all messages sent by Sender ID (AddedTimeStamp
-   *                           Descending order) or null
+   * Retrieve list of messages SENT BY Sender ID (optionally by RecordStatus
+   * and/or ReceiverStatus) from messages_view
+   * @param int $senderID        Sender User ID
+   * @param int $recordStatus    Record Status (Optional)
+   * @param int $receiverStatus  Receiver User Status (Optional)
+   * @return array|null          Returns all messages sent by Sender ID
+   *                             (AddedTimeStamp Descending order) or null
    */
-  public function getListSent($senderID, $recordStatus = null) {
+  public function getListSent($senderID, $recordStatus = null, $receiverStatus = null) {
     try {
       // Build WHERE clause
       $whereClause = "WHERE `SenderID` = {$senderID} ";
       if (!empty($recordStatus)) {
         $whereClause .= "AND `RecordStatus` = {$recordStatus} ";
+      }
+      if (!empty($receiverStatus)) {
+        $whereClause .= "AND `ReceiverStatus` = {$receiverStatus} ";
       }
       // Build SQL & Execute
       $sql = "SELECT `MessageID`, `AddedTimestamp`, `ReceiverName`, `Subject`, `Body`,
