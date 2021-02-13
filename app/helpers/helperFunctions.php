@@ -136,15 +136,19 @@ function statusCycle($type, $current) {
 }
 
 /**
- * Outputs all Approved/Active Users as HTML options
- * @param int $selID  UserID that is marked as 'selected' (optional)
- * @return bool       Returns true on completion
+ * Outputs all Approved/Active Users as HTML options, with option to exclude
+ * current user
+ * @param int $selID   UserID that is marked as 'selected' (optional)
+ * @param bool $exCur  True=Exclude current user (optional)
+ * @return bool        Returns true on completion
  */
-function userOptions($selID = null) {
+function userOptions($selID = null, $exCur = false) {
   include_once "../app/models/userClass.php";
   $user = new User();
   foreach (new RecursiveArrayIterator($user->getUserIDs()) as $value) {
-    if ($value["UserID"] == $selID) {
+    if ($exCur == true && $value["UserID"] == $_SESSION["userID"]) {
+      continue;
+    } elseif ($value["UserID"] == $selID) {
       echo "<option value='{$value["UserID"]}' selected>{$value["UserID"]}: {$value["Username"]}</option>";
     } else {
       echo "<option value='{$value["UserID"]}'>{$value["UserID"]}: {$value["Username"]}</option>";

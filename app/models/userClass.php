@@ -159,17 +159,28 @@ class User {
   }
 
   /**
-   * Retrieve list of ALL user records (optionally based on Username)
+   * Retrieve list of ALL user records (optionally based on Username and
+   * optionally excluding current user)
    * @param string $username  Username (Optional)
+   * @param bool $exCur       True=Exclude current user (Optional)
    * @return array|null       Returns all/selected user records (Username order)
    *                          or null
    */
-  public function getList($username = null) {
+  public function getList($username = null, $exCur = false) {
     try {
       // Build WHERE clause
       $whereClause = null;
       if (!empty($username)) {
-        $whereClause = "WHERE `Username` LIKE '%{$username}%'";
+        $whereClause = "WHERE `Username` LIKE '%{$username}%' ";
+      }
+      if (!empty($exCur)) {
+        // Insert correct pre-fix
+        if (empty($whereClause)) {
+          $whereClause = "WHERE ";
+        } else {
+          $whereClause .= "AND ";
+        }
+        $whereClause .= "`UserID` != {$_SESSION["userID"]} ";
       }
       // Build SQL & Execute
       $sql = "SELECT `UserID`, `Username`, `FirstName`, `LastName`, `Email`, `ContactNo`,
@@ -253,7 +264,7 @@ class User {
         } elseif ($result == 1) {  // Only 1 record should have been updated
           $_SESSION["message"] = msgPrep("success", "Update of User ID: '{$userID}' was successful.");
           if ($userID == $_SESSION["userID"]) {  // User has updated their own record
-            $_SESSION["userName"] = $username;
+            $_SESSION["username"] = $username;
           }
         } else {
           throw new PDOException("Update unsuccessful or multiple records updated.");
@@ -268,23 +279,26 @@ class User {
   /**
    * Update the Password of a user record
    * @param int $userID               User ID of record to update
-   * @param string $existingPassword  Users Existing Password
    * @param string $newPassword       Users New Password
+   * @param string $existingPassword  Users Existing Password (Optional for Admin Reset)
+   * @param bool $adminReset          Admin Reset of Password (Optional)
    * @return int|null                 Number of records updated (=1) or null
    */
-  public function updatePassword($userID, $existingPassword, $newPassword) {
+  public function updatePassword($userID, $newPassword, $existingPassword = null, $adminReset = false) {
     try {
-      // Verify existing password
-      $sqlChk = "SELECT `UserID`, `Password`
-                 FROM `users`
-                 WHERE `UserID` = {$userID}";
-      $stmtChk = $this->conn->query($sqlChk, PDO::FETCH_ASSOC);
-      $resultChk = $stmtChk->fetch();
-      $passwordStatus = password_verify($existingPassword, $resultChk["Password"]);
-      $result = null;
-      if ($passwordStatus != true) {  // Incorrect Existing Password Entered
-        $_SESSION["message"] = msgPrep("danger", "Error - Incorrect Existing Password!");
-        return null;
+      if ($adminReset == false || ($adminReset == true && $_SESSION["userIsAdmin"] != 1)) {
+        // Verify existing password if not adminReset or not userIsAdmin
+        $sqlChk = "SELECT `UserID`, `Password`
+                   FROM `users`
+                   WHERE `UserID` = {$userID}";
+        $stmtChk = $this->conn->query($sqlChk, PDO::FETCH_ASSOC);
+        $resultChk = $stmtChk->fetch();
+        $passwordStatus = password_verify($existingPassword, $resultChk["Password"]);
+        $resultChk = null;
+        if ($passwordStatus != true) {  // Incorrect Existing Password Entered
+          $_SESSION["message"] = msgPrep("danger", "Error - Incorrect Existing Password!");
+          return null;
+        }
       }
       // Update Password with $newPassword
       $newPasswordHash = password_hash($newPassword, PASSWORD_ARGON2ID);

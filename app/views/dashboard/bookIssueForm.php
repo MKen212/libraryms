@@ -35,8 +35,8 @@ namespace LibraryMS;
     <label class="col-form-label lab-fixed" for="userSelect">Select User:</label>
     <div class="input-group inp-fixed">
       <select class="form-control" id="userSelect" name="userIDSelected">
-        <!-- List all UserID: UserNames --><?php
-        userOptions($booksIssuedRecord["UserID"]); ?>
+        <!-- List all UserID: UserNames (including Current User) --><?php
+        userOptions($booksIssuedRecord["UserID"], false); ?>
       </select>
       <div class="input-group-append">
         <button class="btn btn-primary" type="submit" name="selectUser">Select</button>
