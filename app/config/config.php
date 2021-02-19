@@ -120,7 +120,7 @@ class Constants {
   }
 
   /**
-   * Retrieve status code infomation
+   * Retrieve status code information
    * @return array  Valid status code data
    */
   public static function getStatusCodes() {

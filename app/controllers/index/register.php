@@ -18,7 +18,7 @@ $user = new User();
 require_once "../app/models/messageClass.php";
 $message = new Message();
 
-// Register New User if ReigisterForm POSTed
+// Register New User if RegisterForm POSTed
 if (isset($_POST["register"])) {
   $username = cleanInput($_POST["username"], "string");
   $password = cleanInput($_POST["password"], "password");

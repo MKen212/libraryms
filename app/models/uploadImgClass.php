@@ -30,7 +30,7 @@ class UploadImg {
         $finfo = new finfo(FILEINFO_MIME_TYPE);
         $fileType = $finfo->file($tmpFile);
         if (strpos($fileType, "image") === false) {  // Not an image file
-          throw new UploadException("11");
+          throw new UploadException(11);
         } else {
           return true;
         }
@@ -99,7 +99,7 @@ class UploadException extends Exception {
         $message = "Uploaded File Size exceeds maximum set in php.ini.";
         break;
       case UPLOAD_ERR_FORM_SIZE :  // 2
-        $message = "Uploaded File Size exceeds " . (Constants::getDefaultValues()["maxUploadSize"] / 1000000) . " Mbyte(s).";
+        $message = "Uploaded File Size exceeds " . (Constants::getDefaultValues()["maxUploadSize"] / 1000000) . " MByte(s).";
         break;
       case UPLOAD_ERR_PARTIAL :  // 3
         $message = "Uploaded File was only partially uploaded.";

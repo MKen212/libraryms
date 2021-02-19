@@ -36,11 +36,11 @@ class MessageReceived extends RecursiveIteratorIterator {
     $parentValue = parent::current();
     $returnValue = "";
     if ($parentKey == "MessageID") {
-      // For MesssageID save the current value to $_SESSION but dont output
+      // For MessageID save the current value to $_SESSION but do not output
       $_SESSION["curMessageID"] = $parentValue;
       return;
     } elseif ($parentKey == "SenderID") {
-      // For SenderID save the current value to $_SESSION but dont output
+      // For SenderID save the current value to $_SESSION but do not output
       $_SESSION["curSenderID"] = $parentValue;
       return;
     } elseif ($parentKey == "Subject") {

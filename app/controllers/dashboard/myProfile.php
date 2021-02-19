@@ -3,7 +3,7 @@ declare(strict_types=1);
 /**
  * DASHBOARD/myProfile controller
  *
- * Retreive the user record of the current logged-in user and display it in a
+ * Retrieve the user record of the current logged-in user and display it in a
  * user form. If either the user data or user password is updated and
  * submitted, validate the data and update the existing user record.
  *

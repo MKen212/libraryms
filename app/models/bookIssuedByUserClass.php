@@ -80,7 +80,7 @@ class BookIssuedByUser extends RecursiveIteratorIterator {
   }
 
   /**
-   * Add final summary row of total issued & oustanding and unset the counts
+   * Add final summary row of total issued & outstanding and unset the counts
    */
   public function endIteration() {
     echo "<tr class='table-info'><td colspan='5'>"

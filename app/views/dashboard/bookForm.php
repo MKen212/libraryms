@@ -60,7 +60,7 @@ else :  // Display Book Form ?>
         <div class="form-group row">
           <label class="col-form-label lab-fixed" for="ISBN">ISBN:</label>
           <div class="inp-fixed">
-            <input class="form-control" type="text" name="ISBN" id="ISBN" placeholder="Enter ISBN (Format: ###-#-###-#####-#)" pattern="(?:(?=.{17}$)97[89][ -](?:[0-9]+[ -]){2}[0-9]+[ -][0-9]|97[89][0-9]{10}|(?=.{13}$)(?:[0-9]+[ -]){2}[0-9]+[ -][0-9Xx]|[0-9]{9}[0-9Xx])" value="<?= $bookRecord["ISBN"] ?>" />
+            <input class="form-control" type="text" name="ISBN" id="ISBN" placeholder="Enter ISBN (Format: 97#-#-###-#####-#)" pattern="(?:(?=.{17}$)97[89][ -](?:[0-9]+[ -]){2}[0-9]+[ -][0-9]|97[89][0-9]{10}|(?=.{13}$)(?:[0-9]+[ -]){2}[0-9]+[ -][0-9Xx]|[0-9]{9}[0-9Xx])" value="<?= $bookRecord["ISBN"] ?>" />
           </div>
         </div>
         <!-- Price -->
@@ -75,7 +75,7 @@ else :  // Display Book Form ?>
           <div class="form-group row">
             <label class="col-form-label lab-fixed" for="quantity">Quantity:</label>
             <div class="inp-fixed">
-              <input class="form-control" type="number" name="quantity" id="quantity" placeholder="Enter Quantity" min="0" value="<?= $bookRecord["Quantity"] ?>" required />
+              <input class="form-control" type="number" name="quantity" id="quantity" placeholder="Enter Quantity" min="0" max="99999999999" value="<?= $bookRecord["Quantity"] ?>" required />
             </div>
           </div><?php
         else :  // Display QtyTotal, QtyAvail & Added Details ?>

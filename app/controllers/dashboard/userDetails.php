@@ -3,7 +3,7 @@ declare(strict_types=1);
 /**
  * DASHBOARD/userDetails controller
  *
- * Retreive the record of a specific user and display it in a user form. If the
+ * Retrieve the record of a specific user and display it in a user form. If the
  * form is updated and submitted, validate the data and update the existing
  * users record.
  *

@@ -116,7 +116,7 @@ class BookIssuedList extends RecursiveIteratorIterator {
   }
 
   /**
-   * Add final summary row of total issued, oustanding and inactive and
+   * Add final summary row of total issued, outstanding and inactive and
    * unset the counts
    */
   public function endIteration() {

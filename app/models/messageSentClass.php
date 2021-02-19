@@ -36,7 +36,7 @@ class MessageSent extends RecursiveIteratorIterator {
     $parentValue = parent::current();
     $returnValue = "";
     if ($parentKey == "MessageID") {
-      // For MesssageID save the current value to $_SESSION but don't output
+      // For MessageID save the current value to $_SESSION but don't output
       $_SESSION["curMessageID"] = $parentValue;
       return;
     } elseif ($parentKey == "AddedTimestamp") {

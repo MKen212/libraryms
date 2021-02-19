@@ -3,7 +3,7 @@ declare(strict_types=1);
 /**
  * DASHBOARD/bookDetails controller
  * 
- * Retreive the record of a specific book and display it in a book form. If the
+ * Retrieve the record of a specific book and display it in a book form. If the
  * form is updated and submitted, validate the data, update the existing books
  * record and upload the optional image file.
  * 

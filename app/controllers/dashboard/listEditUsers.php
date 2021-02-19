@@ -50,7 +50,7 @@ $_GET = [];
 $username = null;
 if (isset($_POST["userSearch"])) $username = fixSearch($_POST["schUsername"]);
 
-// Get List of users, exluding current user
+// Get List of users, excluding current user
 $userList = $user->getList($username, true);
 
 // Display Users List View
