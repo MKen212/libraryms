@@ -48,7 +48,10 @@ $_GET = [];
 
 // Fix Username Search, if entered
 $username = null;
-if (isset($_POST["userSearch"])) $username = fixSearch($_POST["schUsername"]);
+if (isset($_POST["userSearch"])) {
+  $username = fixSearch($_POST["schUsername"]);
+}
+$_POST = [];
 
 // Get List of users, excluding current user
 $userList = $user->getList($username, true);

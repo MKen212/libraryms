@@ -75,7 +75,7 @@ else :  // Display Book Form ?>
           <div class="form-group row">
             <label class="col-form-label lab-fixed" for="quantity">Quantity:</label>
             <div class="inp-fixed">
-              <input class="form-control" type="number" name="quantity" id="quantity" placeholder="Enter Quantity" min="0" max="99999999999" value="<?= $bookRecord["Quantity"] ?>" required />
+              <input class="form-control" type="number" name="quantity" id="quantity" placeholder="Enter Quantity" min="0" max="2147483647" value="<?= $bookRecord["Quantity"] ?>" required />
             </div>
           </div><?php
         else :  // Display QtyTotal, QtyAvail & Added Details ?>
@@ -83,14 +83,14 @@ else :  // Display Book Form ?>
           <div class="form-group row">
             <label class="col-form-label lab-fixed" for="qtyTotal">Total Quantity:</label>
             <div class="inp-fixed">
-              <input class="form-control" type="number" name="qtyTotal" id="qtyTotal" placeholder="Enter Total Quantity" min="1" max="2147483647" value="<?= $bookRecord["QtyTotal"] ?>" required />
+              <input class="form-control" type="number" name="qtyTotal" id="qtyTotal" placeholder="Enter Total Quantity" min="0" max="2147483647" value="<?= $bookRecord["QtyTotal"] ?>" required />
             </div>
           </div>
           <!-- QtyAvail -->
           <div class="form-group row">
             <label class="col-form-label lab-fixed" for="qtyAvail">Quantity Available:</label>
             <div class="inp-fixed">
-              <input class="form-control" type="number" name="qtyAvail" id="qtyAvail" placeholder="Enter Quantity Available" min="1" max="2147483647" value="<?= $bookRecord["QtyAvail"] ?>" required />
+              <input class="form-control" type="number" name="qtyAvail" id="qtyAvail" placeholder="Enter Quantity Available" min="0" max="2147483647" value="<?= $bookRecord["QtyAvail"] ?>" required />
             </div>
           </div>
           <!-- Added Details -->

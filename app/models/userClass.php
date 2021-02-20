@@ -229,7 +229,11 @@ class User {
       $result = $stmt->fetch();
       return $result;
     } catch (PDOException $err) {
-      $_SESSION["message"] = msgPrep("danger", "Error - User/getRecord Failed: {$err->getMessage()}");
+      if (isset($_SESSION["message"])) {
+        $_SESSION["message"] .= msgPrep("danger", "Error - User/getRecord Failed: {$err->getMessage()}");
+      } else {
+        $_SESSION["message"] = msgPrep("danger", "Error - User/getRecord Failed: {$err->getMessage()}");
+      }
     }
   }
 
